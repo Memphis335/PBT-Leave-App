@@ -1,0 +1,26 @@
+﻿fieldset {
+    margin-top: 35px;
+    margin-left: 200px;
+}
+#adminSection {
+    margin-left: 5px;
+    border-radius: 5px;
+    padding: 6px;
+}
+#leaveBal {
+    margin-top: 5px;
+    opacity: 0;
+    transition: opacity 1s;
+}
+#admin{
+    display: none;
+    transition: display 1s;
+}
+#manager,#managerNav{
+    display: none;
+    transition: display 1s;
+}
+
+.form-group {
+    width: 100%
+}

@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <ListInstance Title="Leave Requests" OnQuickLaunch="TRUE" TemplateType="100" Url="Lists/Requests" Description="List for all the leave requests by the employees."></ListInstance>
+</Elements>

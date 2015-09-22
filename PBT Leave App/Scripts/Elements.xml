@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <Module Name="Scripts">
+    <File Path="Scripts\App.js" Url="Scripts/App.js" ReplaceContent="TRUE" />
+    <File Path="Scripts\bootstrap.min.js" Url="Scripts/bootstrap.min.js" ReplaceContent="TRUE" />
+    <File Path="Scripts\bootstrap.js" Url="Scripts/bootstrap.js" ReplaceContent="TRUE" />
+    <File Path="Scripts\peoplepicker.js" Url="Scripts/peoplepicker.js" ReplaceContent="TRUE" />
+    <File Path="Scripts\peoplepicker.min.js" Url="Scripts/peoplepicker.min.js" ReplaceContent="TRUE" />
+    <File Path="Scripts\requests.js" Url="Scripts/requests.js" ReplaceContent="TRUE" />
+    <File Path="Scripts\jquery-2.1.4.min.map" Url="Scripts/jquery-2.1.4.min.map" ReplaceContent="TRUE" />
+    <File Path="Scripts\jquery-2.1.4.min.js" Url="Scripts/jquery-2.1.4.min.js" ReplaceContent="TRUE" />
+    <File Path="Scripts\jquery-2.1.4.js" Url="Scripts/jquery-2.1.4.js" ReplaceContent="TRUE" />
+    <File Path="Scripts\jquery-2.1.4.intellisense.js" Url="Scripts/jquery-2.1.4.intellisense.js" ReplaceContent="TRUE" />
+  </Module>
+</Elements>

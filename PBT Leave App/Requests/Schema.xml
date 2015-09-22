@@ -1,0 +1,130 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<List xmlns:ows="Microsoft SharePoint" Title="Requests" FolderCreation="FALSE" Direction="$Resources:Direction;" Url="Lists/Requests" BaseType="0" xmlns="http://schemas.microsoft.com/sharepoint/">
+  <MetaData>
+    <ContentTypes>
+      <ContentType ID="0x010087630f51497a4e1c98e972b83c619476" Name="ListFieldsContentType">
+        <FieldRefs>
+          <FieldRef ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" Name="Title" />
+          <FieldRef ID="{9025cbb1-90e1-4140-b8e2-c0b366d7d1e6}" Name="Name1" />
+          <FieldRef ID="{b40fa0e3-53ce-4f9c-a8d8-4e98b70c48fe}" Name="Surname" />
+          <FieldRef ID="{2667a5ca-092d-4e0b-856d-52f6f194944d}" Name="ReachableNumber" />
+          <FieldRef ID="{bb61ce79-ce62-4dbc-a6a9-4e0617f5bab8}" Name="Manager" />
+          <FieldRef ID="{c484ea65-60c4-4102-9002-0c4809aa8576}" Name="From1" />
+          <FieldRef ID="{1d4e1761-bf09-4a72-aff3-8ffcf570cc76}" Name="To" />
+          <FieldRef ID="{f1e81c8f-ed3e-4dd2-992e-572cba358b5c}" Name="TypeofLeave" />
+          <FieldRef ID="{6e5de0c8-030d-4645-a410-6303ed6dd25b}" Name="OnBehalf" />
+        </FieldRefs>
+      </ContentType>
+      <ContentTypeRef ID="0x01">
+        <Folder TargetName="Item" />
+      </ContentTypeRef>
+      <ContentTypeRef ID="0x0120" />
+    </ContentTypes>
+    <Fields>
+      <Field ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" Type="Text" Name="Title" DisplayName="$Resources:core,Title;" Required="FALSE" SourceID="http://schemas.microsoft.com/sharepoint/v3" StaticName="Title" MaxLength="255" />
+      <Field Name="Name1" ID="{9025cbb1-90e1-4140-b8e2-c0b366d7d1e6}" DisplayName="Name" Type="Text" Required="FALSE" />
+      <Field Name="Surname" ID="{b40fa0e3-53ce-4f9c-a8d8-4e98b70c48fe}" DisplayName="Surname" Type="Text" Required="FALSE" />
+      <Field Name="ReachableNumber" ID="{2667a5ca-092d-4e0b-856d-52f6f194944d}" DisplayName="Reachable Number" Type="Text" Required="TRUE" />
+      <Field Name="Manager" ID="{bb61ce79-ce62-4dbc-a6a9-4e0617f5bab8}" DisplayName="Manager" Type="User" Required="TRUE" List="UserInfo" />
+      <Field Name="From1" ID="{c484ea65-60c4-4102-9002-0c4809aa8576}" DisplayName="From" Type="DateTime" Format="DateOnly" Required="TRUE" />
+      <Field Name="To" ID="{1d4e1761-bf09-4a72-aff3-8ffcf570cc76}" DisplayName="To" Type="DateTime" Format="DateOnly" Required="TRUE" />
+      <Field Name="TypeofLeave" ID="{f1e81c8f-ed3e-4dd2-992e-572cba358b5c}" DisplayName="Type of Leave" Type="Choice" Required="TRUE">
+        <CHOICES>
+          <CHOICE>Annual Leave</CHOICE>
+          <CHOICE>Sick Leave</CHOICE>
+          <CHOICE>Study Leave</CHOICE>
+          <CHOICE>Maternity Leave</CHOICE>
+          <CHOICE>Family Responsibility Leave</CHOICE>
+          <CHOICE>Other</CHOICE>
+        </CHOICES>
+      </Field>
+      <Field Name="OnBehalf" ID="{6e5de0c8-030d-4645-a410-6303ed6dd25b}" DisplayName="On Behalf" Type="Boolean" Required="TRUE" />
+    </Fields>
+    <Views>
+      <View BaseViewID="0" Type="HTML" MobileView="TRUE" TabularView="FALSE">
+        <Toolbar Type="Standard" />
+        <XslLink Default="TRUE">main.xsl</XslLink>
+        <RowLimit Paged="TRUE">30</RowLimit>
+        <ViewFields>
+          <FieldRef Name="LinkTitleNoMenu"></FieldRef>
+        </ViewFields>
+        <Query>
+          <OrderBy>
+
+
+
+            <FieldRef Name="Modified" Ascending="FALSE"></FieldRef>
+          </OrderBy>
+        </Query>
+        <ParameterBindings>
+          <ParameterBinding Name="AddNewAnnouncement" Location="Resource(wss,addnewitem)" />
+          <ParameterBinding Name="NoAnnouncements" Location="Resource(wss,noXinviewofY_LIST)" />
+          <ParameterBinding Name="NoAnnouncementsHowTo" Location="Resource(wss,noXinviewofY_ONET_HOME)" />
+        </ParameterBindings>
+      </View>
+      <View BaseViewID="1" Type="HTML" WebPartZoneID="Main" DisplayName="$Resources:core,objectiv_schema_mwsidcamlidC24;" DefaultView="TRUE" MobileView="TRUE" MobileDefaultView="TRUE" SetupPath="pages\viewpage.aspx" ImageUrl="/_layouts/15/images/generic.png?rev=23" Url="AllItems.aspx">
+        <Toolbar Type="Standard" />
+        <XslLink Default="TRUE">main.xsl</XslLink>
+        <JSLink>clienttemplates.js</JSLink>
+        <RowLimit Paged="TRUE">30</RowLimit>
+        <ViewFields>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          <FieldRef Name="LinkTitle"></FieldRef>
+          <FieldRef Name="Name1" />
+          <FieldRef Name="Surname" />
+          <FieldRef Name="ReachableNumber" />
+          <FieldRef Name="Manager" />
+          <FieldRef Name="From1" />
+          <FieldRef Name="To" />
+          <FieldRef Name="TypeofLeave" />
+          <FieldRef Name="OnBehalf" />
+          <FieldRef Name="Attachments" />
+          <FieldRef Name="Author" />
+          <FieldRef Name="Created" />
+        </ViewFields>
+        <Query>
+          <OrderBy>
+
+
+
+            <FieldRef Name="ID"></FieldRef>
+          </OrderBy>
+        </Query>
+        <ParameterBindings>
+          <ParameterBinding Name="NoAnnouncements" Location="Resource(wss,noXinviewofY_LIST)" />
+          <ParameterBinding Name="NoAnnouncementsHowTo" Location="Resource(wss,noXinviewofY_DEFAULT)" />
+        </ParameterBindings>
+      </View>
+    </Views>
+    <Forms>
+      <Form Type="DisplayForm" Url="DispForm.aspx" SetupPath="pages\form.aspx" WebPartZoneID="Main" />
+      <Form Type="EditForm" Url="EditForm.aspx" SetupPath="pages\form.aspx" WebPartZoneID="Main" />
+      <Form Type="NewForm" Url="NewForm.aspx" SetupPath="pages\form.aspx" WebPartZoneID="Main" />
+    </Forms>
+  </MetaData>
+</List>

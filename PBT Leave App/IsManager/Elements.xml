@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <Field
+       ID="{30b3d8a4-0498-4198-90bd-8cd9362a5483}"
+       Name="IsManager"
+       DisplayName="Is Manager?"
+       Type="Choice"
+       Required="FALSE"
+       Group="Custom Site Columns"
+       Description="Is this user a manager that will approve leave for other users?">
+    <CHOICES>
+      <CHOICE>Yes</CHOICE>
+      <CHOICE>No</CHOICE>
+    </CHOICES>
+  </Field>
+</Elements>

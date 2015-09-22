@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <Module Name="Images">
+    <File Path="Images\AppIcon.png" Url="Images/AppIcon.png" ReplaceContent="TRUE" />
+    <File Path="Images\PBT_Group_Logo.png" Url="Images/PBT_Group_Logo.png" ReplaceContent="TRUE" />
+    <File Path="Images\calendar-add-512.png" Url="Images/calendar-add-512.png" ReplaceContent="TRUE" />
+    <File Path="Images\tileAdd.png" Url="Images/tileAdd.png" ReplaceContent="TRUE" />
+  </Module>
+</Elements>

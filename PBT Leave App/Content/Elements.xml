@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <Module Name="Content">
+    <File Path="Content\App.css" Url="Content/App.css" ReplaceContent="TRUE" />
+    <File Path="Content\bootstrap-theme.min.css" Url="Content/bootstrap-theme.min.css" ReplaceContent="TRUE" />
+    <File Path="Content\bootstrap-theme.css.map" Url="Content/bootstrap-theme.css.map" ReplaceContent="TRUE" />
+    <File Path="Content\bootstrap-theme.css" Url="Content/bootstrap-theme.css" ReplaceContent="TRUE" />
+    <File Path="Content\bootstrap.min.css" Url="Content/bootstrap.min.css" ReplaceContent="TRUE" />
+    <File Path="Content\bootstrap.css.map" Url="Content/bootstrap.css.map" ReplaceContent="TRUE" />
+    <File Path="Content\bootstrap.css" Url="Content/bootstrap.css" ReplaceContent="TRUE" />
+    <File Path="Content\metro-bootstrap.css" Url="Content/metro-bootstrap.css" ReplaceContent="TRUE" />
+    <File Path="Content\metro-bootstrap.css.map" Url="Content/metro-bootstrap.css.map" ReplaceContent="TRUE" />
+    <File Path="Content\metro-bootstrap.min.css" Url="Content/metro-bootstrap.min.css" ReplaceContent="TRUE" />
+    <File Path="Content\font-awesome.css" Url="Content/font-awesome.css" ReplaceContent="TRUE" />
+    <File Path="Content\font-awesome.min.css" Url="Content/font-awesome.min.css" ReplaceContent="TRUE" />
+    <File Path="Content\fonts\FontAwesome.otf" Url="Content/fonts/FontAwesome.otf" ReplaceContent="TRUE" />
+    <File Path="Content\fonts\fontawesome-webfont.eot" Url="Content/fonts/fontawesome-webfont.eot" ReplaceContent="TRUE" />
+    <File Path="Content\fonts\fontawesome-webfont.svg" Url="Content/fonts/fontawesome-webfont.svg" ReplaceContent="TRUE" />
+    <File Path="Content\fonts\fontawesome-webfont.ttf" Url="Content/fonts/fontawesome-webfont.ttf" ReplaceContent="TRUE" />
+    <File Path="Content\fonts\fontawesome-webfont.woff" Url="Content/fonts/fontawesome-webfont.woff" ReplaceContent="TRUE" />
+    <File Path="Content\fonts\glyphicons-halflings-regular.eot" Url="Content/fonts/glyphicons-halflings-regular.eot" ReplaceContent="TRUE" />
+    <File Path="Content\fonts\glyphicons-halflings-regular.svg" Url="Content/fonts/glyphicons-halflings-regular.svg" ReplaceContent="TRUE" />
+    <File Path="Content\fonts\glyphicons-halflings-regular.ttf" Url="Content/fonts/glyphicons-halflings-regular.ttf" ReplaceContent="TRUE" />
+    <File Path="Content\fonts\glyphicons-halflings-regular.woff" Url="Content/fonts/glyphicons-halflings-regular.woff" ReplaceContent="TRUE" />
+    <File Path="Content\fonts\glyphicons-halflings-regular.woff2" Url="Content/fonts/glyphicons-halflings-regular.woff2" ReplaceContent="TRUE" />
+  </Module>
+</Elements>

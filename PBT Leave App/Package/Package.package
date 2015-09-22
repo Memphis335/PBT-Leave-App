@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="325c79c3-feb0-47b7-9106-53fe85bbcd27" solutionId="325c79c3-feb0-47b7-9106-53fe85bbcd27" resetWebServer="false" sharePointProductVersion="16.0" name="PBT_Leave_App" xmlns="http://schemas.microsoft.com/VisualStudio/2008/SharePointTools/PackageModel">
+  <features>
+    <featureReference itemId="45326221-1448-4fb8-8eb6-d167987da08a" />
+    <featureReference itemId="96a14177-0096-488b-97e0-1e88da0b525e" />
+    <featureReference itemId="2a4c9d13-b599-4855-a3dc-9b8d7e982c50" />
+  </features>
+</package>

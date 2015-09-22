@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<List xmlns:ows="Microsoft SharePoint" Title="Leave Balances" FolderCreation="FALSE" Direction="$Resources:Direction;" Url="Lists/Leave Balances" BaseType="0" xmlns="http://schemas.microsoft.com/sharepoint/">
+  <MetaData>
+    <ContentTypes>
+      <ContentType ID="0x010031e77ed5eac64f5bab7851276336297c" Name="ListFieldsContentType">
+        <FieldRefs>
+          <FieldRef ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" Name="Title" />
+          <FieldRef ID="{9227689d-eb22-4289-8b41-95989fc01114}" Name="User" />
+          <FieldRef ID="{30b3d8a4-0498-4198-90bd-8cd9362a5483}" Name="IsManager" />
+          <FieldRef ID="{402377b2-45f6-47b0-8204-e610b4a48e75}" Name="AnnualLeave" />
+          <FieldRef ID="{b741225a-b708-44e4-a7ae-ec7051ea4490}" Name="SickLeave" />
+          <FieldRef ID="{ce5bdad0-4b3b-4398-af64-f99e70dd84cc}" Name="StudyLEave" />
+          <FieldRef ID="{b7927635-2291-4eb3-a9a7-d7ebedf47c5e}" Name="MaternityLeave" />
+          <FieldRef ID="{af930204-4283-4452-af28-5c997e471b0b}" Name="FamilyResponsibilityLeave" />
+          <FieldRef ID="{1daa73db-ec7b-4a46-8139-5ea570a09962}" Name="Other" />
+          <FieldRef ID="{1c2ab981-094a-4f21-a01f-f7b37d50ade4}" Name="PBTInceptionDate" />
+        </FieldRefs>
+      </ContentType>
+      <ContentTypeRef ID="0x01">
+        <Folder TargetName="Item" />
+      </ContentTypeRef>
+      <ContentTypeRef ID="0x0120" />
+    </ContentTypes>
+    <Fields>
+      <Field ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" Type="Text" Name="Title" DisplayName="$Resources:core,Title;" Required="FALSE" SourceID="http://schemas.microsoft.com/sharepoint/v3" StaticName="Title" MaxLength="255" />
+      <Field ID="{9227689d-eb22-4289-8b41-95989fc01114}" Name="User" StaticName="User" SourceID="http://schemas.microsoft.com/sharepoint/v3" DisplayName="$Resources:core,User" Type="User" List="UserInfo" Required="TRUE" Hidden="FALSE" Indexed="FALSE" />
+      <Field ID="{30b3d8a4-0498-4198-90bd-8cd9362a5483}" Name="IsManager" DisplayName="Is Manager?" Type="Choice" Required="TRUE" Group="Custom Site Columns" Description="Is this user a manager that will approve leave for other users?">
+        <CHOICES>
+          <CHOICE>Yes</CHOICE>
+          <CHOICE>No</CHOICE>
+        </CHOICES>
+      </Field>
+      <Field Name="AnnualLeave" ID="{402377b2-45f6-47b0-8204-e610b4a48e75}" DisplayName="Annual Leave" Type="Text" Required="TRUE" />
+      <Field Name="SickLeave" ID="{b741225a-b708-44e4-a7ae-ec7051ea4490}" DisplayName="Sick Leave" Type="Text" Required="TRUE" />
+      <Field Name="StudyLEave" ID="{ce5bdad0-4b3b-4398-af64-f99e70dd84cc}" DisplayName="Study Leave" Type="Text" Required="TRUE" />
+      <Field Name="MaternityLeave" ID="{b7927635-2291-4eb3-a9a7-d7ebedf47c5e}" DisplayName="Maternity Leave" Type="Text" Required="TRUE" />
+      <Field Name="FamilyResponsibilityLeave" ID="{af930204-4283-4452-af28-5c997e471b0b}" DisplayName="Family Responsibility Leave" Type="Text" Required="TRUE" />
+      <Field Name="Other" ID="{1daa73db-ec7b-4a46-8139-5ea570a09962}" DisplayName="Other" Type="Text" Required="FALSE" />
+      <Field Name="PBTInceptionDate" ID="{1c2ab981-094a-4f21-a01f-f7b37d50ade4}" DisplayName="PBT Inception Date" Type="DateTime" Required="TRUE" Format="DateOnly" />
+    </Fields>
+    <Views>
+
+
+      <View BaseViewID="0" Type="HTML" MobileView="TRUE" TabularView="FALSE">
+        <Toolbar Type="Standard" />
+        <XslLink Default="TRUE">main.xsl</XslLink>
+        <RowLimit Paged="TRUE">30</RowLimit>
+        <ViewFields>
+
+          <FieldRef Name="LinkTitleNoMenu"></FieldRef>
+        </ViewFields>
+        <Query>
+          <OrderBy>
+
+            <FieldRef Name="Modified" Ascending="FALSE"></FieldRef>
+          </OrderBy>
+        </Query>
+        <ParameterBindings>
+          <ParameterBinding Name="AddNewAnnouncement" Location="Resource(wss,addnewitem)" />
+          <ParameterBinding Name="NoAnnouncements" Location="Resource(wss,noXinviewofY_LIST)" />
+          <ParameterBinding Name="NoAnnouncementsHowTo" Location="Resource(wss,noXinviewofY_ONET_HOME)" />
+        </ParameterBindings>
+      </View>
+      <View BaseViewID="1" Type="HTML" WebPartZoneID="Main" DisplayName="$Resources:core,objectiv_schema_mwsidcamlidC24;" DefaultView="TRUE" MobileView="TRUE" MobileDefaultView="TRUE" SetupPath="pages\viewpage.aspx" ImageUrl="/_layouts/15/images/generic.png?rev=23" Url="AllItems.aspx">
+        <Toolbar Type="Standard" />
+        <XslLink Default="TRUE">main.xsl</XslLink>
+        <JSLink>clienttemplates.js</JSLink>
+        <RowLimit Paged="TRUE">30</RowLimit>
+        <ViewFields>
+
+          <FieldRef Name="LinkTitle"></FieldRef>
+          <FieldRef Name="User" />
+          <FieldRef Name="IsManager" />
+          <FieldRef Name="PBTInceptionDate" />
+          <FieldRef Name="AnnualLeave" />
+          <FieldRef Name="SickLeave" />
+          <FieldRef Name="StudyLEave" />
+          <FieldRef Name="MaternityLeave" />
+          <FieldRef Name="FamilyResponsibilityLeave" />
+          <FieldRef Name="Other" />
+          <FieldRef Name="Created" />
+          <FieldRef Name="Author" />
+        </ViewFields>
+        <Query>
+          <OrderBy>
+
+            <FieldRef Name="ID"></FieldRef>
+          </OrderBy>
+        </Query>
+        <ParameterBindings>
+          <ParameterBinding Name="NoAnnouncements" Location="Resource(wss,noXinviewofY_LIST)" />
+          <ParameterBinding Name="NoAnnouncementsHowTo" Location="Resource(wss,noXinviewofY_DEFAULT)" />
+        </ParameterBindings>
+      </View>
+    </Views>
+    <Forms>
+      <Form Type="DisplayForm" Url="DispForm.aspx" SetupPath="pages\form.aspx" WebPartZoneID="Main" />
+      <Form Type="EditForm" Url="EditForm.aspx" SetupPath="pages\form.aspx" WebPartZoneID="Main" />
+      <Form Type="NewForm" Url="NewForm.aspx" SetupPath="pages\form.aspx" WebPartZoneID="Main" />
+    </Forms>
+  </MetaData>
+</List>
