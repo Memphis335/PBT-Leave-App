@@ -6,6 +6,5 @@
     <ProjectItemFile Source="NewRequest.aspx" Target="Pages\" Type="ElementFile" />
     <ProjectItemFile Source="ToBeApprovedByMe.aspx" Target="Pages\" Type="ElementFile" />
     <ProjectItemFile Source="Help.aspx" Target="Pages\" Type="ElementFile" />
-    <ProjectItemFile Source="testGit.aspx" Target="Pages\" Type="ElementFile" />
   </Files>
 </ProjectItem>

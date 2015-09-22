@@ -5,6 +5,5 @@
     <File Path="Pages\NewRequest.aspx" Url="Pages/NewRequest.aspx" ReplaceContent="TRUE" />
     <File Path="Pages\ToBeApprovedByMe.aspx" Url="Pages/ToBeApprovedByMe.aspx" ReplaceContent="TRUE" />
     <File Path="Pages\Help.aspx" Url="Pages/Help.aspx" ReplaceContent="TRUE" />
-    <File Path="Pages\testGit.aspx" Url="Pages/testGit.aspx" ReplaceContent="TRUE" />
   </Module>
 </Elements>
