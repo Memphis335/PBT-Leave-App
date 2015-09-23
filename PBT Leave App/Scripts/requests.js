@@ -18,7 +18,7 @@ function requestLeave() {
     var name = $("#txtName").val();
     var surname = $("#txtSurname").val();
     var number = $("#txtNumber").val().toString();
-    var managerWho = $("#managerWho").find("div[role='TextBox']").val();
+    var managerWho = $("#managerWho_TopSpan_ResolvedList").find("span.sp-peoplepicker-userSpan").attr("sid");
     console.log(managerWho);
     var fromDate = $("#fromDate").val();
     console.log(fromDate);
@@ -33,12 +33,26 @@ function requestLeave() {
     count++;
     oListItem.set_item("Title", "Request #");
     oListItem.set_item("Name1", name);
-    oListItem.set_item('Surname', surname);
-    oListItem.set_item('ReachableNumber', number);
-    //oListItem.set_item('Manager', "Jakes Steenkamp");
-    oListItem.set_item('From1', fromDate);
-    oListItem.set_item('To', toDate);
-    oListItem.set_item('TypeofLeave', selLeave);
+    oListItem.set_item("Surname", surname);
+    oListItem.set_item("ReachableNumber", number);
+
+    //function preparePickerEntityXml(key, dispval) {
+    //    return '<Entity Key="' + key + '" DisplayText="' + dispval + '" IsResolved="True" Description="' + key + '"><MultipleMatches /></Entity>';
+    //}
+
+    //function setPickerValue(pickerid, key, dispval) {
+    //    var xml = '<Entities Append="False" Error="" Separator=";" MaxHeight="3">';
+    //    xml = xml + preparePickerEntityXml(key, dispval);
+    //    xml = xml + '</Entities>';
+        
+    //    entityEditorCallback(xml, pickerid, true);
+    //}
+    //setPickerValue("ctl00_PlaceHolderMain_pplEdit","",managerWho);
+
+    oListItem.set_item("Manager", "1;#jakess@pbt.co.za");
+    oListItem.set_item("From1", fromDate);
+    oListItem.set_item("To", toDate);
+    oListItem.set_item("TypeofLeave", selLeave);
     if (cbOnbehalf == "on") {
         cbOnbehalf = "Yes";
     } else {
@@ -196,5 +210,3 @@ function hideShowNote() {
         $("#getFile").removeAttr('required');
     }
 }
-
-

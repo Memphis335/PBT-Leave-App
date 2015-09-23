@@ -63,7 +63,7 @@
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="PlaceHolderMain" runat="server">
-    <form class="form-horizontal" autocomplete="on" onsubmit="requestLeave();">
+    <form class="form-horizontal" >
         <fieldset class="fa fa-2x">
 
             <!-- Form Name -->
@@ -84,7 +84,7 @@
             <div class="form-group">
                 <label class="col-md-4 control-label" for="txtName">Name :</label>
                 <div class="col-md-4">
-                    <input id="txtName" name="txtName" type="text" placeholder="" class="form-control input-md" required="true" value="">
+                    <input id="txtName" name="txtName" type="text" placeholder="" class="form-control input-md" required="required" value=""/>
                 </div>
             </div>
 
@@ -92,14 +92,14 @@
             <div class="form-group">
                 <label class="col-md-4 control-label" for="txtSurname">Surname :</label>
                 <div class="col-md-4">
-                    <input id="txtSurname" name="txtSurname" type="text" placeholder="" class="form-control input-md" required="true" value="" />
+                    <input id="txtSurname" name="txtSurname" type="text" placeholder="" class="form-control input-md" required="required" value="" />
                 </div>
             </div>
             <!-- Text input-->
             <div class="form-group">
                 <label class="col-md-4 control-label" for="txtSurname">Phone number where we can reach you :</label>
                 <div class="col-md-4">
-                    <input id="txtNumber" name="txtNumber" type="text" placeholder="" class="form-control input-md" required="true" />
+                    <input id="txtNumber" name="txtNumber" type="text" placeholder="" class="form-control input-md" required="required" />
                 </div>
             </div>
 
@@ -161,7 +161,7 @@
             <div class="form-group">
                 <label class="col-md-4 control-label" for="btnSubmit"></label>
                 <div class="col-md-4">
-                    <input type="submit" id="btnSubmit" name="btnSubmit" class="btn btn-primary" style="width: 25%; margin-left: 0;" value="Submit" />
+                    <button id="btnSubmit" onclick="requestLeave();" name="btnSubmit" class="btn btn-primary" style="width: 25%; margin-left: 0;">Submit</button>
                 </div>
             </div>
 

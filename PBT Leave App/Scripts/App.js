@@ -225,7 +225,7 @@ function ManagerQueryFailed(sender, args) {
 }
 
 function hideDiv(val) {
-    document.getElementById("leaveBal").style.opacity = 1;
+    $("#leaveBal").css("opacity",val);
 }
 
 function printName() {

@@ -25,7 +25,7 @@
       <Field Name="Name1" ID="{9025cbb1-90e1-4140-b8e2-c0b366d7d1e6}" DisplayName="Name" Type="Text" Required="FALSE" />
       <Field Name="Surname" ID="{b40fa0e3-53ce-4f9c-a8d8-4e98b70c48fe}" DisplayName="Surname" Type="Text" Required="FALSE" />
       <Field Name="ReachableNumber" ID="{2667a5ca-092d-4e0b-856d-52f6f194944d}" DisplayName="Reachable Number" Type="Text" Required="TRUE" />
-      <Field Name="Manager" ID="{bb61ce79-ce62-4dbc-a6a9-4e0617f5bab8}" DisplayName="Manager" Type="User" Required="TRUE" List="UserInfo" />
+      <Field Name="Manager" ID="{bb61ce79-ce62-4dbc-a6a9-4e0617f5bab8}" DisplayName="Manager" Type="User" List="UserInfo" />
       <Field Name="From1" ID="{c484ea65-60c4-4102-9002-0c4809aa8576}" DisplayName="From" Type="DateTime" Format="DateOnly" Required="TRUE" />
       <Field Name="To" ID="{1d4e1761-bf09-4a72-aff3-8ffcf570cc76}" DisplayName="To" Type="DateTime" Format="DateOnly" Required="TRUE" />
       <Field Name="TypeofLeave" ID="{f1e81c8f-ed3e-4dd2-992e-572cba358b5c}" DisplayName="Type of Leave" Type="Choice" Required="TRUE">
