@@ -63,7 +63,7 @@
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="PlaceHolderMain" runat="server">
-    <form class="form-horizontal" >
+    <form class="form-horizontal">
         <fieldset class="fa fa-2x">
 
             <!-- Form Name -->
@@ -84,7 +84,7 @@
             <div class="form-group">
                 <label class="col-md-4 control-label" for="txtName">Name :</label>
                 <div class="col-md-4">
-                    <input id="txtName" name="txtName" type="text" placeholder="" class="form-control input-md" required="required" value=""/>
+                    <input id="txtName" name="txtName" type="text" placeholder="" class="form-control input-md" required="required" value="" />
                 </div>
             </div>
 
@@ -103,6 +103,14 @@
                 </div>
             </div>
 
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="managerWho">Approval Manager?</label>
+                <div class="col-md-4">
+                    <div class="input-md" id="managerWho">
+                    </div>
+                </div>
+            </div>
+
             <!-- Select Basic -->
             <div class="form-group">
                 <label class="col-md-4 control-label" for="selLeave">Type of Leave :</label>
@@ -118,14 +126,6 @@
                 </div>
             </div>
 
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="managerWho">Approval Manager?</label>
-                <div class="col-md-4">
-                    <div class="input-md" id="managerWho">
-                    </div>
-                </div>
-            </div>
-
             <!-- Date Controls -->
             <div class="form-group">
                 <div class="col-md-4">
@@ -136,14 +136,14 @@
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
                     <label class="col-md-4 control-label" for="fromDate">From :</label>
-                    <input type="date" id="fromDate" />
+                    <input type="date" id="fromDate" autocomplete="on" step="1" />
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
                     <label class="col-md-4 control-label" for="toDate">To :</label>
-                    <input type="date" id="toDate" />
+                    <input type="date" id="toDate" autocomplete="on" step="1" />
                 </div>
             </div>
 

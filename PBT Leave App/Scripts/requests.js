@@ -19,9 +19,10 @@ function requestLeave() {
     var surname = $("#txtSurname").val();
     var number = $("#txtNumber").val().toString();
     var managerWho = $("#managerWho_TopSpan_ResolvedList").find("span.sp-peoplepicker-userSpan").attr("sid");
-    console.log(managerWho);
+    //console.log(managerWho);
     var fromDate = $("#fromDate").val();
-    console.log(fromDate);
+    var date = new Date(fromDate).toISOString("GMT");
+    console.log(date);
     var toDate = $("#toDate").val();
     var selLeave = $("#selLeave").val();
     var cbOnbehalf = $("#cbOnbehalf:checked").val();
@@ -31,26 +32,27 @@ function requestLeave() {
     var itemCreateInfo = new SP.ListItemCreationInformation();
     this.oListItem = oList.addItem(itemCreateInfo);
     count++;
-    oListItem.set_item("Title", "Request #");
+    oListItem.set_item("Title", "Request #" + count);
     oListItem.set_item("Name1", name);
     oListItem.set_item("Surname", surname);
     oListItem.set_item("ReachableNumber", number);
-
-    //function preparePickerEntityXml(key, dispval) {
-    //    return '<Entity Key="' + key + '" DisplayText="' + dispval + '" IsResolved="True" Description="' + key + '"><MultipleMatches /></Entity>';
+    //oListItem.set_item("Manager", "i:0|jakess@pbt.co.za");
+    //function localizeDateStr (dateToConvertStr) { 
+    //    var dateToConvert = new Date(dateToConvertStr);
+    //    var localDate = new Date();
+    //    dateToConvert.setHours(dateToConvert.getHours()+localDate.getTimezoneOffset‌​());
+    //    return dateToConvert.toString();
+    //} 
+    //var addBrowserUtcOffset = function (date) {
+    //    var utcOffsetMinutes = date.getTimezoneOffset();
+    //    var newDate = new Date(date.getTime());
+    //    newDate.setTime(newDate.getTime() - (utcOffsetMinutes * 60 * 1000));
+    //    return newDate;
     //}
 
-    //function setPickerValue(pickerid, key, dispval) {
-    //    var xml = '<Entities Append="False" Error="" Separator=";" MaxHeight="3">';
-    //    xml = xml + preparePickerEntityXml(key, dispval);
-    //    xml = xml + '</Entities>';
-        
-    //    entityEditorCallback(xml, pickerid, true);
-    //}
-    //setPickerValue("ctl00_PlaceHolderMain_pplEdit","",managerWho);
-
-    oListItem.set_item("Manager", "1;#jakess@pbt.co.za");
-    oListItem.set_item("From1", fromDate);
+    //this.isoDate = context.get_web().get_regionalSettings().get_timeZone().localTimeToUTC(fromDate);
+    //var dateToInsert = addBrowserUtcOffset(this.isoDate.get_value());
+    oListItem.set_item("From1", date);
     oListItem.set_item("To", toDate);
     oListItem.set_item("TypeofLeave", selLeave);
     if (cbOnbehalf == "on") {
@@ -189,9 +191,9 @@ function uploadFile() {
     getFile.fail(onError);
 
     // Get the local file as an array buffer.
-// Add the file to the file collection in the Shared Documents folder.
-// Get the list item that corresponds to the file by calling the file's ListItemAllFields property.
-// Change the display name and title of the list item.
+    // Add the file to the file collection in the Shared Documents folder.
+    // Get the list item that corresponds to the file by calling the file's ListItemAllFields property.
+    // Change the display name and title of the list item.
 }
 
 // Display error messages. 
