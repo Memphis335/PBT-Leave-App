@@ -19,11 +19,9 @@ function requestLeave() {
     var surname = $("#txtSurname").val();
     var number = $("#txtNumber").val().toString();
     var managerWho = $("#managerWho_TopSpan_ResolvedList").find("span.sp-peoplepicker-userSpan").attr("sid");
-    //console.log(managerWho);
-    var fromDate = $("#fromDate").val();
-    var date = new Date(fromDate).toISOString("GMT");
-    console.log(date);
-    var toDate = $("#toDate").val();
+    var fromDate = $("#ctl00_PlaceHolderMain_fromDate_fromDateDate").val().toUTCString();
+    console.log(fromDate);
+    var toDate = $("#ctl00_PlaceHolderMain_toDate_toDateDate").val();
     var selLeave = $("#selLeave").val();
     var cbOnbehalf = $("#cbOnbehalf:checked").val();
 
@@ -37,22 +35,8 @@ function requestLeave() {
     oListItem.set_item("Surname", surname);
     oListItem.set_item("ReachableNumber", number);
     //oListItem.set_item("Manager", "i:0|jakess@pbt.co.za");
-    //function localizeDateStr (dateToConvertStr) { 
-    //    var dateToConvert = new Date(dateToConvertStr);
-    //    var localDate = new Date();
-    //    dateToConvert.setHours(dateToConvert.getHours()+localDate.getTimezoneOffset‌​());
-    //    return dateToConvert.toString();
-    //} 
-    //var addBrowserUtcOffset = function (date) {
-    //    var utcOffsetMinutes = date.getTimezoneOffset();
-    //    var newDate = new Date(date.getTime());
-    //    newDate.setTime(newDate.getTime() - (utcOffsetMinutes * 60 * 1000));
-    //    return newDate;
-    //}
-
-    //this.isoDate = context.get_web().get_regionalSettings().get_timeZone().localTimeToUTC(fromDate);
-    //var dateToInsert = addBrowserUtcOffset(this.isoDate.get_value());
-    oListItem.set_item("From1", date);
+    
+    oListItem.set_item("From1", fromDate);
     oListItem.set_item("To", toDate);
     oListItem.set_item("TypeofLeave", selLeave);
     if (cbOnbehalf == "on") {
@@ -211,4 +195,17 @@ function hideShowNote() {
         $("#SickNote").css("display", "none");
         $("#getFile").removeAttr('required');
     }
+}
+
+function workDays() {
+    function parseDate(str) {
+        var mdy = str.split('/');
+        return new Date(mdy[2], mdy[0] - 1, mdy[1]);
+    }
+
+    function daydiff(first, second) {
+        return Math.round((second - first) / (1000 * 60 * 60 * 24));
+    }
+
+    alert(daydiff(parseDate($("#ctl00_PlaceHolderMain_fromDate_fromDateDate").val()), parseDate($("#ctl00_PlaceHolderMain_toDate_toDateDate").val())));
 }

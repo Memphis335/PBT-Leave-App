@@ -6,12 +6,11 @@
 
 <asp:Content ContentPlaceHolderID="PlaceHolderAdditionalPageHead" runat="server">
     <SharePoint:ScriptLink ID="ScriptLink1" Name="sp.ui.dialog.js" LoadAfterUI="true" Localizable="false" runat="server"></SharePoint:ScriptLink>
-    <SharePoint:FormDigest runat="server" />
+    <SharePoint:ScriptLink LoadAfterUI="true" runat="server" Name="datepicker.js" Localizable="false" Language="javascript" />
     <SharePoint:ScriptLink Name="clienttemplates.js" runat="server" LoadAfterUI="true" Localizable="false" />
     <SharePoint:ScriptLink Name="clientforms.js" runat="server" LoadAfterUI="true" Localizable="false" />
     <SharePoint:ScriptLink Name="clientpeoplepicker.js" runat="server" LoadAfterUI="true" Localizable="false" />
     <SharePoint:ScriptLink Name="autofill.js" runat="server" LoadAfterUI="true" Localizable="false" />
-    <SharePoint:ScriptLink LoadAfterUI="true" runat="server" Name="datepicker.js" Localizable="false" Language="javascript" />
 
     <script type="text/javascript" src="../Scripts/jquery-2.1.4.js"></script>
     <script type="text/javascript" src="../Scripts/jquery-2.1.4.min.js"></script>
@@ -36,6 +35,8 @@
             if (!window.FileReader) {
                 alert('This browser does not support the FileReader API.');
             }
+            var control = $("#ctl00_PlaceHolderMain_toDate_toDateDate");
+            control.onchange = function(){workDays()};
         });
     </script>
 
@@ -136,14 +137,21 @@
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
                     <label class="col-md-4 control-label" for="fromDate">From :</label>
-                    <input type="date" id="fromDate" autocomplete="on" step="1" />
+                    <SharePoint:DateTimeControl runat="server" ID="fromDate" DateOnly="true" UseTimeZoneAdjustment="false" TimeZoneId="1033" LocaleId="1033" DatePickerFrameUrl="../_layouts/15/iframe.aspx"/>
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
                     <label class="col-md-4 control-label" for="toDate">To :</label>
-                    <input type="date" id="toDate" autocomplete="on" step="1" />
+                    <SharePoint:DateTimeControl runat="server" ID="DateTimeControl1" DateOnly="true" UseTimeZoneAdjustment="false" LocaleId="1033" DatePickerFrameUrl="../_layouts/15/iframe.aspx"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-4"></div>
+                <div class="col-md-4">
+                    <label class="col-md-4 control-label" style="width: 36%" for="workDays">Number of Work Days :</label>
+                    <div id="workDays">6</div>
                 </div>
             </div>
 

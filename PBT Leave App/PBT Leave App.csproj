@@ -54,6 +54,7 @@
     <Content Include="Sicknotes\Schema.xml" />
     <Content Include="Sicknotes\SicknotesInstance\Elements.xml" />
     <Content Include="Sicknotes\Upload.aspx" />
+    <None Include="app.config" />
     <None Include="Content\bootstrap-theme.css.map" />
     <None Include="Content\bootstrap.css.map" />
     <None Include="Content\fonts\fontawesome-webfont.eot" />
