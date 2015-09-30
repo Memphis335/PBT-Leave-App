@@ -19,9 +19,12 @@ function requestLeave() {
     var surname = $("#txtSurname").val();
     var number = $("#txtNumber").val().toString();
     var managerWho = $("#managerWho_TopSpan_ResolvedList").find("span.sp-peoplepicker-userSpan").attr("sid");
-    var fromDate = $("#ctl00_PlaceHolderMain_fromDate_fromDateDate").val().toUTCString();
-    console.log(fromDate);
-    var toDate = $("#ctl00_PlaceHolderMain_toDate_toDateDate").val();
+    var fromDate = $("#ctl00_PlaceHolderMain_fromDate_fromDateDate").val();
+    var date = new Date(fromDate);
+    date.setHours(date.getHours() + 22);
+    var toDate = $("#ctl00_PlaceHolderMain_todate_todateDate").val();
+    var dateTo = new Date(toDate);
+    dateTo.setHours(dateTo.getHours() + 22);
     var selLeave = $("#selLeave").val();
     var cbOnbehalf = $("#cbOnbehalf:checked").val();
 
@@ -36,8 +39,8 @@ function requestLeave() {
     oListItem.set_item("ReachableNumber", number);
     //oListItem.set_item("Manager", "i:0|jakess@pbt.co.za");
     
-    oListItem.set_item("From1", fromDate);
-    oListItem.set_item("To", toDate);
+    oListItem.set_item("From1", date);
+    oListItem.set_item("To", dateTo);
     oListItem.set_item("TypeofLeave", selLeave);
     if (cbOnbehalf == "on") {
         cbOnbehalf = "Yes";
@@ -45,7 +48,6 @@ function requestLeave() {
         cbOnbehalf = "No";
     }
     oListItem.set_item('OnBehalf', cbOnbehalf);
-    //oListItem.set_item('Attachments', );
 
     oListItem.update();
     context.load(oListItem);
@@ -64,10 +66,9 @@ function uploadFile() {
  
     // Define the folder path for this example.
     var serverRelativeUrlToFolder = "Lists/Sicknotes";
-    console.log(serverRelativeUrlToFolder);
     // Get test values from the file input and text input page controls.
-    var fileInput = jQuery('#getFile');
-    var newName = jQuery('#displayName').val();
+    var fileInput = $("#getFile");
+    var newName = oListItem.get_id();
 
     // Get the server URL.
     var serverUrl = window._spPageContextInfo.webAbsoluteUrl;
@@ -173,11 +174,6 @@ function uploadFile() {
         addFile.fail(onError);
     });
     getFile.fail(onError);
-
-    // Get the local file as an array buffer.
-    // Add the file to the file collection in the Shared Documents folder.
-    // Get the list item that corresponds to the file by calling the file's ListItemAllFields property.
-    // Change the display name and title of the list item.
 }
 
 // Display error messages. 
@@ -193,19 +189,30 @@ function hideShowNote() {
         $("#getFile").attr({ "required": "required"});
     } else {
         $("#SickNote").css("display", "none");
-        $("#getFile").removeAttr('required');
+        $("#getFile").removeAttr("required");
     }
 }
 
 function workDays() {
-    function parseDate(str) {
-        var mdy = str.split('/');
-        return new Date(mdy[2], mdy[0] - 1, mdy[1]);
+    var dateFrom = $("#ctl00_PlaceHolderMain_fromDate_fromDateDate").val();
+    var dateTo = $("#ctl00_PlaceHolderMain_todate_todateDate").val();
+    function getWorkingDays(startDate, endDate) {
+        var result = 0;
+
+        var currentDate = new Date(startDate);
+        var lastDay = new Date(endDate);
+        while (currentDate <= lastDay) {
+
+            var weekDay = currentDate.getDay();
+            if (weekDay != 0 && weekDay != 6)
+                result++;
+
+            currentDate.setDate(currentDate.getDate() + 1);
+        }
+
+        return result;
     }
 
-    function daydiff(first, second) {
-        return Math.round((second - first) / (1000 * 60 * 60 * 24));
-    }
-
-    alert(daydiff(parseDate($("#ctl00_PlaceHolderMain_fromDate_fromDateDate").val()), parseDate($("#ctl00_PlaceHolderMain_toDate_toDateDate").val())));
+    var dayDiff = getWorkingDays(dateFrom, dateTo);
+    $("#workDays").text(dayDiff);
 }

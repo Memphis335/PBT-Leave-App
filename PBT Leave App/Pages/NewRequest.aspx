@@ -35,8 +35,6 @@
             if (!window.FileReader) {
                 alert('This browser does not support the FileReader API.');
             }
-            var control = $("#ctl00_PlaceHolderMain_toDate_toDateDate");
-            control.onchange = function(){workDays()};
         });
     </script>
 
@@ -116,7 +114,7 @@
             <div class="form-group">
                 <label class="col-md-4 control-label" for="selLeave">Type of Leave :</label>
                 <div class="col-md-4">
-                    <select id="selLeave" name="selLeave" class="form-control" onclick="hideShowNote();">
+                    <select id="selLeave" name="selLeave" class="form-control" onchange="hideShowNote();">
                         <option value="Annual Leave">Annual Leave</option>
                         <option value="Sick Leave">Sick Leave</option>
                         <option value="Study Leav">Study Leave</option>
@@ -133,25 +131,25 @@
                     <label class="col-md-4">Period</label>
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group"  onmousemove="workDays();">
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
                     <label class="col-md-4 control-label" for="fromDate">From :</label>
-                    <SharePoint:DateTimeControl runat="server" ID="fromDate" DateOnly="true" UseTimeZoneAdjustment="false" TimeZoneId="1033" LocaleId="1033" DatePickerFrameUrl="../_layouts/15/iframe.aspx"/>
+                    <SharePoint:DateTimeControl runat="server" ID="fromDate" DateOnly="true" UseTimeZoneAdjustment="false" TimeZoneId="1033" LocaleId="1033" OnValueChangeClientScript="workDays();" DatePickerFrameUrl="../_layouts/15/iframe.aspx"/>
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group" onmousemove="workDays();">
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
                     <label class="col-md-4 control-label" for="toDate">To :</label>
-                    <SharePoint:DateTimeControl runat="server" ID="DateTimeControl1" DateOnly="true" UseTimeZoneAdjustment="false" LocaleId="1033" DatePickerFrameUrl="../_layouts/15/iframe.aspx"/>
+                    <SharePoint:DateTimeControl runat="server" ID="todate" DateOnly="true" UseTimeZoneAdjustment="false" LocaleId="1033" DatePickerFrameUrl="../_layouts/15/iframe.aspx" OnValueChangeClientScript="workDays();"/>
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
                     <label class="col-md-4 control-label" style="width: 36%" for="workDays">Number of Work Days :</label>
-                    <div id="workDays">6</div>
+                    <div id="workDays"></div>
                 </div>
             </div>
 
@@ -159,9 +157,7 @@
             <div class="form-group" id="SickNote" style="display: none">
                 <label class="col-md-4 control-label" for="addFileButton">Upload Sick Note</label>
                 <div class="col-md-4">
-                    <input id="getFile" name="getfile" type="file" /><br />
-                    <input id="displayName" name="displayName" type="text" placeholder="Enter a unique name" /><br />
-                    <input id="addFileButton" name="addFileButton" type="button" value="Upload" onclick="uploadFile()" />
+                    <input id="getFile" name="getfile" type="file" onfocusout="uploadFile();" />
                 </div>
             </div>
 
