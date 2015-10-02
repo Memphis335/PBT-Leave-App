@@ -22,7 +22,7 @@
     <script type="text/javascript" src="../Scripts/peoplepicker.min.js"></script>
     <script type="text/javascript" src="../Scripts/App.js"></script>
     <script type="text/javascript" src="../Scripts/requests.js"></script>
-
+    <script type="text/javascript" src="../Scripts/holidays.js"></script>
 
     <link rel="Stylesheet" type="text/css" href="../Content/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="../Content/App.css" />
@@ -35,9 +35,10 @@
             if (!window.FileReader) {
                 alert('This browser does not support the FileReader API.');
             }
+            $("#ctl00_PlaceHolderMain_fromDate_fromDateDate").value = "";
+            $("#ctl00_PlaceHolderMain_todate_todateDate").value = "";
         });
     </script>
-
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="PlaceHolderPageTitleInTitleArea" runat="server">

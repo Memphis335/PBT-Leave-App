@@ -18,7 +18,7 @@ function requestLeave() {
     var name = $("#txtName").val();
     var surname = $("#txtSurname").val();
     var number = $("#txtNumber").val().toString();
-    var managerWho = $("#managerWho_TopSpan_ResolvedList").find("span.sp-peoplepicker-userSpan").attr("sid");
+    var managerWho = $("#managerWho_TopSpan_ResolvedList").find("span.ms-entity-resolved").attr("title");
     var fromDate = $("#ctl00_PlaceHolderMain_fromDate_fromDateDate").val();
     var date = new Date(fromDate);
     date.setHours(date.getHours() + 22);
@@ -37,8 +37,7 @@ function requestLeave() {
     oListItem.set_item("Name1", name);
     oListItem.set_item("Surname", surname);
     oListItem.set_item("ReachableNumber", number);
-    //oListItem.set_item("Manager", "i:0|jakess@pbt.co.za");
-    
+    oListItem.set_item("Manager", SP.FieldUserValue.fromUser(managerWho));
     oListItem.set_item("From1", date);
     oListItem.set_item("To", dateTo);
     oListItem.set_item("TypeofLeave", selLeave);
@@ -47,7 +46,7 @@ function requestLeave() {
     } else {
         cbOnbehalf = "No";
     }
-    oListItem.set_item('OnBehalf', cbOnbehalf);
+    oListItem.set_item("OnBehalf", cbOnbehalf);
 
     oListItem.update();
     context.load(oListItem);
@@ -55,12 +54,12 @@ function requestLeave() {
 }
 
 function onQuerySucceeded() {
-    alert("Thank You!" + "\n" + "Your leave request has been submitted." + "\n" + "Request number : " + oListItem.get_id());
-}
+        alert("Thank You!" + "\n" + "Your leave request has been submitted." + "\n" + "Request number : " + oListItem.get_id());
+    }
 
-function onQueryFailed(sender, args) {
-    alert("Request failed. " + args.get_message() + "\n" + args.get_stackTrace());
-}
+    function onQueryFailed(sender, args) {
+        alert("Request failed to submit leave! " + args.get_message() + "\n" + args.get_stackTrace());
+    }
 
 function uploadFile() {
  
