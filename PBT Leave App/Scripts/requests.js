@@ -212,6 +212,74 @@ function workDays() {
         return result;
     }
 
+    function getDateArray(startDate, endDate) {
+
+        var dateArray = new Array();
+        var currentDate = new Date(startDate);
+        var lastDay = endDate;
+        do {
+            currentDate.setDate(currentDate.getDate() + 1);
+            dateArray.push(currentDate);
+        } while (currentDate <= lastDay)
+        return dateArray;
+    }
+
+    function holidays() {
+        var defaults = $.extend({
+            calendarId: 'en.sa#holiday@group.v.calendar.google.com',
+            apiKey: 'AIzaSyAFZiKbVRH13BFhOxU6LfM50TxTxMY8sOk',
+            dateFormat: 'LongDate',
+            errorMsg: 'No events in calendar',
+            maxEvents: 50,
+            futureEventsOnly: true,
+            sortDescending: true
+        });
+
+        var s = '';
+        var feedUrl = 'https://www.googleapis.com/calendar/v3/calendars/' +
+          encodeURIComponent(defaults.calendarId.trim()) + '/events?key=' + defaults.apiKey +
+          '&orderBy=startTime&singleEvents=true';
+        if (defaults.futureEventsOnly) {
+            feedUrl += '&timeMin=' + new Date().toISOString();
+        }
+
+        $.ajax({
+            url: feedUrl,
+            dataType: 'json',
+            success: function (response) {
+                var holidayArray = new Array();
+                for (var i = 0; i < response.items.length; i++) {
+                    var daysToConvert = new Date(response.items[i].start.date);
+                    daysToConvert.toUTCString();
+                    holidayArray.push(daysToConvert);
+                }
+                },
+            error: function (response) {
+                alert("Error has occured while checking for holidays!" + '\n' + "Please notify IT.");
+            }
+        });
+    }
+
+    function getHolidays() {
+        var test1 = getDateArray(dateFrom, dateTo);
+        var array1 = new Array(test1);
+        var array2 = new Array(holidays());
+        var daysToSub = 0;
+
+        for (var i = 0; i < array2.length; i++) {
+            for (var j = 0; j < array1.length; j++) {
+                if (array1[i] == array2[j]) {
+                    daysToSub++;
+                }
+            }
+        }
+        console.log(daysToSub);
+        return daysToSub;
+    }
+
+    console.log("Date Array");
+    console.log(getDateArray(dateFrom, dateTo));
+
     var dayDiff = getWorkingDays(dateFrom, dateTo);
     $("#workDays").text(dayDiff);
 }
