@@ -195,17 +195,16 @@ function hideShowNote() {
 function workDays() {
     var dateFrom = $("#ctl00_PlaceHolderMain_fromDate_fromDateDate").val();
     var dateTo = $("#ctl00_PlaceHolderMain_todate_todateDate").val();
+
     function getWorkingDays(startDate, endDate) {
         var result = 0;
 
         var currentDate = new Date(startDate);
         var lastDay = new Date(endDate);
         while (currentDate <= lastDay) {
-
             var weekDay = currentDate.getDay();
             if (weekDay != 0 && weekDay != 6)
                 result++;
-
             currentDate.setDate(currentDate.getDate() + 1);
         }
 
@@ -214,13 +213,15 @@ function workDays() {
 
     function getDateArray(startDate, endDate) {
 
-        var dateArray = new Array();
-        var currentDate = new Date(startDate);
-        var lastDay = endDate;
-        do {
+        var dateArray = new Array(),
+        currentDate = new Date(startDate),
+        lastDay = new Date(endDate);
+        while (currentDate <= lastDay) {
+            if (!(currentDate.getUTCDay() == 5 || currentDate.getUTCDay() == 6)) {
+                dateArray.push(new Date(currentDate));
+            }
             currentDate.setDate(currentDate.getDate() + 1);
-            dateArray.push(currentDate);
-        } while (currentDate <= lastDay)
+        }
         return dateArray;
     }
 
@@ -234,6 +235,7 @@ function workDays() {
             futureEventsOnly: true,
             sortDescending: true
         });
+        var holidayArray = new Array();
 
         var s = '';
         var feedUrl = 'https://www.googleapis.com/calendar/v3/calendars/' +
@@ -247,25 +249,27 @@ function workDays() {
             url: feedUrl,
             dataType: 'json',
             success: function (response) {
-                var holidayArray = new Array();
                 for (var i = 0; i < response.items.length; i++) {
                     var daysToConvert = new Date(response.items[i].start.date);
                     daysToConvert.toUTCString();
                     holidayArray.push(daysToConvert);
                 }
-                },
+            },
             error: function (response) {
                 alert("Error has occured while checking for holidays!" + '\n' + "Please notify IT.");
             }
         });
+        return holidayArray;
     }
 
-    function getHolidays() {
-        var test1 = getDateArray(dateFrom, dateTo);
-        var array1 = new Array(test1);
-        var array2 = new Array(holidays());
+    function getHolidaysToSub() {
+        var array1 = new Array();
+        array1.push.apply(array1, getDateArray(dateFrom, dateTo));
+        var array2 = new Array();
+        array2.push.apply(array2, holidays());
         var daysToSub = 0;
-
+        console.log(array1);
+        console.log(array2);
         for (var i = 0; i < array2.length; i++) {
             for (var j = 0; j < array1.length; j++) {
                 if (array1[i] == array2[j]) {
@@ -273,13 +277,11 @@ function workDays() {
                 }
             }
         }
+        console.log("Days to Subtract");
         console.log(daysToSub);
         return daysToSub;
     }
 
-    console.log("Date Array");
-    console.log(getDateArray(dateFrom, dateTo));
-
-    var dayDiff = getWorkingDays(dateFrom, dateTo);
+    var dayDiff = getWorkingDays(dateFrom, dateTo) - getHolidaysToSub();
     $("#workDays").text(dayDiff);
 }
