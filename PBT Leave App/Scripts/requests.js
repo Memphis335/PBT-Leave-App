@@ -54,15 +54,15 @@ function requestLeave() {
 }
 
 function onQuerySucceeded() {
-        alert("Thank You!" + "\n" + "Your leave request has been submitted." + "\n" + "Request number : " + oListItem.get_id());
-    }
+    alert("Thank You!" + "\n" + "Your leave request has been submitted." + "\n" + "Request number : " + oListItem.get_id());
+}
 
-    function onQueryFailed(sender, args) {
-        alert("Request failed to submit leave! " + args.get_message() + "\n" + args.get_stackTrace());
-    }
+function onQueryFailed(sender, args) {
+    alert("Request failed to submit leave! " + args.get_message() + "\n" + args.get_stackTrace());
+}
 
 function uploadFile() {
- 
+
     // Define the folder path for this example.
     var serverRelativeUrlToFolder = "Lists/Sicknotes";
     // Get test values from the file input and text input page controls.
@@ -185,7 +185,7 @@ function hideShowNote() {
     var sickLeaveVal = "Sick Leave";
     if (selLeave == sickLeaveVal) {
         $("#SickNote").css("display", "inherit");
-        $("#getFile").attr({ "required": "required"});
+        $("#getFile").attr({ "required": "required" });
     } else {
         $("#SickNote").css("display", "none");
         $("#getFile").removeAttr("required");
@@ -213,7 +213,7 @@ function workDays() {
 
     function getDateArray(startDate, endDate) {
 
-        var dateArray = new Array(),
+        var dateArray = [],
         currentDate = new Date(startDate),
         lastDay = new Date(endDate);
         while (currentDate <= lastDay) {
@@ -223,6 +223,27 @@ function workDays() {
             currentDate.setDate(currentDate.getDate() + 1);
         }
         return dateArray;
+    }
+
+    function getHolidaysToSub(data) {
+        var array1 = [];
+        array1.push.apply(array1, getDateArray(dateFrom, dateTo));
+        var array2 = [];
+        array2.push.apply(array2, data);
+        var daysToSub = 0;
+        for (var i = 0; i < array2.length; i++) {
+            for (var j = 0; j < array1.length; j++) {
+                console.log(array1[j]);
+                console.log(array2[i]);
+                if (array1[j] === array2[i]) {
+                    console.log("Equality found!");
+                    daysToSub++;
+                }
+            }
+        }
+        console.log("Days to Subtract");
+        console.log(daysToSub);
+        return daysToSub;
     }
 
     function holidays() {
@@ -235,7 +256,6 @@ function workDays() {
             futureEventsOnly: true,
             sortDescending: true
         });
-        var holidayArray = new Array();
 
         var s = '';
         var feedUrl = 'https://www.googleapis.com/calendar/v3/calendars/' +
@@ -249,39 +269,22 @@ function workDays() {
             url: feedUrl,
             dataType: 'json',
             success: function (response) {
+                var holidayArray = [];
                 for (var i = 0; i < response.items.length; i++) {
                     var daysToConvert = new Date(response.items[i].start.date);
-                    daysToConvert.toUTCString();
+                    //daysToConvert.toUTCString();
+                    daysToConvert.setHours(daysToConvert.getHours() - 2);
                     holidayArray.push(daysToConvert);
+                    getHolidaysToSub(holidayArray);
                 }
-            },
+                },
             error: function (response) {
                 alert("Error has occured while checking for holidays!" + '\n' + "Please notify IT.");
             }
         });
-        return holidayArray;
     }
 
-    function getHolidaysToSub() {
-        var array1 = new Array();
-        array1.push.apply(array1, getDateArray(dateFrom, dateTo));
-        var array2 = new Array();
-        array2.push.apply(array2, holidays());
-        var daysToSub = 0;
-        console.log(array1);
-        console.log(array2);
-        for (var i = 0; i < array2.length; i++) {
-            for (var j = 0; j < array1.length; j++) {
-                if (array1[i] == array2[j]) {
-                    daysToSub++;
-                }
-            }
-        }
-        console.log("Days to Subtract");
-        console.log(daysToSub);
-        return daysToSub;
-    }
-
+    holidays();
     var dayDiff = getWorkingDays(dateFrom, dateTo) - getHolidaysToSub();
     $("#workDays").text(dayDiff);
 }
