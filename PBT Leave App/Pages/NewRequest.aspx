@@ -37,6 +37,7 @@
             }
             $("#ctl00_PlaceHolderMain_fromDate_fromDateDate").value = "";
             $("#ctl00_PlaceHolderMain_todate_todateDate").value = "";
+            $("#ctl00_PlaceHolderMain_todate_todateDateDatePickerImage").click(function() { workDays(); });
         });
     </script>
 </asp:Content>
@@ -132,14 +133,14 @@
                     <label class="col-md-4">Period</label>
                 </div>
             </div>
-            <div class="form-group"  onmouseover="workDays();">
+            <div class="form-group">
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
                     <label class="col-md-4 control-label" for="fromDate">From :</label>
                     <SharePoint:DateTimeControl runat="server" ID="fromDate" DateOnly="true" UseTimeZoneAdjustment="false" TimeZoneId="1033" LocaleId="1033" OnValueChangeClientScript="workDays();" DatePickerFrameUrl="../_layouts/15/iframe.aspx"/>
                 </div>
             </div>
-            <div class="form-group" onmouseover="workDays();">
+            <div class="form-group">
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
                     <label class="col-md-4 control-label" for="toDate">To :</label>

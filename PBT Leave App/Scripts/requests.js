@@ -233,58 +233,54 @@ function workDays() {
         var daysToSub = 0;
         for (var i = 0; i < array2.length; i++) {
             for (var j = 0; j < array1.length; j++) {
-                console.log(array1[j]);
-                console.log(array2[i]);
-                if (array1[j] === array2[i]) {
-                    console.log("Equality found!");
+                if (array1[j].getDate() == (array2[i]).getDate()) {
                     daysToSub++;
                 }
             }
         }
-        console.log("Days to Subtract");
-        console.log(daysToSub);
         return daysToSub;
     }
 
-    function holidays() {
-        var defaults = $.extend({
-            calendarId: 'en.sa#holiday@group.v.calendar.google.com',
-            apiKey: 'AIzaSyAFZiKbVRH13BFhOxU6LfM50TxTxMY8sOk',
-            dateFormat: 'LongDate',
-            errorMsg: 'No events in calendar',
-            maxEvents: 50,
-            futureEventsOnly: true,
-            sortDescending: true
-        });
 
-        var s = '';
-        var feedUrl = 'https://www.googleapis.com/calendar/v3/calendars/' +
-          encodeURIComponent(defaults.calendarId.trim()) + '/events?key=' + defaults.apiKey +
-          '&orderBy=startTime&singleEvents=true';
-        if (defaults.futureEventsOnly) {
-            feedUrl += '&timeMin=' + new Date().toISOString();
-        }
+    var defaults = $.extend({
+        calendarId: 'en.sa#holiday@group.v.calendar.google.com',
+        apiKey: 'AIzaSyAFZiKbVRH13BFhOxU6LfM50TxTxMY8sOk',
+        dateFormat: 'LongDate',
+        errorMsg: 'No events in calendar',
+        maxEvents: 50,
+        futureEventsOnly: true,
+        sortDescending: true
+    });
 
-        $.ajax({
-            url: feedUrl,
-            dataType: 'json',
-            success: function (response) {
-                var holidayArray = [];
-                for (var i = 0; i < response.items.length; i++) {
-                    var daysToConvert = new Date(response.items[i].start.date);
-                    //daysToConvert.toUTCString();
-                    daysToConvert.setHours(daysToConvert.getHours() - 2);
-                    holidayArray.push(daysToConvert);
-                    getHolidaysToSub(holidayArray);
-                }
-                },
-            error: function (response) {
-                alert("Error has occured while checking for holidays!" + '\n' + "Please notify IT.");
-            }
-        });
+    var s = '';
+    var feedUrl = 'https://www.googleapis.com/calendar/v3/calendars/' +
+      encodeURIComponent(defaults.calendarId.trim()) + '/events?key=' + defaults.apiKey +
+      '&orderBy=startTime&singleEvents=true';
+    if (defaults.futureEventsOnly) {
+        feedUrl += '&timeMin=' + new Date().toISOString() + '&timeMax=' + new Date(dateTo).toISOString();
     }
+    
+    $.ajax({
+        url: feedUrl,
+        dataType: 'json',
+        success: function (response) {
+            var holidayArray = [];
+            var testNum;
+            for (var i = 0; i < response.items.length; i++) {
+                var daysToConvert = new Date(response.items[i].start.date);
+                daysToConvert.setHours(daysToConvert.getHours() - 2);
+                holidayArray.push(daysToConvert);
+                testNum = getHolidaysToSub(holidayArray);
+                var numOfWorkDays = getWorkingDays(dateFrom, dateTo);
+                var dayDiff = numOfWorkDays - testNum;
+                $("#workDays").text(dayDiff);
+            }
+            },
+        error: function (response) {
+            alert("Error has occured while checking for holidays!" + '\n' + "Please notify IT.");
+        }
+    });
 
-    holidays();
-    var dayDiff = getWorkingDays(dateFrom, dateTo) - getHolidaysToSub();
-    $("#workDays").text(dayDiff);
+    
 }
+
