@@ -43,7 +43,7 @@ function getListItems(name) {
 
     context.load(items);
     context.executeQueryAsync(
-       Function.createDelegate(this, this.onQuerySucceededLeave), 
+       Function.createDelegate(this, this.onQuerySucceededLeave),
         Function.createDelegate(this, this.onQueryFailed)
     );
 }
@@ -54,6 +54,8 @@ function onQuerySucceededLeave(sender, args) {
     var study = '';
     var matern = '';
     var family = '';
+    var inception = "";
+    var id = "";
 
     var listItemEnumerator = items.getEnumerator();
 
@@ -64,14 +66,32 @@ function onQuerySucceededLeave(sender, args) {
         study = oListItem.get_item('StudyLEave');
         matern = oListItem.get_item('MaternityLeave');
         family = oListItem.get_item('FamilyResponsibilityLeave');
+        inception = oListItem.get_item("PBTInceptionDate");
+        id = oListItem.get_id();
     }
 
-    $('#annual').text(annual);
-    $('#sick').text(sick);
-    $('#study').text(study);
-    $('#matern').text(matern);
-    $('#family').text(family);
-    
+    var date = new Date();
+    var day = date.getDate();
+    var month = date.getMonth() + 1;
+    var year = date.getFullYear();
+
+    var inceptionDate = new Date(inception);
+    var incDay = inceptionDate.getDate();
+    var incMonth = inceptionDate.getMonth() + 1;
+    var incYear = inceptionDate.getFullYear();
+    var yearDiff = year - incYear;
+    console.log(day, incDay);
+    console.log(month, incMonth);
+    if (day === incDay && month === incMonth) {
+        resetLeave(id, annual, yearDiff);
+    }
+
+    $("#annual").text(annual);
+    $("#sick").text(sick);
+    $("#study").text(study);
+    $("#matern").text(matern);
+    $("#family").text(family);
+
 }
 
 function getQueryStringParameter(paramToRetrieve) {
@@ -84,6 +104,44 @@ function getQueryStringParameter(paramToRetrieve) {
             return singleParam[1];
     }
 }
+
+function resetLeave(id, num, year) {
+    var resetList = context.get_web().get_lists().getByTitle("Leave Balances");
+
+    var carryOver = num;
+    var term = year;
+
+    if (term >= 10) {
+        if (carryOver > 8) {
+            carryOver = 23;
+        } else carryOver = +15 + +num;
+    } else if (term >= 5 && term < 10) {
+        if (carryOver > 4) {
+            carryOver = 19;
+        } else carryOver = +15 + +num;
+    } else {
+        carryOver = 15;
+    }
+
+    this.oListItem = resetList.getItemById(id);
+    oListItem.set_item("AnnualLeave", carryOver);
+    oListItem.set_item("SickLeave", 30);
+    oListItem.set_item("StudyLEave", 8);
+    oListItem.set_item("MaternityLeave", 5);
+    oListItem.set_item("FamilyResponsibilityLeave", 3);
+
+    oListItem.update();
+
+    context.executeQueryAsync(
+        Function.createDelegate(this, this.onResetQuerySucceeded),
+        Function.createDelegate(this, this.onQueryFailed)
+    );
+}
+
+function onResetQuerySucceeded() {
+    alert("Your Leave balances has been reset!");
+}
+
 function processEmails() {
     var from = user.get_email();
     var to = 'lourens.marx@pbtgroup.co.za';
@@ -176,7 +234,7 @@ function onQuerySucceeded(sender, args) {
     }
 
     if (listItemInfo == user.get_title()) {
-        document.getElementById('admin').style.display = 'initial';
+        document.getElementById("admin").style.display = "initial";
     }
 }
 
@@ -212,7 +270,7 @@ function ManagerQuerySucceeded(sender, args) {
         var oListItem = listItemEnumerator.get_current();
         listItemInfo += oListItem.get_item("IsManager");
     }
-    
+
     if (listItemInfo == "Yes") {
         document.getElementById("managerNav").style.display = "inherit";
         document.getElementById("manager").style.display = "initial";
@@ -225,7 +283,7 @@ function ManagerQueryFailed(sender, args) {
 }
 
 function hideDiv(val) {
-    $("#leaveBal").css("opacity",val);
+    $("#leaveBal").css("opacity", val);
 }
 
 function printName() {

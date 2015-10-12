@@ -39,7 +39,7 @@
             <li><a href="Help.aspx">Help</a></li>
             <ul id="admin" class="nav nav-stacked nav-pills">
                 <li class="nav-divider"></li>
-                <li  id="adminSection">Admin Section</li>
+                <li id="adminSection">Admin Section</li>
                 <li><a href="../Lists/Admins/AllItems.aspx">Edit Admins</a></li>
                 <li><a href="../Lists/LeaveBalances/AllItems.aspx">Add User</a></li>
                 <li><a href="../Lists/Requests/AllItems.aspx">View All Requests</a></li>
@@ -86,7 +86,6 @@
                 <div class="thumbnail tile tile-medium">
                     <h4>Annual Leave</h4>
                     <p id="annual" class="fa" style="text-align: center; margin-top: 20px; font-size: 30px;">
-                        
                     </p>
                 </div>
             </div>
@@ -94,7 +93,6 @@
                 <div class="thumbnail tile tile-medium">
                     <h4>Sick Leave</h4>
                     <p id="sick" class="fa" style="text-align: center; margin-top: 20px; font-size: 30px;">
-                        
                     </p>
                 </div>
             </div>
@@ -102,7 +100,6 @@
                 <div class="thumbnail tile tile-medium">
                     <h4>Study Leave</h4>
                     <p id="study" class="fa" style="text-align: center; margin-top: 20px; font-size: 30px;">
-                        
                     </p>
                 </div>
             </div>
@@ -110,7 +107,6 @@
                 <div class="thumbnail tile tile-medium">
                     <h4>Maternity Leave</h4>
                     <p id="matern" class="fa" style="text-align: center; margin-top: 20px; font-size: 30px;">
-                        
                     </p>
                 </div>
             </div>
@@ -118,7 +114,6 @@
                 <div class="thumbnail tile tile-medium">
                     <h4>Family Responsibility Leave</h4>
                     <p id="family" class="fa" style="text-align: center; margin-top: 10px; font-size: 30px;">
-                        
                     </p>
                 </div>
             </div>

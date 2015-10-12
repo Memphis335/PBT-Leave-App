@@ -13,5 +13,6 @@
     <ProjectItemFile Source="jquery-2.1.4.js" Target="Scripts\" Type="ElementFile" />
     <ProjectItemFile Source="jquery-2.1.4.intellisense.js" Target="Scripts\" Type="ElementFile" />
     <ProjectItemFile Source="holidays.js" Target="Scripts\" Type="ElementFile" />
+    <ProjectItemFile Source="init.js" Target="Scripts\" Type="ElementFile" />
   </Files>
 </ProjectItem>
