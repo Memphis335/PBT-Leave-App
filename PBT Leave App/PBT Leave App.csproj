@@ -56,6 +56,8 @@
     <Content Include="Sicknotes\Schema.xml" />
     <Content Include="Sicknotes\SicknotesInstance\Elements.xml" />
     <Content Include="Sicknotes\Upload.aspx" />
+    <Content Include="WorkflowHistoryList\Elements.xml" />
+    <Content Include="WorkflowTaskList\Elements.xml" />
     <None Include="app.config" />
     <None Include="Content\bootstrap-theme.css.map" />
     <None Include="Content\bootstrap.css.map" />
@@ -82,6 +84,9 @@
     </None>
     <None Include="IsManager\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{4eb0f3ed-e113-461c-8a8c-e9fba03fc4be}</SharePointProjectItemId>
+    </None>
+    <None Include="Leave Approval\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{ce0f6cee-d6ee-434c-81a9-83790f553d57}</SharePointProjectItemId>
     </None>
     <None Include="Leave Balances\Leave Balances Instance\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{923fc220-4656-420d-874f-a30d6e87736b}</SharePointProjectItemId>
@@ -142,6 +147,12 @@
     </None>
     <None Include="Sicknotes\SicknotesInstance\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{37017006-0cb9-47dd-81f9-6db59742cc5b}</SharePointProjectItemId>
+    </None>
+    <None Include="WorkflowHistoryList\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{2e51ccbe-085d-45dd-bd22-08fd67e96e2b}</SharePointProjectItemId>
+    </None>
+    <None Include="WorkflowTaskList\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{0bba8447-12b9-4026-8c1e-d46872a5deef}</SharePointProjectItemId>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -210,6 +221,12 @@
     <Reference Include="System.Xaml" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <XamlAppDef Include="Leave Approval\Workflow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </XamlAppDef>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

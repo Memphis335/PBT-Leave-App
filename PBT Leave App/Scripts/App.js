@@ -49,11 +49,11 @@ function getListItems(name) {
 }
 
 function onQuerySucceededLeave(sender, args) {
-    var sick = '';
-    var annual = '';
-    var study = '';
-    var matern = '';
-    var family = '';
+    var sick = "";
+    var annual = "";
+    var study = "";
+    var matern = "";
+    var family = "";
     var inception = "";
     var id = "";
 
@@ -80,8 +80,7 @@ function onQuerySucceededLeave(sender, args) {
     var incMonth = inceptionDate.getMonth() + 1;
     var incYear = inceptionDate.getFullYear();
     var yearDiff = year - incYear;
-    console.log(day, incDay);
-    console.log(month, incMonth);
+
     if (day === incDay && month === incMonth) {
         resetLeave(id, annual, yearDiff);
     }
@@ -188,23 +187,6 @@ function sickNote() {
         "medical certificate issued by a registered medical practitioner");
 }
 
-function workDays(start, end) {
-
-    // The number of milliseconds in one day
-    var ONE_DAY = 1000 * 60 * 60 * 24;
-
-    // Convert both dates to milliseconds
-    var start_ms = start.getTime();
-    var end_ms = end.getTime();
-
-    // Calculate the difference in milliseconds
-    var difference_ms = Math.abs(start_ms - end_ms);
-
-    // Convert back to days and return
-    $('#daysMaternity').text(Math.floor(difference_ms / ONE_DAY));
-
-}
-
 function getCurrentAdmins() {
 
     var oList = context.get_web().get_lists().getByTitle('Administrators');
@@ -273,7 +255,7 @@ function ManagerQuerySucceeded(sender, args) {
 
     if (listItemInfo == "Yes") {
         document.getElementById("managerNav").style.display = "inherit";
-        document.getElementById("manager").style.display = "initial";
+        $("manager").css("display", "initial");
     }
 }
 

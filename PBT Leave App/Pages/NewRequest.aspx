@@ -37,9 +37,10 @@
             }
             $("#ctl00_PlaceHolderMain_fromDate_fromDateDate").value = "";
             $("#ctl00_PlaceHolderMain_todate_todateDate").value = "";
-            $("#ctl00_PlaceHolderMain_todate_todateDateDatePickerImage").click(function() { workDays(); });
+            $("#ctl00_PlaceHolderMain_todate_todateDate").click(workDays());
+            //$("#ctl00$PlaceHolderMain$todate$todateDate").click(workDays());
         });
-    </script>
+        </script>
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="PlaceHolderPageTitleInTitleArea" runat="server">
@@ -137,14 +138,14 @@
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
                     <label class="col-md-4 control-label" for="fromDate">From :</label>
-                    <SharePoint:DateTimeControl runat="server" ID="fromDate" DateOnly="true" UseTimeZoneAdjustment="false" TimeZoneId="1033" LocaleId="1033" OnValueChangeClientScript="workDays();" DatePickerFrameUrl="../_layouts/15/iframe.aspx"/>
+                    <SharePoint:DateTimeControl runat="server" ID="fromDate" DateOnly="true" UseTimeZoneAdjustment="false" TimeZoneID="1033" LocaleId="1033" OnValueChangeClientScript="workDays();" DatePickerFrameUrl="../_layouts/15/iframe.aspx" />
                 </div>
             </div>
             <div class="form-group">
                 <div class="col-md-4"></div>
                 <div class="col-md-4">
                     <label class="col-md-4 control-label" for="toDate">To :</label>
-                    <SharePoint:DateTimeControl runat="server" ID="todate" DateOnly="true" UseTimeZoneAdjustment="false" LocaleId="1033" DatePickerFrameUrl="../_layouts/15/iframe.aspx" OnValueChangeClientScript="workDays();"/>
+                    <SharePoint:DateTimeControl runat="server" ID="todate" DateOnly="true" UseTimeZoneAdjustment="false" LocaleId="1033" DatePickerFrameUrl="../_layouts/15/iframe.aspx" OnValueChangeClientScript="workDays();" />
                 </div>
             </div>
             <div class="form-group">
@@ -156,10 +157,11 @@
             </div>
 
             <!-- File Button.Hidden if not sick leave-->
+            <div id="sckNote" class="col-md-4 control-label" style="padding: 5px; width: 100%"></div>
             <div class="form-group" id="SickNote" style="display: none">
                 <label class="col-md-4 control-label" for="addFileButton">Upload Sick Note</label>
                 <div class="col-md-4">
-                    <input id="getFile" name="getfile" type="file" onfocusout="uploadFile();" />
+                    <input id="getFile" name="getfile" type="file" />
                 </div>
             </div>
 

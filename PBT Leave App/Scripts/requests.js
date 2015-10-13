@@ -27,7 +27,8 @@ function requestLeave() {
     dateTo.setHours(dateTo.getHours() + 22);
     var selLeave = $("#selLeave").val();
     var cbOnbehalf = $("#cbOnbehalf:checked").val();
-
+    var workDays = $("#workDays").val();
+    console.log(workDays);
     //Send values to Sharepoint list
     var oList = context.get_web().get_lists().getByTitle("Leave Requests");
     var itemCreateInfo = new SP.ListItemCreationInformation();
@@ -47,6 +48,7 @@ function requestLeave() {
         cbOnbehalf = "No";
     }
     oListItem.set_item("OnBehalf", cbOnbehalf);
+    oListItem.set_item("WorkDays", workDays);
 
     oListItem.update();
     context.load(oListItem);
@@ -182,13 +184,17 @@ function onError(error) {
 
 function hideShowNote() {
     var selLeave = $("#selLeave").val();
+    var days = 3;
+    var daysVal = 3;
     var sickLeaveVal = "Sick Leave";
-    if (selLeave == sickLeaveVal) {
+    if (selLeave == sickLeaveVal && days >= daysVal) {
+        $("#sckNote").html("***Sick Leave in excess of 3 days require a Sick Note from a registered doctor. Please upload your sicknote below.***");
         $("#SickNote").css("display", "inherit");
         $("#getFile").attr({ "required": "required" });
     } else {
         $("#SickNote").css("display", "none");
         $("#getFile").removeAttr("required");
+        $("#sckNote").html("");
     }
 }
 
@@ -275,7 +281,7 @@ function workDays() {
                 var dayDiff = numOfWorkDays - testNum;
                 $("#workDays").text(dayDiff);
             }
-            },
+        },
         error: function (response) {
             alert("Error has occured while checking for holidays!" + '\n' + "Please notify IT.");
         }
