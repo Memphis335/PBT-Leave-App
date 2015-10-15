@@ -260,7 +260,7 @@ function ManagerQuerySucceeded(sender, args) {
 }
 
 function ManagerQueryFailed(sender, args) {
-    alert('Request failed. ' + args.get_message() +
+    alert('Request failed to verify if this user is a manager. Error : ' + args.get_message() +
         '\n' + args.get_stackTrace());
 }
 

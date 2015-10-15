@@ -22,7 +22,6 @@
     <script type="text/javascript" src="../Scripts/peoplepicker.min.js"></script>
     <script type="text/javascript" src="../Scripts/App.js"></script>
     <script type="text/javascript" src="../Scripts/requests.js"></script>
-    <script type="text/javascript" src="../Scripts/holidays.js"></script>
 
     <link rel="Stylesheet" type="text/css" href="../Content/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="../Content/App.css" />
@@ -31,16 +30,14 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            $("#managerWho").spPeoplePicker();
+            checkMF();
             if (!window.FileReader) {
                 alert('This browser does not support the FileReader API.');
             }
             $("#ctl00_PlaceHolderMain_fromDate_fromDateDate").value = "";
             $("#ctl00_PlaceHolderMain_todate_todateDate").value = "";
-            $("#ctl00_PlaceHolderMain_todate_todateDate").click(workDays());
-            //$("#ctl00$PlaceHolderMain$todate$todateDate").click(workDays());
         });
-        </script>
+    </script>
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="PlaceHolderPageTitleInTitleArea" runat="server">
@@ -105,22 +102,22 @@
                 </div>
             </div>
 
+            <!-- Text Input Manager (Autofilled) -->
             <div class="form-group">
-                <label class="col-md-4 control-label" for="managerWho">Approval Manager?</label>
+                <label class="col-md-4 control-label" for="manager">Approval Manager</label>
                 <div class="col-md-4">
-                    <div class="input-md" id="managerWho">
-                    </div>
+                    <input type="text" id="manager" class="form-control input-md" />
                 </div>
             </div>
 
-            <!-- Select Basic -->
+            <!-- Select Leave Type -->
             <div class="form-group">
                 <label class="col-md-4 control-label" for="selLeave">Type of Leave :</label>
                 <div class="col-md-4">
                     <select id="selLeave" name="selLeave" class="form-control" onchange="hideShowNote();">
                         <option value="Annual Leave">Annual Leave</option>
                         <option value="Sick Leave">Sick Leave</option>
-                        <option value="Study Leav">Study Leave</option>
+                        <option value="Study Leave">Study Leave</option>
                         <option value="Maternity Leave">Maternity Leave</option>
                         <option value="Family Responsibility Leave">Family Responsibility Leave</option>
                         <option value="Other">Other</option>
@@ -129,39 +126,44 @@
             </div>
 
             <!-- Date Controls -->
-            <div class="form-group">
-                <div class="col-md-4">
-                    <label class="col-md-4">Period</label>
+            <div onmouseover="workDays();">
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <label class="col-md-4">Period</label>
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
-                    <label class="col-md-4 control-label" for="fromDate">From :</label>
-                    <SharePoint:DateTimeControl runat="server" ID="fromDate" DateOnly="true" UseTimeZoneAdjustment="false" TimeZoneID="1033" LocaleId="1033" OnValueChangeClientScript="workDays();" DatePickerFrameUrl="../_layouts/15/iframe.aspx" />
+                <div class="form-group">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <label class="col-md-4 control-label" for="fromDate">From :</label>
+                        <SharePoint:DateTimeControl runat="server" ID="fromDate" DateOnly="true" UseTimeZoneAdjustment="false" TimeZoneID="1033" LocaleId="1033" DatePickerFrameUrl="../_layouts/15/iframe.aspx" />
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
-                    <label class="col-md-4 control-label" for="toDate">To :</label>
-                    <SharePoint:DateTimeControl runat="server" ID="todate" DateOnly="true" UseTimeZoneAdjustment="false" LocaleId="1033" DatePickerFrameUrl="../_layouts/15/iframe.aspx" OnValueChangeClientScript="workDays();" />
+                <div class="form-group">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <label class="col-md-4 control-label" for="toDate">To :</label>
+                        <SharePoint:DateTimeControl runat="server" ID="todate" DateOnly="true" UseTimeZoneAdjustment="false" LocaleId="1033" DatePickerFrameUrl="../_layouts/15/iframe.aspx" />
+                    </div>
                 </div>
-            </div>
-            <div class="form-group">
-                <div class="col-md-4"></div>
-                <div class="col-md-4">
-                    <label class="col-md-4 control-label" style="width: 36%" for="workDays">Number of Work Days :</label>
-                    <div id="workDays"></div>
+                <div class="form-group">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <label class="col-md-4 control-label" style="width: 36%" for="workDays">Number of Work Days :</label>
+                        <div id="workDays"></div>
+                    </div>
                 </div>
             </div>
 
             <!-- File Button.Hidden if not sick leave-->
             <div id="sckNote" class="col-md-4 control-label" style="padding: 5px; width: 100%"></div>
             <div class="form-group" id="SickNote" style="display: none">
-                <label class="col-md-4 control-label" for="addFileButton">Upload Sick Note</label>
+                <label class="col-md-4 control-label" for="getFile">Upload Sick Note</label>
                 <div class="col-md-4">
                     <input id="getFile" name="getfile" type="file" />
+                </div>
+                <div class="col-md-4">
+                    <button class="btn btn-danger" id="uploadFile" name="uploadFile" type="button" onclick="uploadFile()">Upload file</button>
                 </div>
             </div>
 

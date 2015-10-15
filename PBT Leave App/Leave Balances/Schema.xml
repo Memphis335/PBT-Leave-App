@@ -14,6 +14,7 @@
           <FieldRef ID="{af930204-4283-4452-af28-5c997e471b0b}" Name="FamilyResponsibilityLeave" />
           <FieldRef ID="{1daa73db-ec7b-4a46-8139-5ea570a09962}" Name="Other" />
           <FieldRef ID="{1c2ab981-094a-4f21-a01f-f7b37d50ade4}" Name="PBTInceptionDate" />
+          <FieldRef ID="{2654d6e6-e7fb-40c6-a39d-06dd8f7fa616}" Name="Sex" />
         </FieldRefs>
       </ContentType>
       <ContentTypeRef ID="0x01">
@@ -37,8 +38,16 @@
       <Field Name="FamilyResponsibilityLeave" ID="{af930204-4283-4452-af28-5c997e471b0b}" DisplayName="Family Responsibility Leave" Type="Text" Required="TRUE" />
       <Field Name="Other" ID="{1daa73db-ec7b-4a46-8139-5ea570a09962}" DisplayName="Other" Type="Text" Required="FALSE" />
       <Field Name="PBTInceptionDate" ID="{1c2ab981-094a-4f21-a01f-f7b37d50ade4}" DisplayName="PBT Inception Date" Type="DateTime" Required="TRUE" Format="DateOnly" />
+      <Field Name="Sex" ID="{2654d6e6-e7fb-40c6-a39d-06dd8f7fa616}" DisplayName="Sex" Type="Choice" Required="TRUE">
+        <CHOICES>
+          <CHOICE>Male</CHOICE>
+          <CHOICE>Female</CHOICE>
+        </CHOICES>
+      </Field>
     </Fields>
     <Views>
+
+
 
 
       <View BaseViewID="0" Type="HTML" MobileView="TRUE" TabularView="FALSE">
@@ -47,10 +56,12 @@
         <RowLimit Paged="TRUE">30</RowLimit>
         <ViewFields>
 
+
           <FieldRef Name="LinkTitleNoMenu"></FieldRef>
         </ViewFields>
         <Query>
           <OrderBy>
+
 
             <FieldRef Name="Modified" Ascending="FALSE"></FieldRef>
           </OrderBy>
@@ -68,6 +79,18 @@
         <RowLimit Paged="TRUE">30</RowLimit>
         <ViewFields>
 
+
+
+
+
+
+
+
+
+
+
+
+
           <FieldRef Name="LinkTitle"></FieldRef>
           <FieldRef Name="User" />
           <FieldRef Name="IsManager" />
@@ -80,9 +103,11 @@
           <FieldRef Name="Other" />
           <FieldRef Name="Created" />
           <FieldRef Name="Author" />
+          <FieldRef Name="Sex" />
         </ViewFields>
         <Query>
           <OrderBy>
+
 
             <FieldRef Name="ID"></FieldRef>
           </OrderBy>
