@@ -12,6 +12,7 @@
     <script type="text/javascript" src="/_layouts/15/sp.runtime.js"></script>
     <script type="text/javascript" src="/_layouts/15/sp.js"></script>
     <script type="text/javascript" src="../Scripts/App.js"></script>
+    <script type="text/javascript" src="../Scripts/requests.js"></script>
     <script type="text/javascript" src="../Scripts/bootstrap.js"></script>
     <script type="text/javascript" src="../Scripts/bootstrap.min.js"></script>
     <meta name="WebPartPageExpansion" content="full" />
@@ -103,7 +104,7 @@
                     </p>
                 </div>
             </div>
-            <div class="col-md-2">
+            <div id="maternBlock" class="col-md-2">
                 <div class="thumbnail tile tile-medium">
                     <h4>Maternity Leave</h4>
                     <p id="matern" class="fa" style="text-align: center; margin-top: 20px; font-size: 30px;">

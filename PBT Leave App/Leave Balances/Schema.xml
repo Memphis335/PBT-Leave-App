@@ -9,7 +9,7 @@
           <FieldRef ID="{30b3d8a4-0498-4198-90bd-8cd9362a5483}" Name="IsManager" />
           <FieldRef ID="{402377b2-45f6-47b0-8204-e610b4a48e75}" Name="AnnualLeave" />
           <FieldRef ID="{b741225a-b708-44e4-a7ae-ec7051ea4490}" Name="SickLeave" />
-          <FieldRef ID="{ce5bdad0-4b3b-4398-af64-f99e70dd84cc}" Name="StudyLEave" />
+          <FieldRef ID="{ce5bdad0-4b3b-4398-af64-f99e70dd84cc}" Name="StudyLeave" />
           <FieldRef ID="{b7927635-2291-4eb3-a9a7-d7ebedf47c5e}" Name="MaternityLeave" />
           <FieldRef ID="{af930204-4283-4452-af28-5c997e471b0b}" Name="FamilyResponsibilityLeave" />
           <FieldRef ID="{1daa73db-ec7b-4a46-8139-5ea570a09962}" Name="Other" />
@@ -31,19 +31,19 @@
           <CHOICE>No</CHOICE>
         </CHOICES>
       </Field>
-      <Field Name="AnnualLeave" ID="{402377b2-45f6-47b0-8204-e610b4a48e75}" DisplayName="Annual Leave" Type="Text" Required="TRUE" />
-      <Field Name="SickLeave" ID="{b741225a-b708-44e4-a7ae-ec7051ea4490}" DisplayName="Sick Leave" Type="Text" Required="TRUE" />
-      <Field Name="StudyLEave" ID="{ce5bdad0-4b3b-4398-af64-f99e70dd84cc}" DisplayName="Study Leave" Type="Text" Required="TRUE" />
-      <Field Name="MaternityLeave" ID="{b7927635-2291-4eb3-a9a7-d7ebedf47c5e}" DisplayName="Maternity Leave" Type="Text" Required="TRUE" />
-      <Field Name="FamilyResponsibilityLeave" ID="{af930204-4283-4452-af28-5c997e471b0b}" DisplayName="Family Responsibility Leave" Type="Text" Required="TRUE" />
-      <Field Name="Other" ID="{1daa73db-ec7b-4a46-8139-5ea570a09962}" DisplayName="Other" Type="Text" Required="FALSE" />
-      <Field Name="PBTInceptionDate" ID="{1c2ab981-094a-4f21-a01f-f7b37d50ade4}" DisplayName="PBT Inception Date" Type="DateTime" Required="TRUE" Format="DateOnly" />
       <Field Name="Sex" ID="{2654d6e6-e7fb-40c6-a39d-06dd8f7fa616}" DisplayName="Sex" Type="Choice" Required="TRUE">
         <CHOICES>
           <CHOICE>Male</CHOICE>
           <CHOICE>Female</CHOICE>
         </CHOICES>
       </Field>
+      <Field Name="AnnualLeave" ID="{402377b2-45f6-47b0-8204-e610b4a48e75}" DisplayName="Annual Leave" Type="Text" Required="TRUE" />
+      <Field Name="SickLeave" ID="{b741225a-b708-44e4-a7ae-ec7051ea4490}" DisplayName="Sick Leave" Type="Text" Required="TRUE" />
+      <Field Name="StudyLeave" ID="{ce5bdad0-4b3b-4398-af64-f99e70dd84cc}" DisplayName="Study Leave" Type="Text" Required="TRUE" />
+      <Field Name="MaternityLeave" ID="{b7927635-2291-4eb3-a9a7-d7ebedf47c5e}" DisplayName="Maternity Leave" Type="Text" Required="TRUE" />
+      <Field Name="FamilyResponsibilityLeave" ID="{af930204-4283-4452-af28-5c997e471b0b}" DisplayName="Family Responsibility Leave" Type="Text" Required="TRUE" />
+      <Field Name="Other" ID="{1daa73db-ec7b-4a46-8139-5ea570a09962}" DisplayName="Other" Type="Text" Required="FALSE" />
+      <Field Name="PBTInceptionDate" ID="{1c2ab981-094a-4f21-a01f-f7b37d50ade4}" DisplayName="PBT Inception Date" Type="DateTime" Required="TRUE" Format="DateOnly" />
     </Fields>
     <Views>
 

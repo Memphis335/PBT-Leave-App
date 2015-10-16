@@ -7,7 +7,7 @@ var hostweburl;
 $(document).ready(function () {
     getUserName();
     getCurrentAdmins();
-});
+    });
 
 // This function prepares, loads, and then executes a SharePoint query to get the current users information
 function getUserName() {
@@ -23,6 +23,7 @@ function onGetUserNameSuccess() {
     IsManager();
     getListItems(username);
     hideDiv(1);
+    checkMF();
 }
 
 // This function is executed if the above call fails
@@ -275,4 +276,32 @@ function printName() {
     var surname = username.split(" ")[1];
     document.getElementById("txtName").value = name;
     document.getElementById("txtSurname").value = surname;
+}
+
+//function to count list items
+function countRequests() {
+    var oList = context.get_web().get_lists().getByTitle('Requests');
+
+    var query = new SP.CamlQuery();
+    query.set_viewXml(
+        '<View><Query><Where><Eq><FieldRef Name=\'ID\'/>' +
+        '<Value Type=\'Number\'>1</Value></Eq></Where></Query>' +
+        '</View>'
+        );
+    this.items = oList.getItems(query);
+
+    context.load(items);
+    context.executeQueryAsync(
+       Function.createDelegate(this, this.onQuerySucceededCount),
+        Function.createDelegate(this, this.onQueryFailed)
+    );
+}
+//Success function for Count
+function onQuerySucceededCount(sender, args) {
+    var count = 0;
+
+    count = this.listItems.get_count();
+    console.log("success");
+    console.log(count);
+    return count;
 }

@@ -1,4 +1,5 @@
-﻿function check() {
+﻿//Function to check if leave is submitted on behalf of another user
+function check() {
     var cbOnbehalf = $("#cbOnbehalf:checked").val();
 
     if (cbOnbehalf == "on") {
@@ -8,13 +9,14 @@
         printName();
     }
 }
-
+//Request Leave function
 function requestLeave() {
     var context = new SP.ClientContext.get_current();
     var user = context.get_web().get_currentUser();
 
     //Get values from form
-    var count = 0;
+    var count = countRequests();
+    console.log(count);
     var name = $("#txtName").val();
     var surname = $("#txtSurname").val();
     var number = $("#txtNumber").val().toString();
@@ -28,7 +30,8 @@ function requestLeave() {
     var selLeave = $("#selLeave").val();
     var cbOnbehalf = $("#cbOnbehalf:checked").val();
     var workDays = $("#workDays").text();
-    console.log(workDays);
+
+
     //Send values to Sharepoint list
     var oList = context.get_web().get_lists().getByTitle("Leave Requests");
     var itemCreateInfo = new SP.ListItemCreationInformation();
@@ -179,18 +182,19 @@ function uploadFile() {
     getFile.fail(onError);
 }
 
-// Display error messages. 
+// Display error message for file upload.
 function onError(error) {
     alert(error.responseText);
 }
 
+//Hide or show sicknote
 function hideShowNote() {
     var selLeave = $("#selLeave").val();
     var days = 3;
     var daysVal = 3;
     var sickLeaveVal = "Sick Leave";
     if (selLeave == sickLeaveVal && days >= daysVal) {
-        $("#sckNote").html("***Sick Leave in excess of 3 days require a Sick Note from a registered doctor. Please upload your sicknote below.***");
+        $("#sckNote").html("***Sick Leave of 3 days or more require a sick note from a registered doctor. Please upload your sicknote below.***");
         $("#SickNote").css("display", "inherit");
         $("#getFile").attr({ "required": "required" });
     } else {
@@ -200,6 +204,7 @@ function hideShowNote() {
     }
 }
 
+//Calculate amount of workdays
 function workDays() {
     var dateFrom = $("#ctl00_PlaceHolderMain_fromDate_fromDateDate").val();
     var dateTo = $("#ctl00_PlaceHolderMain_todate_todateDate").val();
@@ -208,6 +213,9 @@ function workDays() {
         $("#ctl00_PlaceHolderMain_fromDate_fromDateDate").css("border-color", "red");
         $("#ctl00_PlaceHolderMain_todate_todateDate").css("border-color", "red");
     } else {
+        $("#ctl00_PlaceHolderMain_fromDate_fromDateDate").css("border-color", "green");
+        $("#ctl00_PlaceHolderMain_todate_todateDate").css("border-color", "green");
+
         function getWorkingDays(startDate, endDate) {
             var result = 0;
 
@@ -296,13 +304,15 @@ function workDays() {
     }
 }
 
+//Function to check whether user is male or female
 function checkMF() {
-    var oList = context.get_web().get_lists().getByTitle('Leave Balances');
+    var oList = context.get_web().get_lists().getByTitle("Leave Balances");
+    var id = user.get_id();
 
     var camlQuery = new SP.CamlQuery();
     camlQuery.set_viewXml(
-        '<View><Query><Where><Eq><FieldRef Name=\'ID\'/>' +
-        '<Value Type=\'Number\'>1</Value></Eq></Where></Query>' +
+        '<View><Query><Where><Eq><FieldRef Name=\'User\' LookupId=\'True\'/>' +
+        '<Value Type=\'Lookup\'>' + id + '</Value></Eq></Where></Query>' +
         '<RowLimit>10</RowLimit></View>'
     );
     this.ListItem = oList.getItems(camlQuery);
@@ -322,9 +332,10 @@ function checkMFQuerySucceeded(sender, args) {
         var oListItem = listItemEnumerator.get_current();
         listItemInfo += oListItem.get_item("Sex");
     }
-
+    
     if (listItemInfo == "Male") {
-        $("selLeave option[value='Maternity Leave']").remove();
+        $("#selLeave option[value='Maternity Leave']").remove();
+        $("#maternBlock").css("display", "none");
     }
 }
 

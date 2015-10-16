@@ -30,13 +30,12 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
-            checkMF();
             if (!window.FileReader) {
                 alert('This browser does not support the FileReader API.');
             }
             $("#ctl00_PlaceHolderMain_fromDate_fromDateDate").value = "";
             $("#ctl00_PlaceHolderMain_todate_todateDate").value = "";
-        });
+            });
     </script>
 </asp:Content>
 
@@ -104,9 +103,9 @@
 
             <!-- Text Input Manager (Autofilled) -->
             <div class="form-group">
-                <label class="col-md-4 control-label" for="manager">Approval Manager</label>
+                <label class="col-md-4 control-label" for="tbManager">Approval Manager</label>
                 <div class="col-md-4">
-                    <input type="text" id="manager" class="form-control input-md" />
+                    <input type="text" id="tbManager" class="form-control input-md" />
                 </div>
             </div>
 
@@ -156,7 +155,7 @@
             </div>
 
             <!-- File Button.Hidden if not sick leave-->
-            <div id="sckNote" class="col-md-4 control-label" style="padding: 5px; width: 100%"></div>
+            <div id="sckNote" class="col-md-4 control-label" style="padding: 10px 5px; width: 100%"></div>
             <div class="form-group" id="SickNote" style="display: none">
                 <label class="col-md-4 control-label" for="getFile">Upload Sick Note</label>
                 <div class="col-md-4">
