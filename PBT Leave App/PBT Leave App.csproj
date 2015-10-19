@@ -44,6 +44,12 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="Features\Feature3\Feature3.Template.xml">
+      <DependentUpon>Feature3.feature</DependentUpon>
+    </Content>
+    <Content Include="Managers\Elements.xml" />
+    <Content Include="Managers\ManagersInstance\Elements.xml" />
+    <Content Include="Managers\Schema.xml" />
     <Content Include="Scripts\holidays.js" />
     <Content Include="Scripts\init.js" />
     <Content Include="Scripts\jquery-2.1.4.intellisense.js" />
@@ -82,6 +88,9 @@
     <None Include="Features\Feature2\Feature2.feature">
       <FeatureId>{2a4c9d13-b599-4855-a3dc-9b8d7e982c50}</FeatureId>
     </None>
+    <None Include="Features\Feature3\Feature3.feature">
+      <FeatureId>{5de2bec9-71b8-4d37-9a6a-fe6676adf66b}</FeatureId>
+    </None>
     <None Include="IsManager\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{4eb0f3ed-e113-461c-8a8c-e9fba03fc4be}</SharePointProjectItemId>
     </None>
@@ -93,6 +102,12 @@
     </None>
     <None Include="Leave Balances\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{4659a32a-7373-43a4-a5fb-17975da2ef66}</SharePointProjectItemId>
+    </None>
+    <None Include="Managers\ManagersInstance\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{e6b4b237-a4ef-4f60-9d55-bf94f5fe9a56}</SharePointProjectItemId>
+    </None>
+    <None Include="Managers\SharePointProjectItem.spdata">
+      <SharePointProjectItemId>{6525d51d-94dc-4c20-ab1f-0fea0700f125}</SharePointProjectItemId>
     </None>
     <None Include="Requests\List1Instance\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{698011a7-a4bc-4717-8702-78f690585ecc}</SharePointProjectItemId>

@@ -1,4 +1,5 @@
-﻿//Function to check if leave is submitted on behalf of another user
+﻿
+//Function to check if leave is submitted on behalf of another user
 function check() {
     var cbOnbehalf = $("#cbOnbehalf:checked").val();
 
@@ -15,12 +16,12 @@ function requestLeave() {
     var user = context.get_web().get_currentUser();
 
     //Get values from form
-    var count = countRequests();
+    var count = $("#hiddenDiv").text();
     console.log(count);
     var name = $("#txtName").val();
     var surname = $("#txtSurname").val();
     var number = $("#txtNumber").val().toString();
-    var manager = $("#manager").val();
+    var manager = $("#tbManager").val();
     var fromDate = $("#ctl00_PlaceHolderMain_fromDate_fromDateDate").val();
     var date = new Date(fromDate);
     date.setHours(date.getHours() + 22);
@@ -36,7 +37,7 @@ function requestLeave() {
     var oList = context.get_web().get_lists().getByTitle("Leave Requests");
     var itemCreateInfo = new SP.ListItemCreationInformation();
     this.oListItem = oList.addItem(itemCreateInfo);
-    count++;
+
     oListItem.set_item("Title", "Request #" + count);
     oListItem.set_item("Name1", name);
     oListItem.set_item("Surname", surname);
@@ -63,7 +64,7 @@ function onQuerySucceeded() {
 }
 
 function onQueryFailed(sender, args) {
-    //alert("Request failed to submit leave! " + args.get_message());
+    alert("Request failed to submit leave! " + args.get_message());
 }
 
 function uploadFile() {
@@ -73,7 +74,7 @@ function uploadFile() {
     var serverRelativeUrlToFolder = "Lists/Sicknotes";
     // Get test values from the file input and text input page controls.
     var fileInput = $("#getFile");
-    var newName = name+surname;
+    var newName = name + surname;
 
     // Get the server URL.
     var serverUrl = window._spPageContextInfo.webAbsoluteUrl;
@@ -283,7 +284,7 @@ function workDays() {
         $.ajax({
             url: feedUrl,
             dataType: 'json',
-            success: function(response) {
+            success: function (response) {
                 var holidayArray = [];
                 for (var i = 0; i < response.items.length; i++) {
                     var daysToConvert = new Date(response.items[i].start.date);
@@ -295,7 +296,7 @@ function workDays() {
                 var dayDiff = numOfWorkDays - testNum;
                 $("#workDays").text(dayDiff);
             },
-            error: function(response) {
+            error: function (response) {
                 alert("Error has occured while checking for holidays!" + '\n' + "Please notify IT.");
             }
         });
@@ -332,7 +333,7 @@ function checkMFQuerySucceeded(sender, args) {
         var oListItem = listItemEnumerator.get_current();
         listItemInfo += oListItem.get_item("Sex");
     }
-    
+
     if (listItemInfo == "Male") {
         $("#selLeave option[value='Maternity Leave']").remove();
         $("#maternBlock").css("display", "none");
@@ -341,5 +342,47 @@ function checkMFQuerySucceeded(sender, args) {
 
 function checkMFQueryFailed(sender, args) {
     alert('Request failed to verify if this user is male or female. Error : ' + args.get_message() +
+        '\n' + args.get_stackTrace());
+}
+
+function chkManager() {
+    var name = "Lourens";
+    var surname = "Marx";
+    var username = name.concat(" " + surname);
+
+    var oList = context.get_web().get_lists().getByTitle("Managers");
+
+    var camlQuery = new SP.CamlQuery();
+    camlQuery.set_viewXml(
+        '<View><Query><Where><Eq><FieldRef Name=\'User\'/>' +
+        '<Value Type=\'User\'>' + username + '</Value></Eq></Where></Query>' +
+        '<RowLimit>10</RowLimit></View>'
+    );
+    this.manListItem = oList.getItems(camlQuery);
+
+    context.load(manListItem);
+    context.executeQueryAsync(
+       Function.createDelegate(this, this.checkManagerQuerySucceeded),
+        Function.createDelegate(this, this.checkManagerQueryFailed)
+    );
+}
+
+function checkManagerQuerySucceeded(sender, args) {
+    var listItemInfo = "";
+    var manager = "";
+    
+    var listItemEnumerator = manListItem.getEnumerator();
+    console.log(listItemEnumerator);
+    while (listItemEnumerator.moveNext()) {
+        var oListItem = listItemEnumerator.get_current();
+        listItemInfo += oListItem.get_item("BDM");
+    }
+    manager = listItemInfo;//Issue here!!<---
+    alert(manager);
+    $("#tbManager").val(manager);
+}
+
+function checkManagerQueryFailed(sender, args) {
+    alert('Request failed to obtain Manager. Error : ' + args.get_message() +
         '\n' + args.get_stackTrace());
 }

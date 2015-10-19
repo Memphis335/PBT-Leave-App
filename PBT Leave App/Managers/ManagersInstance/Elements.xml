@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Elements xmlns="http://schemas.microsoft.com/sharepoint/">
+  <ListInstance Title="Managers" OnQuickLaunch="TRUE" TemplateType="100" Url="Lists/Managers" Description="List for managing the approval managers"></ListInstance>
+</Elements>

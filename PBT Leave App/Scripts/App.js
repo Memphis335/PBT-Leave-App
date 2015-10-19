@@ -7,7 +7,7 @@ var hostweburl;
 $(document).ready(function () {
     getUserName();
     getCurrentAdmins();
-    });
+});
 
 // This function prepares, loads, and then executes a SharePoint query to get the current users information
 function getUserName() {
@@ -232,9 +232,9 @@ function IsManager() {
 
     var camlQuery = new SP.CamlQuery();
     camlQuery.set_viewXml(
-        '<View><Query><Where><Eq><FieldRef Name=\'ID\'/>' +
-        '<Value Type=\'Number\'>1</Value></Eq></Where></Query>' +
-        '<RowLimit>10</RowLimit></View>'
+        '<View><Query><Where><Geq><FieldRef Name=\'ID\'/>' +
+        '<Value Type=\'Number\'>1</Value></Geq></Where></Query>' +
+        '</View>'
     );
     this.ListItem = oList.getItems(camlQuery);
 
@@ -280,28 +280,33 @@ function printName() {
 
 //function to count list items
 function countRequests() {
-    var oList = context.get_web().get_lists().getByTitle('Requests');
+    var oList = context.get_web().get_lists().getByTitle('Leave Requests');
 
     var query = new SP.CamlQuery();
     query.set_viewXml(
-        '<View><Query><Where><Eq><FieldRef Name=\'ID\'/>' +
-        '<Value Type=\'Number\'>1</Value></Eq></Where></Query>' +
+        '<View><Query><Where><Geq><FieldRef Name=\'ID\'/>' +
+        '<Value Type=\'Number\'>1</Value></Geq></Where></Query>' +
         '</View>'
-        );
+    );
     this.items = oList.getItems(query);
 
     context.load(items);
     context.executeQueryAsync(
-       Function.createDelegate(this, this.onQuerySucceededCount),
-        Function.createDelegate(this, this.onQueryFailed)
+        Function.createDelegate(this, this.onQuerySucceededCount),
+        Function.createDelegate(this, this.onQueryFailedcount)
     );
 }
+
 //Success function for Count
 function onQuerySucceededCount(sender, args) {
     var count = 0;
+    count = items.get_count();
+    count++;
+    $("#hiddenDiv").val(count);
+}
 
-    count = this.listItems.get_count();
-    console.log("success");
-    console.log(count);
-    return count;
+//Failure for count
+function onQueryFailedcount(sender, args) {
+    alert('Count failed. ' + args.get_message() +
+        '\n' + args.get_stackTrace());
 }

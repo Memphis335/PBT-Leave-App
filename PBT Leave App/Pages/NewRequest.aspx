@@ -35,8 +35,10 @@
             }
             $("#ctl00_PlaceHolderMain_fromDate_fromDateDate").value = "";
             $("#ctl00_PlaceHolderMain_todate_todateDate").value = "";
-            });
-    </script>
+            window.setInterval(chkManager(), 1000);
+        });
+        
+        </script>
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="PlaceHolderPageTitleInTitleArea" runat="server">
@@ -67,6 +69,8 @@
             <!-- Form Name -->
             <legend>New Leave Request</legend>
 
+            <div id="hiddenDiv" style="opacity: 0" ></div>
+
             <!-- Multiple Checkboxes (inline) -->
             <div class="form-group">
                 <label class="col-md-4 control-label" for="cbOnbehalf">Are you submitting leave on behalf of another user?</label>
@@ -90,7 +94,7 @@
             <div class="form-group">
                 <label class="col-md-4 control-label" for="txtSurname">Surname :</label>
                 <div class="col-md-4">
-                    <input id="txtSurname" name="txtSurname" type="text" placeholder="" class="form-control input-md" required="required" value="" />
+                    <input id="txtSurname" name="txtSurname" type="text" placeholder="" class="form-control input-md" required="required" value=""/>
                 </div>
             </div>
             <!-- Text input-->

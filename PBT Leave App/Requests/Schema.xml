@@ -42,7 +42,7 @@
       </Field>
       <Field Name="OnBehalf" ID="{6e5de0c8-030d-4645-a410-6303ed6dd25b}" DisplayName="On Behalf" Type="Boolean" Required="TRUE" />
       <Field Name="WorkDays" ID="{acf1e9e3-b3d7-4acf-b7ec-34352c05715f}" DisplayName="Work Days" Type="Number" Required="TRUE" />
-      <Field Name="Approved_x002f_Rejected" ID="{2fefe348-667c-427e-9d38-728c3f8b0f46}" DisplayName="Approved/Rejected" Type="Text" URLEncode="TRUE" />
+      <Field Name="Approved_x002f_Rejected" ID="{2fefe348-667c-427e-9d38-728c3f8b0f46}" DisplayName="Approved/Rejected" Type="Text"/>
     </Fields>
     <Views>
       <View BaseViewID="0" Type="HTML" MobileView="TRUE" TabularView="FALSE">
