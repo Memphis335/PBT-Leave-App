@@ -35,7 +35,8 @@
             }
             $("#ctl00_PlaceHolderMain_fromDate_fromDateDate").value = "";
             $("#ctl00_PlaceHolderMain_todate_todateDate").value = "";
-            window.setInterval(chkManager(), 1000);
+            window.setInterval(chkManager(), 2000);
+            countRequests();
         });
         
         </script>
@@ -54,8 +55,11 @@
             <ul id="admin" class="nav nav-stacked nav-pills">
                 <li class="nav-divider"></li>
                 <li id="adminSection">Admin Section</li>
-                <li><a href="../Lists/Admins/AllItems.aspx">Edit Admins</a></li>
-                <li><a href="../Lists/LeaveBalances/AllItems.aspx">Add User</a></li>
+                <<li><a href="javascript:displayLayover('../Lists/Admins/NewForm.aspx?IsDlg=1')">Add Administrator</a></li>
+                <li><a href="javascript:displayLayover('../Lists/LeaveBalances/NewForm.aspx?&IsDlg=1')">Add New User</a></li>
+                <li><a href="../Lists/Managers/AllItems.aspx">Manage Managers</a></li>
+                <li><a href="../Lists/Admins/AllItems.aspx">Manage Administrators</a></li>
+                <li><a href="../Lists/LeaveBalances/AllItems.aspx">View All Users</a></li>
                 <li><a href="../Lists/Requests/AllItems.aspx">View All Requests</a></li>
             </ul>
         </ul>
@@ -76,7 +80,7 @@
                 <label class="col-md-4 control-label" for="cbOnbehalf">Are you submitting leave on behalf of another user?</label>
                 <div class="col-md-4">
                     <label class="checkbox-inline" for="cbOnbehalf">
-                        <input type="checkbox" name="cbOnbehalf" id="cbOnbehalf" checked="" onclick="check();" />
+                        <input type="checkbox" name="cbOnbehalf" id="cbOnbehalf" checked="checked" onclick="check();" />
                         Yes/No
                     </label>
                 </div>
@@ -86,7 +90,7 @@
             <div class="form-group">
                 <label class="col-md-4 control-label" for="txtName">Name :</label>
                 <div class="col-md-4">
-                    <input id="txtName" name="txtName" type="text" placeholder="" class="form-control input-md" required="required" value="" />
+                    <input id="txtName" name="txtName" type="text" placeholder="" class="form-control input-md" required="required" />
                 </div>
             </div>
 
@@ -94,14 +98,15 @@
             <div class="form-group">
                 <label class="col-md-4 control-label" for="txtSurname">Surname :</label>
                 <div class="col-md-4">
-                    <input id="txtSurname" name="txtSurname" type="text" placeholder="" class="form-control input-md" required="required" value=""/>
+                    <input id="txtSurname" name="txtSurname" type="text" placeholder="" class="form-control input-md" required="required" onblur="chkManager();" />
                 </div>
             </div>
+
             <!-- Text input-->
             <div class="form-group">
                 <label class="col-md-4 control-label" for="txtSurname">Phone number where we can reach you :</label>
                 <div class="col-md-4">
-                    <input id="txtNumber" name="txtNumber" type="text" placeholder="" class="form-control input-md" required="required" />
+                    <input id="txtNumber" name="txtNumber" type="text" placeholder="" class="form-control input-md" required="required" onmouseenter="chkManager();" />
                 </div>
             </div>
 
@@ -109,7 +114,7 @@
             <div class="form-group">
                 <label class="col-md-4 control-label" for="tbManager">Approval Manager</label>
                 <div class="col-md-4">
-                    <input type="text" id="tbManager" class="form-control input-md" />
+                    <input type="text" id="tbManager" class="form-control input-md" disabled="disabled" placeholder="Generated Value..."/>
                 </div>
             </div>
 
@@ -166,7 +171,7 @@
                     <input id="getFile" name="getfile" type="file" />
                 </div>
                 <div class="col-md-4">
-                    <button class="btn btn-danger" id="uploadFile" name="uploadFile" type="button" onclick="uploadFile()">Upload file</button>
+                    <button class="btn btn-danger" id="uploadFile" name="uploadFile" type="button" onclick="javascript:uploadFile();">Upload file</button>
                 </div>
             </div>
 
@@ -174,7 +179,7 @@
             <div class="form-group">
                 <label class="col-md-4 control-label" for="btnSubmit"></label>
                 <div class="col-md-4">
-                    <button id="btnSubmit" onclick="requestLeave();" name="btnSubmit" class="btn btn-primary" style="width: 25%; margin-left: 0;">Submit</button>
+                    <button id="btnSubmit" onclick="validate();" name="btnSubmit" class="btn btn-primary" style="width: 25%; margin-left: 0;">Submit</button>
                 </div>
             </div>
 

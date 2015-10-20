@@ -2,11 +2,15 @@
 var user = context.get_web().get_currentUser();
 var siteurl;
 var hostweburl;
+var sick = "";
+var annual = "";
+var study = "";
+var matern = "";
+var family = "";
 
 // This code runs when the DOM is ready and creates a context object which is needed to use the SharePoint object model
 $(document).ready(function () {
     getUserName();
-    getCurrentAdmins();
 });
 
 // This function prepares, loads, and then executes a SharePoint query to get the current users information
@@ -20,7 +24,8 @@ function getUserName() {
 function onGetUserNameSuccess() {
     var username = user.get_title();
     $('#message').text('Welcome ' + username);
-    IsManager();
+    getCurrentAdmins();
+    IsManager(username);
     getListItems(username);
     hideDiv(1);
     checkMF();
@@ -50,11 +55,6 @@ function getListItems(name) {
 }
 
 function onQuerySucceededLeave(sender, args) {
-    var sick = "";
-    var annual = "";
-    var study = "";
-    var matern = "";
-    var family = "";
     var inception = "";
     var id = "";
 
@@ -62,11 +62,11 @@ function onQuerySucceededLeave(sender, args) {
 
     while (listItemEnumerator.moveNext()) {
         var oListItem = listItemEnumerator.get_current();
-        annual = oListItem.get_item('AnnualLeave');
-        sick = oListItem.get_item('SickLeave');
-        study = oListItem.get_item('StudyLEave');
-        matern = oListItem.get_item('MaternityLeave');
-        family = oListItem.get_item('FamilyResponsibilityLeave');
+        annual = oListItem.get_item("AnnualLeave");
+        sick = oListItem.get_item("SickLeave");
+        study = oListItem.get_item("StudyLeave");
+        matern = oListItem.get_item("MaternityLeave");
+        family = oListItem.get_item("FamilyResponsibilityLeave");
         inception = oListItem.get_item("PBTInceptionDate");
         id = oListItem.get_id();
     }
@@ -91,7 +91,6 @@ function onQuerySucceededLeave(sender, args) {
     $("#study").text(study);
     $("#matern").text(matern);
     $("#family").text(family);
-
 }
 
 function getQueryStringParameter(paramToRetrieve) {
@@ -191,19 +190,20 @@ function sickNote() {
 function getCurrentAdmins() {
 
     var oList = context.get_web().get_lists().getByTitle('Administrators');
+    var username = user.get_title();
 
     var camlQuery = new SP.CamlQuery();
     camlQuery.set_viewXml(
-        '<View><Query><Where><Geq><FieldRef Name=\'ID\'/>' +
-        '<Value Type=\'Number\'>1</Value></Geq></Where></Query>' +
-        '<RowLimit>10</RowLimit></View>'
+        '<View><Query><Where><Eq><FieldRef Name=\'Name1\'/>' +
+        '<Value Type=\'User\'>' + username + '</Value></Eq></Where></Query>' +
+        '</View>'
     );
     this.collListItem = oList.getItems(camlQuery);
 
     context.load(collListItem);
     context.executeQueryAsync(
        Function.createDelegate(this, this.onQuerySucceeded),
-        Function.createDelegate(this, this.onQueryFailed)
+        Function.createDelegate(this, this.onAdminFailed)
     );
 }
 
@@ -213,32 +213,33 @@ function onQuerySucceeded(sender, args) {
 
     while (listItemEnumerator.moveNext()) {
         var oListItem = listItemEnumerator.get_current();
-        listItemInfo += oListItem.get_item('Title');
+        listItemInfo = oListItem.get_item("Name1");
     }
 
-    if (listItemInfo == user.get_title()) {
-        document.getElementById("admin").style.display = "initial";
+    var userTitle = listItemInfo.$4I_1;
+    if (userTitle == user.get_title()) {
+        $("#admin").css("display", "inherit");
     }
 }
 
-function onQueryFailed(sender, args) {
+function onAdminFailed(sender, args) {
     alert('Request failed. ' + args.get_message() +
         '\n' + args.get_stackTrace());
 }
 
-function IsManager() {
+function IsManager(username) {
 
     var oList = context.get_web().get_lists().getByTitle('Leave Balances');
 
     var camlQuery = new SP.CamlQuery();
     camlQuery.set_viewXml(
-        '<View><Query><Where><Geq><FieldRef Name=\'ID\'/>' +
-        '<Value Type=\'Number\'>1</Value></Geq></Where></Query>' +
+        '<View><Query><Where><Eq><FieldRef Name=\'User\'/>' +
+        '<Value Type=\'User\'>' + username + '</Value></Eq></Where></Query>' +
         '</View>'
     );
-    this.ListItem = oList.getItems(camlQuery);
+    this.manItem = oList.getItems(camlQuery);
 
-    context.load(ListItem);
+    context.load(manItem);
     context.executeQueryAsync(
        Function.createDelegate(this, this.ManagerQuerySucceeded),
         Function.createDelegate(this, this.ManagerQueryFailed)
@@ -247,16 +248,16 @@ function IsManager() {
 
 function ManagerQuerySucceeded(sender, args) {
     var listItemInfo = '';
-    var listItemEnumerator = ListItem.getEnumerator();
+    var listItemEnumerator = manItem.getEnumerator();
 
     while (listItemEnumerator.moveNext()) {
         var oListItem = listItemEnumerator.get_current();
-        listItemInfo += oListItem.get_item("IsManager");
+        listItemInfo = oListItem.get_item("IsManager");
     }
 
     if (listItemInfo == "Yes") {
-        document.getElementById("managerNav").style.display = "inherit";
-        $("manager").css("display", "initial");
+        $("#managerNav").css("display", "inherit");
+        $("#manager").css("display", "initial");
     }
 }
 
@@ -276,21 +277,14 @@ function printName() {
     var surname = username.split(" ")[1];
     document.getElementById("txtName").value = name;
     document.getElementById("txtSurname").value = surname;
+    chkManager();
 }
 
 //function to count list items
 function countRequests() {
-    var oList = context.get_web().get_lists().getByTitle('Leave Requests');
+    this.countList = context.get_web().get_lists().getByTitle('Leave Requests');
 
-    var query = new SP.CamlQuery();
-    query.set_viewXml(
-        '<View><Query><Where><Geq><FieldRef Name=\'ID\'/>' +
-        '<Value Type=\'Number\'>1</Value></Geq></Where></Query>' +
-        '</View>'
-    );
-    this.items = oList.getItems(query);
-
-    context.load(items);
+    context.load(countList);
     context.executeQueryAsync(
         Function.createDelegate(this, this.onQuerySucceededCount),
         Function.createDelegate(this, this.onQueryFailedcount)
@@ -300,9 +294,9 @@ function countRequests() {
 //Success function for Count
 function onQuerySucceededCount(sender, args) {
     var count = 0;
-    count = items.get_count();
+    count = countList.get_itemCount();
     count++;
-    $("#hiddenDiv").val(count);
+    $("#hiddenDiv").text(count);
 }
 
 //Failure for count

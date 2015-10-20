@@ -1,11 +1,16 @@
-﻿
+﻿var selLeave = "";
+var workDays = "";
 //Function to check if leave is submitted on behalf of another user
 function check() {
     var cbOnbehalf = $("#cbOnbehalf:checked").val();
 
     if (cbOnbehalf == "on") {
-        document.getElementById("txtName").value = "";
-        document.getElementById("txtSurname").value = "";
+        $("#txtName").val("");
+        $("#txtSurname").val("");
+        $("#tbManager").val("");
+        $("#txtName").attr("placeholder", "Enter username here");
+        $("#txtSurname").attr("placeholder", "Enter surname here");
+        $("#tbManager").attr("placeholder", "Waiting for input");
     } else {
         printName();
     }
@@ -17,7 +22,6 @@ function requestLeave() {
 
     //Get values from form
     var count = $("#hiddenDiv").text();
-    console.log(count);
     var name = $("#txtName").val();
     var surname = $("#txtSurname").val();
     var number = $("#txtNumber").val().toString();
@@ -28,9 +32,9 @@ function requestLeave() {
     var toDate = $("#ctl00_PlaceHolderMain_todate_todateDate").val();
     var dateTo = new Date(toDate);
     dateTo.setHours(dateTo.getHours() + 22);
-    var selLeave = $("#selLeave").val();
+    selLeave = $("#selLeave").val();
     var cbOnbehalf = $("#cbOnbehalf:checked").val();
-    var workDays = $("#workDays").text();
+    workDays = $("#workDays").text();
 
 
     //Send values to Sharepoint list
@@ -56,15 +60,15 @@ function requestLeave() {
 
     oListItem.update();
     context.load(oListItem);
-    context.executeQueryAsync(Function.createDelegate(this, this.onQuerySucceeded), Function.createDelegate(this, this.onQueryFailed));
+    context.executeQueryAsync(Function.createDelegate(this, this.onSubmitSucceeded), Function.createDelegate(this, this.onSubmitFailed));
 }
 
-function onQuerySucceeded() {
+function onSubmitSucceeded() {
     alert("Thank You!" + "\n" + "Your leave request has been submitted." + "\n" + "Request number : " + oListItem.get_id());
 }
 
-function onQueryFailed(sender, args) {
-    alert("Request failed to submit leave! " + args.get_message());
+function onSubmitFailed(sender, args) {
+    console.log("Request failed to submit leave! " + args.get_message());
 }
 
 function uploadFile() {
@@ -334,9 +338,10 @@ function checkMFQuerySucceeded(sender, args) {
         listItemInfo += oListItem.get_item("Sex");
     }
 
-    if (listItemInfo == "Male") {
+    if (listItemInfo == "Female") {
+        $("#maternBlock").css("display", "inherit");
+    } else {
         $("#selLeave option[value='Maternity Leave']").remove();
-        $("#maternBlock").css("display", "none");
     }
 }
 
@@ -346,8 +351,8 @@ function checkMFQueryFailed(sender, args) {
 }
 
 function chkManager() {
-    var name = "Lourens";
-    var surname = "Marx";
+    var name = $("#txtName").val();
+    var surname = $("#txtSurname").val();
     var username = name.concat(" " + surname);
 
     var oList = context.get_web().get_lists().getByTitle("Managers");
@@ -372,17 +377,51 @@ function checkManagerQuerySucceeded(sender, args) {
     var manager = "";
     
     var listItemEnumerator = manListItem.getEnumerator();
-    console.log(listItemEnumerator);
     while (listItemEnumerator.moveNext()) {
         var oListItem = listItemEnumerator.get_current();
-        listItemInfo += oListItem.get_item("BDM");
+        listItemInfo = oListItem.get_item("BDM");
     }
-    manager = listItemInfo;//Issue here!!<---
-    alert(manager);
+    manager = listItemInfo.$4I_1;
     $("#tbManager").val(manager);
 }
 
 function checkManagerQueryFailed(sender, args) {
-    alert('Request failed to obtain Manager. Error : ' + args.get_message() +
-        '\n' + args.get_stackTrace());
+    $("#tbManager").val("Error!");
+}
+
+function validate() {
+    var workerNum = 0;
+
+    if (selLeave == "Annual Leave") {
+        workerNum = annual;
+    } else if (selLeave == "Sick Leave") {
+        workerNum = sick;
+    } else if (selLeave == "Study Leave") {
+        workerNum = study;
+    } else if (selLeave == "Maternity Leave") {
+        workerNum = matern;
+    } else if (selLeave == "Family Responsibility Leave") {
+        workerNum = family;
+    }
+
+    if (workerNum > workDays) {
+        $("#selLeave").css("border-color", "red");
+        return;
+    } else {
+        requestLeave();
+    }
+}
+
+function displayLayover(url) {
+
+    var options = SP.UI.$create_DialogOptions();
+
+    options.url = url;
+
+    options.dialogReturnValueCallback = Function.createDelegate(
+
+    null, null);
+
+    SP.UI.ModalDialog.showModalDialog(options);
+
 }

@@ -11,6 +11,8 @@
     <script type="text/javascript" src="../Scripts/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="/_layouts/15/sp.runtime.js"></script>
     <script type="text/javascript" src="/_layouts/15/sp.js"></script>
+    <script type="text/javascript" src="/_layouts/15/SP.UI.Dialog.js"></script>
+    <script type="text/javascript" src="/_layouts/15/SP.UI.Dialog.debug.js"></script>
     <script type="text/javascript" src="../Scripts/App.js"></script>
     <script type="text/javascript" src="../Scripts/requests.js"></script>
     <script type="text/javascript" src="../Scripts/bootstrap.js"></script>
@@ -19,7 +21,6 @@
 
     <!-- CSS styles -->
     <link rel="Stylesheet" type="text/css" href="../Content/App.css" />
-
     <link rel="Stylesheet" type="text/css" href="../Content/metro-bootstrap.css" />
     <link rel="Stylesheet" type="text/css" href="../Content/font-awesome.css" />
     <link rel="Stylesheet" type="text/css" href="../Content/font-awesome.min.css" />
@@ -41,8 +42,11 @@
             <ul id="admin" class="nav nav-stacked nav-pills">
                 <li class="nav-divider"></li>
                 <li id="adminSection">Admin Section</li>
-                <li><a href="../Lists/Admins/AllItems.aspx">Edit Admins</a></li>
-                <li><a href="../Lists/LeaveBalances/AllItems.aspx">Add User</a></li>
+                <li><a href="javascript:displayLayover('../Lists/Admins/NewForm.aspx?IsDlg=1')">Add Administrator</a></li>
+                <li><a href="javascript:displayLayover('../Lists/LeaveBalances/NewForm.aspx?&IsDlg=1')">Add New User</a></li>
+                <li><a href="../Lists/Managers/AllItems.aspx">Manage Managers</a></li>
+                <li><a href="../Lists/Admins/AllItems.aspx">Manage Administrators</a></li>
+                <li><a href="../Lists/LeaveBalances/AllItems.aspx">View All Users</a></li>
                 <li><a href="../Lists/Requests/AllItems.aspx">View All Requests</a></li>
             </ul>
         </ul>
@@ -104,7 +108,7 @@
                     </p>
                 </div>
             </div>
-            <div id="maternBlock" class="col-md-2">
+            <div id="maternBlock" class="col-md-2" style="display: none">
                 <div class="thumbnail tile tile-medium">
                     <h4>Maternity Leave</h4>
                     <p id="matern" class="fa" style="text-align: center; margin-top: 20px; font-size: 30px;">

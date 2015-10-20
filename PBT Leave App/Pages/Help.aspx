@@ -17,6 +17,7 @@
 
     <!-- Add your JavaScript to the following file -->
     <script type="text/javascript" src="../Scripts/App.js"></script>
+    <script type="text/javascript" src="../Scripts/requests.js"></script>
     <script type="text/javascript" src="../Scripts/bootstrap.js"></script>
 </asp:Content>
 
@@ -35,8 +36,11 @@
             <ul id="admin" class="nav nav-stacked nav-pills">
                 <li class="nav-divider"></li>
                 <li  id="adminSection"><strong>Admin Section</strong></li>
-                <li><a href="../Lists/Admins/AllItems.aspx">Edit Admins</a></li>
-                <li><a href="../Lists/LeaveBalances/AllItems.aspx">Add User</a></li>
+                <li><a href="javascript:displayLayover('../Lists/Admins/NewForm.aspx?IsDlg=1')">Add Administrator</a></li>
+                <li><a href="javascript:displayLayover('../Lists/LeaveBalances/NewForm.aspx?&IsDlg=1')">Add New User</a></li>
+                <li><a href="../Lists/Managers/AllItems.aspx">Manage Managers</a></li>
+                <li><a href="../Lists/Admins/AllItems.aspx">Manage Administrators</a></li>
+                <li><a href="../Lists/LeaveBalances/AllItems.aspx">View All Users</a></li>
                 <li><a href="../Lists/Requests/AllItems.aspx">View All Requests</a></li>
             </ul>
         </ul>
