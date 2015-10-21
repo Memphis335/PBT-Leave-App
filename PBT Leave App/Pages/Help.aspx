@@ -42,6 +42,7 @@
                 <li><a href="../Lists/Admins/AllItems.aspx">Manage Administrators</a></li>
                 <li><a href="../Lists/LeaveBalances/AllItems.aspx">View All Users</a></li>
                 <li><a href="../Lists/Requests/AllItems.aspx">View All Requests</a></li>
+                <li><a href="../Lists/Sicknotes/Forms/AllItems.aspx">View Sicknotes</a></li>
             </ul>
         </ul>
     </div>

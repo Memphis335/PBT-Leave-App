@@ -16,7 +16,6 @@
     <script type="text/javascript" src="../Scripts/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="/_layouts/15/sp.runtime.js"></script>
     <script type="text/javascript" src="/_layouts/15/sp.js"></script>
-    <script type="text/javascript" src="/_layouts/15/SP.UI.Dialog.js"></script>
     <script type="text/javascript" src="//ajax.aspnetcdn.com/ajax/4.0/1/MicrosoftAjax.js"></script>
     <script type="text/javascript" src="../Scripts/peoplepicker.js"></script>
     <script type="text/javascript" src="../Scripts/peoplepicker.min.js"></script>
@@ -38,8 +37,8 @@
             window.setInterval(chkManager(), 2000);
             countRequests();
         });
-        
-        </script>
+
+    </script>
 </asp:Content>
 
 <asp:Content ContentPlaceHolderID="PlaceHolderPageTitleInTitleArea" runat="server">
@@ -55,12 +54,13 @@
             <ul id="admin" class="nav nav-stacked nav-pills">
                 <li class="nav-divider"></li>
                 <li id="adminSection">Admin Section</li>
-                <<li><a href="javascript:displayLayover('../Lists/Admins/NewForm.aspx?IsDlg=1')">Add Administrator</a></li>
+                <li><a href="javascript:displayLayover('../Lists/Admins/NewForm.aspx?IsDlg=1')">Add Administrator</a></li>
                 <li><a href="javascript:displayLayover('../Lists/LeaveBalances/NewForm.aspx?&IsDlg=1')">Add New User</a></li>
                 <li><a href="../Lists/Managers/AllItems.aspx">Manage Managers</a></li>
                 <li><a href="../Lists/Admins/AllItems.aspx">Manage Administrators</a></li>
                 <li><a href="../Lists/LeaveBalances/AllItems.aspx">View All Users</a></li>
                 <li><a href="../Lists/Requests/AllItems.aspx">View All Requests</a></li>
+                <li><a href="../Lists/Sicknotes/Forms/AllItems.aspx">View Sicknotes</a></li>
             </ul>
         </ul>
     </div>
@@ -73,7 +73,7 @@
             <!-- Form Name -->
             <legend>New Leave Request</legend>
 
-            <div id="hiddenDiv" style="opacity: 0" ></div>
+            <div id="hiddenDiv" style="opacity: 0"></div>
 
             <!-- Multiple Checkboxes (inline) -->
             <div class="form-group">
@@ -114,7 +114,7 @@
             <div class="form-group">
                 <label class="col-md-4 control-label" for="tbManager">Approval Manager</label>
                 <div class="col-md-4">
-                    <input type="text" id="tbManager" class="form-control input-md" disabled="disabled" placeholder="Generated Value..."/>
+                    <input type="text" id="tbManager" class="form-control input-md" disabled="disabled" placeholder="Generated Value..." />
                 </div>
             </div>
 
@@ -134,7 +134,7 @@
             </div>
 
             <!-- Date Controls -->
-            <div onmouseover="workDays();">
+            <div onmouseover="javascript:workDays();">
                 <div class="form-group">
                     <div class="col-md-4">
                         <label class="col-md-4">Period</label>
@@ -169,9 +169,13 @@
                 <label class="col-md-4 control-label" for="getFile">Upload Sick Note</label>
                 <div class="col-md-4">
                     <input id="getFile" name="getfile" type="file" />
+                    <div id="progressBar" class="progress" style="margin-top: 2%;display: none">
+                        <div id="barProgress" class="progress-bar" role="progressbar">
+                          </div>
+                    </div>
                 </div>
                 <div class="col-md-4">
-                    <button class="btn btn-danger" id="uploadFile" name="uploadFile" type="button" onclick="javascript:uploadFile();">Upload file</button>
+                    <button class="btn btn-danger" id="btnUploadFile" name="btnUploadFile" type="button" onclick="javascript:uploadFile();">Upload file</button>
                 </div>
             </div>
 

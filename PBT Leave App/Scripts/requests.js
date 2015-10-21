@@ -1,6 +1,4 @@
-﻿var selLeave = "";
-var workDays = "";
-//Function to check if leave is submitted on behalf of another user
+﻿//Function to check if leave is submitted on behalf of another user
 function check() {
     var cbOnbehalf = $("#cbOnbehalf:checked").val();
 
@@ -32,9 +30,9 @@ function requestLeave() {
     var toDate = $("#ctl00_PlaceHolderMain_todate_todateDate").val();
     var dateTo = new Date(toDate);
     dateTo.setHours(dateTo.getHours() + 22);
-    selLeave = $("#selLeave").val();
+    var selLeave = $("#selLeave").val();
     var cbOnbehalf = $("#cbOnbehalf:checked").val();
-    workDays = $("#workDays").text();
+    var workDaysVar = $("#workDays").text();
 
 
     //Send values to Sharepoint list
@@ -56,7 +54,7 @@ function requestLeave() {
         cbOnbehalf = "No";
     }
     oListItem.set_item("OnBehalf", cbOnbehalf);
-    oListItem.set_item("WorkDays", workDays);
+    oListItem.set_item("WorkDays", workDaysVar);
 
     oListItem.update();
     context.load(oListItem);
@@ -68,17 +66,21 @@ function onSubmitSucceeded() {
 }
 
 function onSubmitFailed(sender, args) {
-    console.log("Request failed to submit leave! " + args.get_message());
+    alert("Request failed to submit leave! " + args.get_message());
 }
 
 function uploadFile() {
     var name = $("#txtName").val();
-    var surname = $("#txtSurname").val();
+    var count = $("#hiddenDiv").text();
+    $("#progressBar").css("display", "inherit");
+    $("#barProgress").css("width", "0");
+    $("#barProgress").html("0%");
+
 
     var serverRelativeUrlToFolder = "Lists/Sicknotes";
     // Get test values from the file input and text input page controls.
     var fileInput = $("#getFile");
-    var newName = name + surname;
+    var newName = name + count;
 
     // Get the server URL.
     var serverUrl = window._spPageContextInfo.webAbsoluteUrl;
@@ -163,20 +165,38 @@ function uploadFile() {
     }
 
     getFile.done(function (arrayBuffer) {
-
+        $("#barProgress").css("width", "10%");
+        $("#barProgress").html("10%");
+        $("#barProgress").css("width", "20%");
+        $("#barProgress").html("20%");
         // Add the file to the SharePoint folder.
         var addFile = addFileToFolder(arrayBuffer);
         addFile.done(function (file, status, xhr) {
+            $("#barProgress").css("width", "30%");
+            $("#barProgress").html("30%");
 
             // Get the list item that corresponds to the uploaded file.
             var getItem = getListItem(file.d.ListItemAllFields.__deferred.uri);
+            $("#barProgress").css("width", "40%");
+            $("#barProgress").html("40%");
             getItem.done(function (listItem, status, xhr) {
+                $("#barProgress").css("width", "50%");
+                $("#barProgress").html("50%");
 
                 // Change the display name and title of the list item.
                 var changeItem = updateListItem(listItem.d.__metadata);
-                changeItem.done(function (data, status, xhr) {
-                    $("#uploadFile").html("Uploaded");
-                    $("#uploadFile").class("btn btn-success");
+                $("#barProgress").css("width", "60%");
+                $("#barProgress").html("60%");
+
+                changeItem.done(function (data, status, url) {
+                    $("#barProgress").css("width", "80%");
+                    $("#barProgress").html("80%");
+                    $("#btnUploadFile").html("File Uploaded!");
+                    $("#btnUploadFile").removeClass("btn btn-danger");
+                    $("#btnUploadFile").addClass("btn btn-success");
+                    $("#barProgress").css("width", "100%");
+                    $("#barProgress").html("100%");
+                    $("#btnSubmit").removeAttr("disabled");
                 });
                 changeItem.fail(onError);
             });
@@ -189,6 +209,8 @@ function uploadFile() {
 
 // Display error message for file upload.
 function onError(error) {
+    $("#barProgress").css("background-color", "firebrick");
+    $("#barProgress").html("Error!");
     alert(error.responseText);
 }
 
@@ -199,13 +221,15 @@ function hideShowNote() {
     var daysVal = 3;
     var sickLeaveVal = "Sick Leave";
     if (selLeave == sickLeaveVal && days >= daysVal) {
-        $("#sckNote").html("***Sick Leave of 3 days or more require a sick note from a registered doctor. Please upload your sicknote below.***");
+        $("#sckNote").html("***Sick leave of 3 days or more require a sick note from a registered doctor. Please upload your sicknote below.***");
         $("#SickNote").css("display", "inherit");
         $("#getFile").attr({ "required": "required" });
+        $("#btnSubmit").attr("disabled", "disabled");
     } else {
         $("#SickNote").css("display", "none");
         $("#getFile").removeAttr("required");
         $("#sckNote").html("");
+        $("#btnSubmit").removeAttr("disabled");
     }
 }
 
@@ -214,7 +238,7 @@ function workDays() {
     var dateFrom = $("#ctl00_PlaceHolderMain_fromDate_fromDateDate").val();
     var dateTo = $("#ctl00_PlaceHolderMain_todate_todateDate").val();
 
-    if (dateFrom == "" && dateTo == "") {
+    if (dateFrom == "" || dateTo == "") {
         $("#ctl00_PlaceHolderMain_fromDate_fromDateDate").css("border-color", "red");
         $("#ctl00_PlaceHolderMain_todate_todateDate").css("border-color", "red");
     } else {
@@ -304,8 +328,6 @@ function workDays() {
                 alert("Error has occured while checking for holidays!" + '\n' + "Please notify IT.");
             }
         });
-
-
     }
 }
 
@@ -375,7 +397,7 @@ function chkManager() {
 function checkManagerQuerySucceeded(sender, args) {
     var listItemInfo = "";
     var manager = "";
-    
+
     var listItemEnumerator = manListItem.getEnumerator();
     while (listItemEnumerator.moveNext()) {
         var oListItem = listItemEnumerator.get_current();
@@ -391,6 +413,8 @@ function checkManagerQueryFailed(sender, args) {
 
 function validate() {
     var workerNum = 0;
+    var selLeave = $("#selLeave").val();
+    var workDaysVar = $("#workDays").text();
 
     if (selLeave == "Annual Leave") {
         workerNum = annual;
@@ -404,8 +428,11 @@ function validate() {
         workerNum = family;
     }
 
-    if (workerNum > workDays) {
+    if (+workerNum < +workDaysVar) {
         $("#selLeave").css("border-color", "red");
+        $("#workDays").css("color", "red");
+        alert("You do not have enough leave available for the type you are requesting. Please select another type or reduce your number of days!" + '\n'
+            + "You only have " + workerNum + " days " + selLeave + " left.");
         return;
     } else {
         requestLeave();
@@ -424,4 +451,66 @@ function displayLayover(url) {
 
     SP.UI.ModalDialog.showModalDialog(options);
 
+}
+
+function getLeaveRequests(name) {
+    var username = name.split(" ", 1)[0];
+
+    var oList = context.get_web().get_lists().getByTitle('Leave Requests');
+
+    var query = new SP.CamlQuery();
+    query.set_viewXml(
+        '<View><Query><Where><Eq><FieldRef Name=\'Name1\'/>' +
+        '<Value Type=\'Text\'>' + username + '</Value></Eq></Where></Query>' +
+        '</View>'
+        );
+    this.items = oList.getItems(query);
+
+    context.load(items);
+    context.executeQueryAsync(
+       Function.createDelegate(this, this.onQuerySuccess),
+        Function.createDelegate(this, this.onQueryFail)
+    );
+}
+
+function onQuerySuccess(sender, args) {
+    console.log(items);
+    var title = "";
+    var name = "";
+    var surname = "";
+    var number = "";
+    var manager = "";
+    var from = "";
+    var to = "";
+    var type = "";
+    var requestedBy = "";
+    var when = "";
+    var status = "";
+
+    var table = $("#tblCustomListData");
+    var tableData = "<tr><td>Title</td><td>Name</td><td>Surname</td><td>Cell Number</td><td>Manager</td><td>From</td><td>To</td><td>Leave Type</td><td>Requested By</td><td>When</td><td>Status</td></tr>";
+
+    var listEnumerator = items.getEnumerator();
+    while (listEnumerator.moveNext()) {
+        var oListItem = listEnumerator.get_current();
+        title = oListItem.get_item("Title");
+        name = oListItem.get_item("Name1");
+        surname = oListItem.get_item("Surname");
+        number = oListItem.get_item("ReachableNumber");
+        manager = oListItem.get_item("Manager");
+        from = oListItem.get_item("From1");
+        to = oListItem.get_item("To");
+        type = oListItem.get_item("TypeofLeave");
+        requestedBy = oListItem.get_item("Author");
+        when = oListItem.get_item("Created");
+        status = oListItem.get_item("Approved_x002f_Rejected");
+
+        tableData += "<tr><td>" + title + "</td><td>" + name + "</td><td>" + surname + "</td><td>" + number + "</td><td>" + manager.$4I_1 + "</td><td>" + from + "</td><td>" + to + "</td><td>" +
+            + "</td><td>" + type + "</td><td>" + requestedBy.$4I_1 + "</td><td>" + when + "</td><td>" + status + "</td></tr>";
+    }
+    table.html(tableData);
+}
+
+function onQueryFail(sender, args) {
+    alert("failed Message" + args.get_message());
 }

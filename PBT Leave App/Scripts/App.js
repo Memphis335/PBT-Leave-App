@@ -27,6 +27,7 @@ function onGetUserNameSuccess() {
     getCurrentAdmins();
     IsManager(username);
     getListItems(username);
+    getLeaveRequests(username);
     hideDiv(1);
     checkMF();
 }
@@ -180,11 +181,6 @@ function sendEmail(from, to, body, subject) {
             console.log(JSON.stringify(err));
         }
     });
-}
-
-function sickNote() {
-    alert("Applications in respect of sick leave of three days or more must be accompanied by a " +
-        "medical certificate issued by a registered medical practitioner");
 }
 
 function getCurrentAdmins() {
