@@ -13,10 +13,6 @@
     <script type="text/javascript" src="/_layouts/15/sp.js"></script>
     <script type="text/javascript" src="/_layouts/15/SP.UI.Dialog.js"></script>
     <script type="text/javascript" src="/_layouts/15/SP.UI.Dialog.debug.js"></script>
-    <script type="text/javascript" src="../Scripts/App.js"></script>
-    <script type="text/javascript" src="../Scripts/requests.js"></script>
-    <script type="text/javascript" src="../Scripts/bootstrap.js"></script>
-    <script type="text/javascript" src="../Scripts/bootstrap.min.js"></script>
     <meta name="WebPartPageExpansion" content="full" />
 
     <!-- CSS styles -->
@@ -24,6 +20,12 @@
     <link rel="Stylesheet" type="text/css" href="../Content/metro-bootstrap.css" />
     <link rel="Stylesheet" type="text/css" href="../Content/font-awesome.css" />
     <link rel="Stylesheet" type="text/css" href="../Content/font-awesome.min.css" />
+
+    <!-- Javascript -->
+    <script type="text/javascript" src="../Scripts/App.js"></script>
+    <script type="text/javascript" src="../Scripts/requests.js"></script>
+    <script type="text/javascript" src="../Scripts/bootstrap.js"></script>
+    <script type="text/javascript" src="../Scripts/bootstrap.min.js"></script>
 
 </asp:Content>
 
@@ -125,11 +127,14 @@
             </div>
         </div>
     </div>
-
-    <div class="table-responsive" style="margin-left: 12%">
-        <table class="table-hover" id="tblCustomListData" border="0">
-            <thead>
-                </thead>
-        </table>
+    <!--Table-->
+    <div class="container-fluid" id="leavetbl" style="margin-top: 0">
+        <div class="row-fluid">
+            <p style="font-size: large;">Your leave request history : </p>
+            <div>
+                <table class="table table-hover" id="tblCustomListData">
+                </table>
+            </div>
+        </div>
     </div>
 </asp:Content>

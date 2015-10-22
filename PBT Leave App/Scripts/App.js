@@ -11,6 +11,7 @@ var family = "";
 // This code runs when the DOM is ready and creates a context object which is needed to use the SharePoint object model
 $(document).ready(function () {
     getUserName();
+    $("#tblCustomListData").toggle().toggle();
 });
 
 // This function prepares, loads, and then executes a SharePoint query to get the current users information
@@ -27,7 +28,6 @@ function onGetUserNameSuccess() {
     getCurrentAdmins();
     IsManager(username);
     getListItems(username);
-    getLeaveRequests(username);
     hideDiv(1);
     checkMF();
 }
@@ -92,6 +92,8 @@ function onQuerySucceededLeave(sender, args) {
     $("#study").text(study);
     $("#matern").text(matern);
     $("#family").text(family);
+    var username = user.get_title();
+    getLeaveRequests(username);
 }
 
 function getQueryStringParameter(paramToRetrieve) {

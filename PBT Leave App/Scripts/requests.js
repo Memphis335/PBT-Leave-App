@@ -417,7 +417,10 @@ function validate() {
     var workDaysVar = $("#workDays").text();
 
     if (selLeave == "Annual Leave") {
+        console.log("True");
         workerNum = annual;
+        console.log(workDaysVar);
+        console.log(annual);
     } else if (selLeave == "Sick Leave") {
         workerNum = sick;
     } else if (selLeave == "Study Leave") {
@@ -427,6 +430,8 @@ function validate() {
     } else if (selLeave == "Family Responsibility Leave") {
         workerNum = family;
     }
+
+    console.log(workerNum);
 
     if (+workerNum < +workDaysVar) {
         $("#selLeave").css("border-color", "red");
@@ -474,7 +479,6 @@ function getLeaveRequests(name) {
 }
 
 function onQuerySuccess(sender, args) {
-    console.log(items);
     var title = "";
     var name = "";
     var surname = "";
@@ -488,7 +492,7 @@ function onQuerySuccess(sender, args) {
     var status = "";
 
     var table = $("#tblCustomListData");
-    var tableData = "<tr><td>Title</td><td>Name</td><td>Surname</td><td>Cell Number</td><td>Manager</td><td>From</td><td>To</td><td>Leave Type</td><td>Requested By</td><td>When</td><td>Status</td></tr>";
+    var tableData = "<thead><tr><th>Title</th><th>Name</th><th>Surname</th><th>Cell Number</th><th>Manager</th><th>From</th><th>To</th><th>Leave Type</th><th>Requested By</th><th>When</th><th>Status</th></tr></thead>";
 
     var listEnumerator = items.getEnumerator();
     while (listEnumerator.moveNext()) {
@@ -498,15 +502,19 @@ function onQuerySuccess(sender, args) {
         surname = oListItem.get_item("Surname");
         number = oListItem.get_item("ReachableNumber");
         manager = oListItem.get_item("Manager");
-        from = oListItem.get_item("From1");
+        from = new Date(oListItem.get_item("From1"));
         to = oListItem.get_item("To");
         type = oListItem.get_item("TypeofLeave");
         requestedBy = oListItem.get_item("Author");
         when = oListItem.get_item("Created");
         status = oListItem.get_item("Approved_x002f_Rejected");
 
-        tableData += "<tr><td>" + title + "</td><td>" + name + "</td><td>" + surname + "</td><td>" + number + "</td><td>" + manager.$4I_1 + "</td><td>" + from + "</td><td>" + to + "</td><td>" +
-            + "</td><td>" + type + "</td><td>" + requestedBy.$4I_1 + "</td><td>" + when + "</td><td>" + status + "</td></tr>";
+        var fromDate = from.toISOString().slice(0, 10).replace(/-/g, "-");
+        var toDate = to.toISOString().slice(0, 10).replace(/-/g, "-");
+        var reqWhen = when.toISOString().slice(0, 10).replace(/-/g, "-");
+
+        tableData += "<tbody><tr><td>" + title + "</td><td>" + name + "</td><td>" + surname + "</td><td>" + number + "</td><td>" + manager.$4I_1 + "</td><td>" + fromDate + "</td><td>" + toDate + "</td><td>"
+            + type + "</td><td>" + requestedBy.$4I_1 + "</td><td>" + reqWhen + "</td><td>" + status + "</td></tr></tbody>";
     }
     table.html(tableData);
 }
