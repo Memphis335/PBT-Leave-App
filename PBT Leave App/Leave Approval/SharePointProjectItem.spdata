@@ -7,16 +7,16 @@
     <ExtensionDataItem Key="WorkflowAssociation.EventSourceGUID" Value="Lists/Requests" />
     <ExtensionDataItem Key="WorkflowAssociation.HistoryListId" Value="Lists/WorkflowHistoryList" />
     <ExtensionDataItem Key="WorkflowAssociation.TaskListId" Value="Lists/WorkflowTaskList" />
-    <ExtensionDataItem Key="WorkflowAssociationItemAdded.Description" Value="Leave Approval - ItemAdded" />
-    <ExtensionDataItem Key="WorkflowAssociationItemAdded.DisplayName" Value="Leave Approval - ItemAdded" />
+    <ExtensionDataItem Key="WorkflowAssociationItemAdded.Description" Value="ItemAdded" />
+    <ExtensionDataItem Key="WorkflowAssociationItemAdded.DisplayName" Value="Approved/Rejected" />
     <ExtensionDataItem Key="WorkflowAssociationItemAdded.Enabled" Value="true" />
     <ExtensionDataItem Key="WorkflowAssociationItemAdded.EventSourceGUID" Value="Lists/Requests" />
     <ExtensionDataItem Key="WorkflowAssociationItemAdded.EventType" Value="ItemAdded" />
     <ExtensionDataItem Key="WorkflowAssociationItemAdded.HistoryListId" Value="Lists/WorkflowHistoryList" />
     <ExtensionDataItem Key="WorkflowAssociationItemAdded.Id" Value="3ad6f6c8-bc21-4910-9445-bb65ee067d68" />
     <ExtensionDataItem Key="WorkflowAssociationItemAdded.TaskListId" Value="Lists/WorkflowTaskList" />
-    <ExtensionDataItem Key="WorkflowAssociationItemUpdated.Description" Value="Leave Approval - ItemUpdated" />
-    <ExtensionDataItem Key="WorkflowAssociationItemUpdated.DisplayName" Value="Leave Approval - ItemUpdated" />
+    <ExtensionDataItem Key="WorkflowAssociationItemUpdated.Description" Value="ItemUpdated" />
+    <ExtensionDataItem Key="WorkflowAssociationItemUpdated.DisplayName" Value="Approved/Rejected" />
     <ExtensionDataItem Key="WorkflowAssociationItemUpdated.Enabled" Value="true" />
     <ExtensionDataItem Key="WorkflowAssociationItemUpdated.EventSourceGUID" Value="Lists/Requests" />
     <ExtensionDataItem Key="WorkflowAssociationItemUpdated.EventType" Value="ItemUpdated" />
