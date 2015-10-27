@@ -11,8 +11,6 @@ var family = "";
 // This code runs when the DOM is ready and creates a context object which is needed to use the SharePoint object model
 $(document).ready(function () {
     getUserName();
-
-    window.setInterval(getLeaveRequests(username), 2000);
 });
 
 // This function prepares, loads, and then executes a SharePoint query to get the current users information
