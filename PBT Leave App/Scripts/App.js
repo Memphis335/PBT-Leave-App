@@ -127,7 +127,7 @@ function resetLeave(id, num, year) {
     this.oListItem = resetList.getItemById(id);
     oListItem.set_item("AnnualLeave", carryOver);
     oListItem.set_item("SickLeave", 30);
-    oListItem.set_item("StudyLEave", 8);
+    oListItem.set_item("StudyLEave", 5);
     oListItem.set_item("MaternityLeave", 5);
     oListItem.set_item("FamilyResponsibilityLeave", 3);
 

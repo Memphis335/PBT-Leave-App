@@ -240,20 +240,6 @@
         </InArgument>
       </p1:Email.To>
     </p1:Email>
-    <p1:SetModerationStatus Comments="{x:Null}" ItemGuid="{x:Null}" sap2010:WorkflowViewState.IdRef="SetModerationStatus_1" ModerationStatus="Pending">
-      <p1:SetModerationStatus.ItemId>
-        <InArgument x:TypeArguments="x:Int32">
-          <p:ExpressionContainerValue x:TypeArguments="x:Int32">
-            <p1:GetCurrentItemId />
-          </p:ExpressionContainerValue>
-        </InArgument>
-      </p1:SetModerationStatus.ItemId>
-      <p1:SetModerationStatus.ListId>
-        <InArgument x:TypeArguments="s:Guid">
-          <mca:CSharpValue x:TypeArguments="s:Guid">System.Guid.Parse("{$ListId:Lists/WorkflowTaskList;}")</mca:CSharpValue>
-        </InArgument>
-      </p1:SetModerationStatus.ListId>
-    </p1:SetModerationStatus>
     <Sequence DisplayName="ManagerApproval" sap2010:WorkflowViewState.IdRef="Sequence_19">
       <Sequence.Variables>
         <Variable x:TypeArguments="x:String" Default="lourens.marx@pbtgroup.co.za" Name="ITMail" />
@@ -666,21 +652,6 @@ Manager + " has reached a decision on your request.&lt;/br&gt;" +
               </OutArgument>
             </scg:Dictionary>
           </p:GetODataProperties>
-          <p1:SetModerationStatus Comments="{x:Null}" ItemGuid="{x:Null}" ModerationStatus="Pending">
-            <p1:SetModerationStatus.ItemId>
-              <InArgument x:TypeArguments="x:Int32">
-                <p:ExpressionContainerValue x:TypeArguments="x:Int32">
-                  <p1:GetCurrentItemId />
-                </p:ExpressionContainerValue>
-              </InArgument>
-            </p1:SetModerationStatus.ItemId>
-            <p1:SetModerationStatus.ListId>
-              <InArgument x:TypeArguments="s:Guid">
-                <mca:CSharpValue x:TypeArguments="s:Guid">System.Guid.Parse("{$ListId:Lists/WorkflowTaskList;}")</mca:CSharpValue>
-              </InArgument>
-            </p1:SetModerationStatus.ListId>
-            <sap2010:WorkflowViewState.IdRef>SetModerationStatus_2</sap2010:WorkflowViewState.IdRef>
-          </p1:SetModerationStatus>
           <p1:WriteToHistory sap2010:WorkflowViewState.IdRef="WriteToHistory_31" Message="Assigning task to HR Department" />
           <p1:SingleTask TaskId="{x:Null}" TaskItemId="{x:Null}" AssignmentEmailSubject="Leave Request Task Assigned" CancelationEmailBody="&lt;html&gt;&lt;body style='font-size:11pt;font-family:Segoe UI Light,sans-serif;color:#444444;'&gt;&lt;div&gt;&lt;span style='font-size:13.5pt'&gt;One of your tasks was canceled and deleted. You do not need to take any further action on that task.&lt;/span&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;" CancelationEmailSubject="Leave Request Task Canceled" CompletedStatus="Completed" ContentTypeId="0x0108003365C4474CAE8C42BCE396314E88E51F" DefaultTaskOutcome="1" sap2010:WorkflowViewState.IdRef="SingleTask_8" OutcomeFieldName="TaskOutcome" OverdueEmailBody="&lt;html&gt;&lt;body style='font-size:11pt;font-family:Segoe UI Light,sans-serif;color:#444444;'&gt;&lt;div&gt;&lt;span style='font-size:13.5pt'&gt;You have an &lt;/span&gt;&lt;span style='font-size:13.5pt;color:#ff3b3b;'&gt;overdue&lt;/span&gt;&lt;span style='font-size:13.5pt'&gt; task.&lt;/span&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;" OverdueEmailSubject="Leave Request Task Overdue" OverdueReminderRepeat="1" OverdueRepeatTimes="1" PreserveIncompleteTasks="False" SendReminderEmail="True" WaitForTaskCompletion="True" WaiveAssignmentEmail="False" WaiveCancelationEmail="False">
             <p1:SingleTask.AssignedTo>
@@ -887,7 +858,7 @@ HRUser + " has reached a decision on your request.&lt;/br&gt;" +
         </TerminateWorkflow>
       </If.Else>
     </If>
-    <sads:DebugSymbol.Symbol>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</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>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</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
@@ -956,17 +927,6 @@ HRUser + " has reached a decision on your request.&lt;/br&gt;" +
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="BuildCollection`1_1" sap:VirtualizedContainerService.HintSize="716,22" />
       <sap2010:ViewStateData Id="Email_1" sap:VirtualizedContainerService.HintSize="716,68" />
-      <sap2010:ViewStateData Id="SetModerationStatus_1" sap:VirtualizedContainerService.HintSize="716,68">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <scg:Dictionary x:TypeArguments="x:String, msdad:ViewStateNameValue" x:Key="SPLocalizedDisplayNames">
-              <msdad:ViewStateNameValue x:Key="ItemId" DisplayName="(current item)" Value="$CurrentItemId" />
-              <msdad:ViewStateNameValue x:Key="ListId" DisplayName="WorkflowTaskList" Value="Lists/WorkflowTaskList" />
-              <msdad:ViewStateNameValue x:Key="ModerationStatus" DisplayName="Pending" Value="Pending" />
-            </scg:Dictionary>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="WriteToHistory_22" sap:VirtualizedContainerService.HintSize="464,68" />
       <sap2010:ViewStateData Id="LookupSPListItem_4" sap:VirtualizedContainerService.HintSize="464,89">
         <sap:WorkflowViewStateService.ViewState>
@@ -1070,7 +1030,7 @@ HRUser + " has reached a decision on your request.&lt;/br&gt;" +
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_18" sap:VirtualizedContainerService.HintSize="491,1521">
+      <sap2010:ViewStateData Id="Sequence_18" sap:VirtualizedContainerService.HintSize="200,51">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -1141,17 +1101,6 @@ HRUser + " has reached a decision on your request.&lt;/br&gt;" +
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="SetModerationStatus_2" sap:VirtualizedContainerService.HintSize="469,68">
-        <sap:WorkflowViewStateService.ViewState>
-          <scg:Dictionary x:TypeArguments="x:String, x:Object">
-            <scg:Dictionary x:TypeArguments="x:String, msdad:ViewStateNameValue" x:Key="SPLocalizedDisplayNames">
-              <msdad:ViewStateNameValue x:Key="ItemId" DisplayName="(current item)" Value="$CurrentItemId" />
-              <msdad:ViewStateNameValue x:Key="ListId" DisplayName="WorkflowTaskList" Value="Lists/WorkflowTaskList" />
-              <msdad:ViewStateNameValue x:Key="ModerationStatus" DisplayName="Pending" Value="Pending" />
-            </scg:Dictionary>
-          </scg:Dictionary>
-        </sap:WorkflowViewStateService.ViewState>
-      </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="WriteToHistory_31" sap:VirtualizedContainerService.HintSize="469,68" />
       <sap2010:ViewStateData Id="SingleTask_8" sap:VirtualizedContainerService.HintSize="469,89">
         <sap:WorkflowViewStateService.ViewState>
@@ -1215,7 +1164,7 @@ HRUser + " has reached a decision on your request.&lt;/br&gt;" +
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_27" sap:VirtualizedContainerService.HintSize="491,1719">
+      <sap2010:ViewStateData Id="Sequence_27" sap:VirtualizedContainerService.HintSize="491,1611">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -1224,7 +1173,7 @@ HRUser + " has reached a decision on your request.&lt;/br&gt;" +
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="TerminateWorkflow_2" sap:VirtualizedContainerService.HintSize="200,22" />
-      <sap2010:ViewStateData Id="If_6" sap:VirtualizedContainerService.HintSize="716,1869">
+      <sap2010:ViewStateData Id="If_6" sap:VirtualizedContainerService.HintSize="716,1761">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -1232,14 +1181,14 @@ HRUser + " has reached a decision on your request.&lt;/br&gt;" +
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="738,3668">
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="738,3452">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="PBT_Leave_App.Leave_Approval.Workflow_1" sap:VirtualizedContainerService.HintSize="778,3647">
+      <sap2010:ViewStateData Id="PBT_Leave_App.Leave_Approval.Workflow_1" sap:VirtualizedContainerService.HintSize="778,3748">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="ShouldExpandAll">False</x:Boolean>
