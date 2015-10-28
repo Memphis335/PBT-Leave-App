@@ -50,11 +50,11 @@
     <Content Include="Managers\Elements.xml" />
     <Content Include="Managers\ManagersInstance\Elements.xml" />
     <Content Include="Managers\Schema.xml" />
-    <Content Include="Scripts\holidays.js" />
-    <Content Include="Scripts\init.js" />
     <Content Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
+    <Content Include="Scripts\tasks.js" />
+    <Content Include="Scripts\ToApproveByMe.js" />
     <Content Include="Sicknotes\EditDlg.htm" />
     <Content Include="Sicknotes\Elements.xml" />
     <Content Include="Sicknotes\FileDlg.htm" />

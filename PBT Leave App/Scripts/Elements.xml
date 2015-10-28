@@ -11,7 +11,7 @@
     <File Path="Scripts\jquery-2.1.4.min.js" Url="Scripts/jquery-2.1.4.min.js" ReplaceContent="TRUE" />
     <File Path="Scripts\jquery-2.1.4.js" Url="Scripts/jquery-2.1.4.js" ReplaceContent="TRUE" />
     <File Path="Scripts\jquery-2.1.4.intellisense.js" Url="Scripts/jquery-2.1.4.intellisense.js" ReplaceContent="TRUE" />
-    <File Path="Scripts\holidays.js" Url="Scripts/holidays.js" ReplaceContent="TRUE" />
-    <File Path="Scripts\init.js" Url="Scripts/init.js" ReplaceContent="TRUE" />
+    <File Path="Scripts\ToApproveByMe.js" Url="Scripts/ToApproveByMe.js" ReplaceContent="TRUE" />
+    <File Path="Scripts\tasks.js" Url="Scripts/tasks.js" ReplaceContent="TRUE" />
   </Module>
 </Elements>

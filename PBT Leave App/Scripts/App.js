@@ -254,7 +254,7 @@ function ManagerQuerySucceeded(sender, args) {
 
     if (listItemInfo == "Yes") {
         $("#managerNav").css("display", "inherit");
-        $("#manager").css("display", "initial");
+        $("#manager").css("display", "inherit");
     }
 }
 

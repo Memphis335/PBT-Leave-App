@@ -132,7 +132,7 @@
         <div class="row-fluid">
             <p style="font-size: large;">Your leave request history : </p>
             <div>
-                <table class="table table-hover" id="tblCustomListData">
+                <table class="table table-hover" id="tblCustomListData" onclick="RefreshPage()">
                 </table>
             </div>
         </div>
