@@ -7,6 +7,7 @@
           <FieldRef ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" Name="Title" />
           <FieldRef ID="{9227689d-eb22-4289-8b41-95989fc01114}" Name="User" />
           <FieldRef ID="{30b3d8a4-0498-4198-90bd-8cd9362a5483}" Name="IsManager" />
+          <FieldRef ID="{2654d6e6-e7fb-40c6-a39d-06dd8f7fa616}" Name="Sex" />
           <FieldRef ID="{402377b2-45f6-47b0-8204-e610b4a48e75}" Name="AnnualLeave" />
           <FieldRef ID="{b741225a-b708-44e4-a7ae-ec7051ea4490}" Name="SickLeave" />
           <FieldRef ID="{ce5bdad0-4b3b-4398-af64-f99e70dd84cc}" Name="StudyLeave" />
@@ -14,7 +15,9 @@
           <FieldRef ID="{af930204-4283-4452-af28-5c997e471b0b}" Name="FamilyResponsibilityLeave" />
           <FieldRef ID="{1daa73db-ec7b-4a46-8139-5ea570a09962}" Name="Other" />
           <FieldRef ID="{1c2ab981-094a-4f21-a01f-f7b37d50ade4}" Name="PBTInceptionDate" />
-          <FieldRef ID="{2654d6e6-e7fb-40c6-a39d-06dd8f7fa616}" Name="Sex" />
+          <FieldRef ID="{16bf8b69-ac8f-400a-8fd2-1c11e0a1e2e3}" Name="Accrued" />
+          <FieldRef ID="{32b381a0-a0e8-41a8-9c90-e2c9d1727bb0}" Name="DaysDeal" />
+          <FieldRef ID="{ecd9e65b-d9e7-4091-85bc-e80f3b17ce7a}" Name="SickLeaveCounter" />
         </FieldRefs>
       </ContentType>
       <ContentTypeRef ID="0x01">
@@ -23,7 +26,7 @@
       <ContentTypeRef ID="0x0120" />
     </ContentTypes>
     <Fields>
-      <Field ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" Type="Text" Name="Title" DisplayName="$Resources:core,Title;" Required="FALSE" SourceID="http://schemas.microsoft.com/sharepoint/v3" StaticName="Title" MaxLength="255" />
+      <Field ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" Type="Text" ShowInNewForm="False" ShowInEditForm="False" Name="Title" DisplayName="$Resources:core,Title;" Required="FALSE" SourceID="http://schemas.microsoft.com/sharepoint/v3" StaticName="Title" MaxLength="255" Description="Leave this empty or enter anything you like. Unused field" />
       <Field ID="{9227689d-eb22-4289-8b41-95989fc01114}" Name="User" StaticName="User" SourceID="http://schemas.microsoft.com/sharepoint/v3" DisplayName="$Resources:core,User" Type="User" List="UserInfo" Required="TRUE" Hidden="FALSE" Indexed="FALSE" />
       <Field ID="{30b3d8a4-0498-4198-90bd-8cd9362a5483}" Name="IsManager" DisplayName="Is Manager?" Type="Choice" Required="TRUE" Group="Custom Site Columns" Description="Is this user a manager that will approve leave for other users?">
         <CHOICES>
@@ -31,7 +34,7 @@
           <CHOICE>No</CHOICE>
         </CHOICES>
       </Field>
-      <Field Name="Sex" ID="{2654d6e6-e7fb-40c6-a39d-06dd8f7fa616}" DisplayName="Sex" Type="Choice" Required="TRUE">
+      <Field Name="Sex" ID="{2654d6e6-e7fb-40c6-a39d-06dd8f7fa616}" DisplayName="Sexuality" Type="Choice" Required="TRUE">
         <CHOICES>
           <CHOICE>Male</CHOICE>
           <CHOICE>Female</CHOICE>
@@ -40,29 +43,29 @@
       <Field Name="AnnualLeave" ID="{402377b2-45f6-47b0-8204-e610b4a48e75}" DisplayName="Annual Leave" Type="Text" Required="TRUE" />
       <Field Name="SickLeave" ID="{b741225a-b708-44e4-a7ae-ec7051ea4490}" DisplayName="Sick Leave" Type="Text" Required="TRUE" />
       <Field Name="StudyLeave" ID="{ce5bdad0-4b3b-4398-af64-f99e70dd84cc}" DisplayName="Study Leave" Type="Text" Required="TRUE" />
-      <Field Name="MaternityLeave" ID="{b7927635-2291-4eb3-a9a7-d7ebedf47c5e}" DisplayName="Maternity Leave" Type="Text" Required="TRUE" />
+      <Field Name="MaternityLeave" ID="{b7927635-2291-4eb3-a9a7-d7ebedf47c5e}" DisplayName="Maternity Leave" Type="Text" Required="TRUE" Description="Enter 0 for Males." />
       <Field Name="FamilyResponsibilityLeave" ID="{af930204-4283-4452-af28-5c997e471b0b}" DisplayName="Family Responsibility Leave" Type="Text" Required="TRUE" />
       <Field Name="Other" ID="{1daa73db-ec7b-4a46-8139-5ea570a09962}" DisplayName="Other" Type="Text" Required="FALSE" />
       <Field Name="PBTInceptionDate" ID="{1c2ab981-094a-4f21-a01f-f7b37d50ade4}" DisplayName="PBT Inception Date" Type="DateTime" Required="TRUE" Format="DateOnly" />
+      <Field Name="Accrued" ID="{16bf8b69-ac8f-400a-8fd2-1c11e0a1e2e3}" DisplayName="AccruedLeave" Type="Text" Required="TRUE" />
+      <Field Name="DaysDeal" ID="{32b381a0-a0e8-41a8-9c90-e2c9d1727bb0}" DisplayName="20 Days Deal?" Type="Choice">
+        <CHOICES>
+          <CHOICE>Yes</CHOICE>
+          <CHOICE>No</CHOICE>
+        </CHOICES>
+      </Field>
+      <Field Name="SickLeaveCounter" ShowInNewForm="False" ID="{ecd9e65b-d9e7-4091-85bc-e80f3b17ce7a}" DisplayName="Sick Leave Counter" Type="Text" Description="DO NOT EDIT! (Used for Internal Process)" />
     </Fields>
     <Views>
-
-
-
-
       <View BaseViewID="0" Type="HTML" MobileView="TRUE" TabularView="FALSE">
         <Toolbar Type="Standard" />
         <XslLink Default="TRUE">main.xsl</XslLink>
         <RowLimit Paged="TRUE">30</RowLimit>
         <ViewFields>
-
-
           <FieldRef Name="LinkTitleNoMenu"></FieldRef>
         </ViewFields>
         <Query>
           <OrderBy>
-
-
             <FieldRef Name="Modified" Ascending="FALSE"></FieldRef>
           </OrderBy>
         </Query>
@@ -91,22 +94,51 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
           <FieldRef Name="LinkTitle"></FieldRef>
           <FieldRef Name="User" />
           <FieldRef Name="IsManager" />
           <FieldRef Name="PBTInceptionDate" />
           <FieldRef Name="AnnualLeave" />
           <FieldRef Name="SickLeave" />
-          <FieldRef Name="StudyLEave" />
           <FieldRef Name="MaternityLeave" />
           <FieldRef Name="FamilyResponsibilityLeave" />
           <FieldRef Name="Other" />
           <FieldRef Name="Created" />
           <FieldRef Name="Author" />
           <FieldRef Name="Sex" />
+          <FieldRef Name="Accrued" />
         </ViewFields>
         <Query>
           <OrderBy>
+
+
 
 
             <FieldRef Name="ID"></FieldRef>

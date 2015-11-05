@@ -14,7 +14,7 @@
       <ContentTypeRef ID="0x0120" />
     </ContentTypes>
     <Fields>
-      <Field ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" Type="User" Name="Title" DisplayName="$Resources:core,Title;" Description="Please ensure that this title matches the persons Name and Surname. Choose it below to verify. " Required="TRUE" SourceID="http://schemas.microsoft.com/sharepoint/v3" StaticName="Title" MaxLength="255" />
+      <Field ID="{fa564e0f-0c70-4ab9-b863-0177e6ddd247}" Type="Text" ShowInNewForm="False" Name="Title" DisplayName="$Resources:core,Title;" Description="You can leave this empty" Required="False" SourceID="http://schemas.microsoft.com/sharepoint/v3" StaticName="Title" MaxLength="255" />
       <Field Name="Name1" ID="{46849636-861e-49b8-a12b-5f1fb235f0c0}" DisplayName="Name" Type="User" List="UserInfo" Required="TRUE" />
     </Fields>
     <Views>

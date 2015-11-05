@@ -31,6 +31,7 @@ function requestLeave() {
     var dateTo = new Date(toDate);
     dateTo.setHours(dateTo.getHours() + 22);
     var selLeave = $("#selLeave").val();
+    var frLeave = $("#FRLeave").val();
     var cbOnbehalf = $("#cbOnbehalf:checked").val();
     var workDaysVar = $("#workDays").text();
 
@@ -48,6 +49,7 @@ function requestLeave() {
     oListItem.set_item("From1", date);
     oListItem.set_item("To", dateTo);
     oListItem.set_item("TypeofLeave", selLeave);
+    oListItem.set_item("Reason", frLeave);
     if (cbOnbehalf == "on") {
         cbOnbehalf = "Yes";
     } else {
@@ -63,10 +65,12 @@ function requestLeave() {
 
 function onSubmitSucceeded() {
     alert("Thank You!" + "\n" + "Your leave request has been submitted." + "\n" + "Request number : " + oListItem.get_id());
+    window.location.href("../Pages/Default.aspx");
 }
 
 function onSubmitFailed(sender, args) {
     alert("Request failed to submit leave! " + args.get_message());
+    window.location.href("../Pages/Default.aspx");
 }
 
 function uploadFile() {
@@ -217,19 +221,45 @@ function onError(error) {
 //Hide or show sicknote
 function hideShowNote() {
     var selLeave = $("#selLeave").val();
-    var days = 3;
+    var days = $("#workDays").text();
+    var dateFrom = $("#ctl00_PlaceHolderMain_fromDate_fromDateDate").val();
+    var dateTo = $("#ctl00_PlaceHolderMain_todate_todateDate").val();
     var daysVal = 3;
     var sickLeaveVal = "Sick Leave";
-    if (selLeave == sickLeaveVal && days >= daysVal) {
-        $("#sckNote").html("***Sick leave of 3 days or more require a sick note from a registered doctor. Please upload your sicknote below.***");
-        $("#SickNote").css("display", "inherit");
-        $("#getFile").attr({ "required": "required" });
-        $("#btnSubmit").attr("disabled", "disabled");
+    var frLeave = "Family Responsibility Leave";
+    var currentDate = new Date(dateFrom);
+    var lastDay = new Date(dateTo);
+
+    if (selLeave == sickLeaveVal) {
+        if (+days >= +daysVal) {
+            $("#sckNote").html("***Sick leave of 3 days or more require a sick note from a registered doctor. Please upload your sicknote below.***");
+            $("#SickNote").css("display", "inherit");
+            $("#getFile").attr({ "required": "required" });
+            $("#btnSubmit").attr("disabled", "disabled");
+        } else {
+            while (currentDate <= lastDay) {
+                var weekDay = currentDate.getDay();
+                console.log(weekDay);
+                if (weekDay == 1 || weekDay == 5) {
+                    $("#sckNote").html("***Sick leave on a Friday or Monday require a sick note from a registered doctor. Please upload your sicknote below.***");
+                    $("#SickNote").css("display", "inherit");
+                    $("#getFile").attr({ "required": "required" });
+                    $("#btnSubmit").attr("disabled", "disabled");
+                }
+                currentDate.setDate(currentDate.getDate() + 1);
+            }
+        }
     } else {
         $("#SickNote").css("display", "none");
         $("#getFile").removeAttr("required");
         $("#sckNote").html("");
         $("#btnSubmit").removeAttr("disabled");
+    }
+
+    if (selLeave == frLeave) {
+        $("#FRLeave").css("display", "inherit");
+    } else {
+        $("#FRLeave").css("display", "none");
     }
 }
 
@@ -238,7 +268,7 @@ function workDays() {
     var dateFrom = $("#ctl00_PlaceHolderMain_fromDate_fromDateDate").val();
     var dateTo = $("#ctl00_PlaceHolderMain_todate_todateDate").val();
 
-    if (dateFrom == "" || dateTo == "") {
+    if (dateFrom === "" || dateTo === "") {
         $("#ctl00_PlaceHolderMain_fromDate_fromDateDate").css("border-color", "red");
         $("#ctl00_PlaceHolderMain_todate_todateDate").css("border-color", "red");
     } else {
@@ -252,7 +282,7 @@ function workDays() {
             var lastDay = new Date(endDate);
             while (currentDate <= lastDay) {
                 var weekDay = currentDate.getDay();
-                if (weekDay != 0 && weekDay != 6)
+                if (weekDay !== 0 && weekDay !== 6)
                     result++;
                 currentDate.setDate(currentDate.getDate() + 1);
             }
@@ -266,7 +296,7 @@ function workDays() {
                 currentDate = new Date(startDate),
                 lastDay = new Date(endDate);
             while (currentDate <= lastDay) {
-                if (!(currentDate.getUTCDay() == 5 || currentDate.getUTCDay() == 6)) {
+                if (!(currentDate.getUTCDay() === 5 || currentDate.getUTCDay() === 6)) {
                     dateArray.push(new Date(currentDate));
                 }
                 currentDate.setDate(currentDate.getDate() + 1);
@@ -282,7 +312,7 @@ function workDays() {
             var daysToSub = 0;
             for (var i = 0; i < array2.length; i++) {
                 for (var j = 0; j < array1.length; j++) {
-                    if (array1[j].getDate() == (array2[i]).getDate()) {
+                    if (array1[j].getDate() === (array2[i]).getDate()) {
                         daysToSub++;
                     }
                 }
@@ -300,8 +330,6 @@ function workDays() {
             futureEventsOnly: true,
             sortDescending: true
         });
-
-        var s = '';
         var feedUrl = 'https://www.googleapis.com/calendar/v3/calendars/' +
             encodeURIComponent(defaults.calendarId.trim()) + '/events?key=' + defaults.apiKey +
             '&orderBy=startTime&singleEvents=true';
@@ -324,7 +352,7 @@ function workDays() {
                 var dayDiff = numOfWorkDays - testNum;
                 $("#workDays").text(dayDiff);
             },
-            error: function (response) {
+            error: function () {
                 alert("Error has occured while checking for holidays!" + '\n' + "Please notify IT.");
             }
         });
@@ -351,7 +379,7 @@ function checkMF() {
     );
 }
 
-function checkMFQuerySucceeded(sender, args) {
+function checkMFQuerySucceeded() {
     var listItemInfo = '';
     var listItemEnumerator = ListItem.getEnumerator();
 
@@ -360,7 +388,7 @@ function checkMFQuerySucceeded(sender, args) {
         listItemInfo += oListItem.get_item("Sex");
     }
 
-    if (listItemInfo == "Female") {
+    if (listItemInfo === "Female") {
         $("#maternBlock").css("display", "inherit");
     } else {
         $("#selLeave option[value='Maternity Leave']").remove();
@@ -403,7 +431,7 @@ function checkManagerQuerySucceeded(sender, args) {
         var oListItem = listItemEnumerator.get_current();
         listItemInfo = oListItem.get_item("BDM");
     }
-    manager = listItemInfo.$4I_1;
+    manager = listItemInfo.$4J_1;
     $("#tbManager").val(manager);
 }
 
@@ -430,8 +458,6 @@ function validate() {
     } else if (selLeave == "Family Responsibility Leave") {
         workerNum = family;
     }
-
-    console.log(workerNum);
 
     if (+workerNum < +workDaysVar) {
         $("#selLeave").css("border-color", "red");
@@ -490,9 +516,10 @@ function onQuerySuccess(sender, args) {
     var requestedBy = "";
     var when = "";
     var status = "";
+    var days = "";
 
     var table = $("#tblCustomListData");
-    var tableData = "<thead><tr><th>Title</th><th>Name</th><th>Surname</th><th>Cell Number</th><th>Manager</th><th>From</th><th>To</th><th>Leave Type</th><th>Requested By</th><th>When</th><th>Status</th></tr></thead>";
+    var tableData = "<thead><tr><th>Title</th><th>Name</th><th>Surname</th><th>Cell Number</th><th>Manager</th><th>From</th><th>To</th><th>Days</th><th>Leave Type</th><th>Requested By</th><th>When</th><th>Status</th></tr></thead>";
 
     var listEnumerator = items.getEnumerator();
     while (listEnumerator.moveNext()) {
@@ -508,13 +535,14 @@ function onQuerySuccess(sender, args) {
         requestedBy = oListItem.get_item("Author");
         when = oListItem.get_item("Created");
         status = oListItem.get_item("Approved_x002f_Rejected");
+        days = oListItem.get_item("WorkDays");
 
         var fromDate = from.toISOString().slice(0, 10).replace(/-/g, "-");
         var toDate = to.toISOString().slice(0, 10).replace(/-/g, "-");
         var reqWhen = when.toISOString().slice(0, 10).replace(/-/g, "-");
 
-        tableData += "<tbody><tr><td>" + title + "</td><td>" + name + "</td><td>" + surname + "</td><td>" + number + "</td><td>" + manager.$4I_1 + "</td><td>" + fromDate + "</td><td>" + toDate + "</td><td>"
-            + type + "</td><td>" + requestedBy.$4I_1 + "</td><td>" + reqWhen + "</td><td>" + status + "</td></tr></tbody>";
+        tableData += "<tbody><tr><td>" + title + "</td><td>" + name + "</td><td>" + surname + "</td><td>" + number + "</td><td>" + manager.$4J_1 + "</td><td>" + fromDate + "</td><td>" + toDate + "</td><td>" + days + "</td><td>"
+            + type + "</td><td>" + requestedBy.$4J_1 + "</td><td>" + reqWhen + "</td><td>" + status + "</td></tr></tbody>";
     }
     table.html(tableData);
 }

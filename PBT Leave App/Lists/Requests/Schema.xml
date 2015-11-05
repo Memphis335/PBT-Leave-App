@@ -15,6 +15,7 @@
           <FieldRef ID="{6e5de0c8-030d-4645-a410-6303ed6dd25b}" Name="OnBehalf" />
           <FieldRef ID="{acf1e9e3-b3d7-4acf-b7ec-34352c05715f}" Name="WorkDays" />
           <FieldRef ID="{2fefe348-667c-427e-9d38-728c3f8b0f46}" Name="Approved_x002f_Rejected" />
+          <FieldRef ID="{1299808e-c18e-4cc9-ad00-a8b61a7832bc}" Name="Reason" />
         </FieldRefs>
       </ContentType>
       <ContentTypeRef ID="0x01">
@@ -42,7 +43,8 @@
       </Field>
       <Field Name="OnBehalf" ID="{6e5de0c8-030d-4645-a410-6303ed6dd25b}" DisplayName="On Behalf" Type="Boolean" Required="TRUE" />
       <Field Name="WorkDays" ID="{acf1e9e3-b3d7-4acf-b7ec-34352c05715f}" DisplayName="Work Days" Type="Number" Required="TRUE" />
-      <Field Name="Approved_x002f_Rejected" ID="{2fefe348-667c-427e-9d38-728c3f8b0f46}" DisplayName="Approved/Rejected" Type="Text"/>
+      <Field Name="Approved_x002f_Rejected" ID="{2fefe348-667c-427e-9d38-728c3f8b0f46}" DisplayName="Approved/Rejected" Type="Text" />
+      <Field Name="Reason" ID="{1299808e-c18e-4cc9-ad00-a8b61a7832bc}" DisplayName="Reason" Type="Note" />
     </Fields>
     <Views>
       <View BaseViewID="0" Type="HTML" MobileView="TRUE" TabularView="FALSE">
@@ -50,10 +52,12 @@
         <XslLink Default="TRUE">main.xsl</XslLink>
         <RowLimit Paged="TRUE">30</RowLimit>
         <ViewFields>
+
           <FieldRef Name="LinkTitleNoMenu"></FieldRef>
         </ViewFields>
         <Query>
           <OrderBy>
+
             <FieldRef Name="Modified" Ascending="FALSE"></FieldRef>
           </OrderBy>
         </Query>
@@ -120,6 +124,19 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
           <FieldRef Name="LinkTitle"></FieldRef>
           <FieldRef Name="Name1" />
           <FieldRef Name="Surname" />
@@ -133,9 +150,12 @@
           <FieldRef Name="Author" />
           <FieldRef Name="Created" />
           <FieldRef Name="Approved_x002f_Rejected" />
+          <FieldRef Name="Reason" />
+          <FieldRef Name="WorkDays" />
         </ViewFields>
         <Query>
           <OrderBy>
+
 
 
 

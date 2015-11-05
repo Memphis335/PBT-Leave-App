@@ -21,6 +21,7 @@
     <script type="text/javascript" src="../Scripts/peoplepicker.min.js"></script>
     <script type="text/javascript" src="../Scripts/App.js"></script>
     <script type="text/javascript" src="../Scripts/requests.js"></script>
+    <script type="text/javascript" src="../Scripts/jquery.cookie.js"></script>
 
     <link rel="Stylesheet" type="text/css" href="../Content/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="../Content/App.css" />
@@ -53,7 +54,7 @@
             <li><a href="Help.aspx">Help</a></li>
             <ul id="admin" class="nav nav-stacked nav-pills">
                 <li class="nav-divider"></li>
-                <li id="adminSection">Admin Section</li>
+                <li id="adminSection">Administration</li>
                 <li><a href="javascript:displayLayover('../Lists/Admins/NewForm.aspx?IsDlg=1')">Add Administrator</a></li>
                 <li><a href="javascript:displayLayover('../Lists/LeaveBalances/NewForm.aspx?&IsDlg=1')">Add New User</a></li>
                 <li><a href="../Lists/Managers/AllItems.aspx">Manage Managers</a></li>
@@ -109,6 +110,36 @@
                     <input id="txtNumber" name="txtNumber" type="text" placeholder="" class="form-control input-md" required="required" onmouseenter="chkManager();" />
                 </div>
             </div>
+            
+              <!-- Date Controls -->
+            <div onmouseover="javascript:workDays();">
+                <div class="form-group">
+                    <div class="col-md-4">
+                        <label class="col-md-4">Period</label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <label class="col-md-4 control-label">From :</label>
+                        <SharePoint:DateTimeControl runat="server" ID="fromDate" DateOnly="true" UseTimeZoneAdjustment="false" TimeZoneID="1033" LocaleId="1033" DatePickerFrameUrl="../_layouts/15/iframe.aspx" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <label class="col-md-4 control-label">To :</label>
+                        <SharePoint:DateTimeControl runat="server" ID="todate" DateOnly="true" UseTimeZoneAdjustment="false" LocaleId="1033" DatePickerFrameUrl="../_layouts/15/iframe.aspx" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4">
+                        <label class="col-md-4 control-label" style="width: 36%" for="workDays">Number of Work Days :</label>
+                        <div id="workDays"></div>
+                    </div>
+                </div>
+            </div>
 
             <!-- Text Input Manager (Autofilled) -->
             <div class="form-group">
@@ -133,52 +164,34 @@
                 </div>
             </div>
 
-            <!-- Date Controls -->
-            <div onmouseover="javascript:workDays();">
-                <div class="form-group">
-                    <div class="col-md-4">
-                        <label class="col-md-4">Period</label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-4"></div>
-                    <div class="col-md-4">
-                        <label class="col-md-4 control-label" for="fromDate">From :</label>
-                        <SharePoint:DateTimeControl runat="server" ID="fromDate" DateOnly="true" UseTimeZoneAdjustment="false" TimeZoneID="1033" LocaleId="1033" DatePickerFrameUrl="../_layouts/15/iframe.aspx" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-4"></div>
-                    <div class="col-md-4">
-                        <label class="col-md-4 control-label" for="toDate">To :</label>
-                        <SharePoint:DateTimeControl runat="server" ID="todate" DateOnly="true" UseTimeZoneAdjustment="false" LocaleId="1033" DatePickerFrameUrl="../_layouts/15/iframe.aspx" />
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-4"></div>
-                    <div class="col-md-4">
-                        <label class="col-md-4 control-label" style="width: 36%" for="workDays">Number of Work Days :</label>
-                        <div id="workDays"></div>
-                    </div>
+            <!-- Reason for FR Leave -->
+            <div id="FRLeave" class="form-group" style="display: none">
+                <label class="col-md-4 control-label" for="FRLeave">Reason for Leave :</label>
+                <div class="col-md-4">
+                    <select name="FRLeave" class="form-control">
+                        <option value="childbirth">Birth of my child.</option>
+                        <option value="childsick">My child is sick.</option>
+                        <option value="death">Passing of spouse,life partner, parent, adoptive parent, grandparent, child, adopted child, grandchild or sibling</option>
+                    </select>
                 </div>
             </div>
-
+            
             <!-- File Button.Hidden if not sick leave-->
             <div id="sckNote" class="col-md-4 control-label" style="padding: 10px 5px; width: 100%"></div>
             <div class="form-group" id="SickNote" style="display: none">
                 <label class="col-md-4 control-label" for="getFile">Upload Sick Note</label>
                 <div class="col-md-4">
                     <input id="getFile" name="getfile" type="file" />
-                    <div id="progressBar" class="progress" style="margin-top: 2%;display: none">
+                    <div id="progressBar" class="progress" style="margin-top: 2%; display: none">
                         <div id="barProgress" class="progress-bar" role="progressbar">
-                          </div>
+                        </div>
                     </div>
                 </div>
                 <div class="col-md-4">
                     <button class="btn btn-danger" id="btnUploadFile" name="btnUploadFile" type="button" onclick="javascript:uploadFile();">Upload file</button>
                 </div>
             </div>
-
+            
             <!-- Button -->
             <div class="form-group">
                 <label class="col-md-4 control-label" for="btnSubmit"></label>

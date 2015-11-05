@@ -26,6 +26,28 @@
     <script type="text/javascript" src="../Scripts/requests.js"></script>
     <script type="text/javascript" src="../Scripts/bootstrap.js"></script>
     <script type="text/javascript" src="../Scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../Scripts/jquery.cookie.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#accruedHover").hover(function () {
+                $("#annualSpan", this).stop(true, true).hide();
+                $("#accruedSpan", this).stop(true, true).show();
+            },
+            function () {
+                $("#annualSpan", this).stop(true, true).show();
+                $("#accruedSpan", this).stop(true, true).hide();
+            });
+            $("#maternHover").hover(function () {
+                $("#days", this).stop(true, true).hide();
+                $("#words", this).stop(true, true).show();
+            },
+            function () {
+                $("#days", this).stop(true, true).show();
+                $("#words", this).stop(true, true).hide();
+            });
+        })
+    </script>
 
 </asp:Content>
 
@@ -43,7 +65,7 @@
             <li><a href="Help.aspx">Help</a></li>
             <ul id="admin" class="nav nav-stacked nav-pills">
                 <li class="nav-divider"></li>
-                <li id="adminSection">Admin Section</li>
+                <li id="adminSection">Administration</li>
                 <li><a href="javascript:displayLayover('../Lists/Admins/NewForm.aspx?IsDlg=1')">Add Administrator</a></li>
                 <li><a href="javascript:displayLayover('../Lists/LeaveBalances/NewForm.aspx?&IsDlg=1')">Add New User</a></li>
                 <li><a href="../Lists/Managers/AllItems.aspx">Manage Managers</a></li>
@@ -58,7 +80,7 @@
 
 <%-- The markup and script in the following Content element will be placed in the <body> of the page --%>
 <asp:Content ContentPlaceHolderID="PlaceHolderMain" runat="server">
-    <div class="container-fluid">
+    <div class="container-fluid" id="container-fluid">
         <div class="row">
             <div class="col-md-4">
                 <div class="thumbnail tile tile-wide tile-pbt">
@@ -91,10 +113,17 @@
             <p id="message" class="fa"></p>
             <p>Your leave balances is as follow : </p>
             <div class="col-md-2">
-                <div class="thumbnail tile tile-medium">
-                    <h4>Annual Leave</h4>
-                    <p id="annual" class="fa" style="text-align: center; margin-top: 20px; font-size: 30px;">
-                    </p>
+                <div id="accruedHover" class="thumbnail tile tile-medium">
+                    <span id="annualSpan">
+                        <h4>Annual Leave</h4>
+                        <p id="annual" class="fa" style="text-align: center; margin-top: 20px; font-size: 30px;">
+                        </p>
+                    </span>
+                    <span id="accruedSpan" style="display: none">
+                        <h4>Days Accrued</h4>
+                        <p id="accrued" class="fa" style="text-align: center; margin-top: 20px; font-size: 30px;">
+                        </p>
+                    </span>
                 </div>
             </div>
             <div class="col-md-2">
@@ -112,10 +141,17 @@
                 </div>
             </div>
             <div id="maternBlock" class="col-md-2" style="display: none">
-                <div class="thumbnail tile tile-medium">
+                <div class="thumbnail tile tile-medium" id="maternHover">
                     <h4>Maternity Leave</h4>
-                    <p id="matern" class="fa" style="text-align: center; margin-top: 20px; font-size: 30px;">
-                    </p>
+                    <span id="days">
+                        <p id="matern" class="fa" style="text-align: center; margin-top: 20px; font-size: 30px;">
+                        </p>
+                    </span>
+                    <span id="words">
+                        <p class="fa" style="text-align: center; margin-top: 20px; font-size: 22px;">
+                            4 Months(Unpaid)
+                        </p>
+                    </span>
                 </div>
             </div>
             <div class="col-md-2">
@@ -130,9 +166,9 @@
     <!--Table-->
     <div class="container-fluid" id="leavetbl" style="margin-top: 0">
         <div class="row-fluid">
-            <p style="font-size: large;">Your leave request history : </p>
+            <p style="font-size: large;">Your leave request history : (Click to refresh)</p>
             <div>
-                <table class="table table-hover" id="tblCustomListData" onclick="RefreshPage()">
+                <table class="table table-hover" id="tblCustomListData" onclick="refreshTable()">
                 </table>
             </div>
         </div>

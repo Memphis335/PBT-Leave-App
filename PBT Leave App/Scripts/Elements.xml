@@ -7,11 +7,12 @@
     <File Path="Scripts\peoplepicker.js" Url="Scripts/peoplepicker.js" ReplaceContent="TRUE" />
     <File Path="Scripts\peoplepicker.min.js" Url="Scripts/peoplepicker.min.js" ReplaceContent="TRUE" />
     <File Path="Scripts\requests.js" Url="Scripts/requests.js" ReplaceContent="TRUE" />
-    <File Path="Scripts\jquery-2.1.4.min.map" Url="Scripts/jquery-2.1.4.min.map" ReplaceContent="TRUE" />
+    <File Path="Scripts\jquery.min.map" Url="Scripts/jquery.min.map" ReplaceContent="TRUE" />
     <File Path="Scripts\jquery-2.1.4.min.js" Url="Scripts/jquery-2.1.4.min.js" ReplaceContent="TRUE" />
     <File Path="Scripts\jquery-2.1.4.js" Url="Scripts/jquery-2.1.4.js" ReplaceContent="TRUE" />
     <File Path="Scripts\jquery-2.1.4.intellisense.js" Url="Scripts/jquery-2.1.4.intellisense.js" ReplaceContent="TRUE" />
-    <File Path="Scripts\ToApproveByMe.js" Url="Scripts/ToApproveByMe.js" ReplaceContent="TRUE" />
-    <File Path="Scripts\tasks.js" Url="Scripts/tasks.js" ReplaceContent="TRUE" />
+    <File Path="Scripts\tasksPending.js" Url="Scripts/tasksPending.js" ReplaceContent="TRUE" />
+    <File Path="Scripts\tasksCompleted.js" Url="Scripts/tasksCompleted.js" ReplaceContent="TRUE" />
+    <File Path="Scripts\jquery.cookie.js" Url="Scripts/jquery.cookie.js" ReplaceContent="TRUE" />
   </Module>
 </Elements>

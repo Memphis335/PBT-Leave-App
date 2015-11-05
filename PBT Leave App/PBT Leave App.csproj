@@ -47,23 +47,24 @@
     <Content Include="Features\Feature3\Feature3.Template.xml">
       <DependentUpon>Feature3.feature</DependentUpon>
     </Content>
-    <Content Include="Managers\Elements.xml" />
-    <Content Include="Managers\ManagersInstance\Elements.xml" />
-    <Content Include="Managers\Schema.xml" />
+    <Content Include="Lists\Managers\Elements.xml" />
+    <Content Include="Lists\Managers\ManagersInstance\Elements.xml" />
+    <Content Include="Lists\Managers\Schema.xml" />
     <Content Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
-    <Content Include="Scripts\tasks.js" />
-    <Content Include="Scripts\ToApproveByMe.js" />
-    <Content Include="Sicknotes\EditDlg.htm" />
-    <Content Include="Sicknotes\Elements.xml" />
-    <Content Include="Sicknotes\FileDlg.htm" />
-    <Content Include="Sicknotes\Repair.aspx" />
-    <Content Include="Sicknotes\Schema.xml" />
-    <Content Include="Sicknotes\SicknotesInstance\Elements.xml" />
-    <Content Include="Sicknotes\Upload.aspx" />
-    <Content Include="WorkflowHistoryList\Elements.xml" />
-    <Content Include="WorkflowTaskList\Elements.xml" />
+    <Content Include="Scripts\jquery.cookie.js" />
+    <Content Include="Scripts\tasksCompleted.js" />
+    <Content Include="Scripts\tasksPending.js" />
+    <Content Include="Lists\Sicknotes\EditDlg.htm" />
+    <Content Include="Lists\Sicknotes\Elements.xml" />
+    <Content Include="Lists\Sicknotes\FileDlg.htm" />
+    <Content Include="Lists\Sicknotes\Repair.aspx" />
+    <Content Include="Lists\Sicknotes\Schema.xml" />
+    <Content Include="Lists\Sicknotes\SicknotesInstance\Elements.xml" />
+    <Content Include="Lists\Sicknotes\Upload.aspx" />
+    <Content Include="Workflows\WorkflowHistoryList\Elements.xml" />
+    <Content Include="Workflows\WorkflowTaskList\Elements.xml" />
     <None Include="app.config" />
     <None Include="Content\bootstrap-theme.css.map" />
     <None Include="Content\bootstrap.css.map" />
@@ -79,10 +80,10 @@
     <None Include="Features\Feature1\Feature1.feature">
       <FeatureId>{96a14177-0096-488b-97e0-1e88da0b525e}</FeatureId>
     </None>
-    <None Include="Admins\AdminsInstance\SharePointProjectItem.spdata">
+    <None Include="Lists\Admins\AdminsInstance\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{437ffcd0-68b0-45b4-8b54-f2c439968fee}</SharePointProjectItemId>
     </None>
-    <None Include="Admins\SharePointProjectItem.spdata">
+    <None Include="Lists\Admins\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{19d7b71d-836c-45f5-95e8-231d3cb5b455}</SharePointProjectItemId>
     </None>
     <None Include="Features\Feature2\Feature2.feature">
@@ -94,25 +95,25 @@
     <None Include="IsManager\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{4eb0f3ed-e113-461c-8a8c-e9fba03fc4be}</SharePointProjectItemId>
     </None>
-    <None Include="Leave Approval\SharePointProjectItem.spdata">
+    <None Include="Workflows\Leave Approval\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{ce0f6cee-d6ee-434c-81a9-83790f553d57}</SharePointProjectItemId>
     </None>
-    <None Include="Leave Balances\Leave Balances Instance\SharePointProjectItem.spdata">
+    <None Include="Lists\Leave Balances\Leave Balances Instance\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{923fc220-4656-420d-874f-a30d6e87736b}</SharePointProjectItemId>
     </None>
-    <None Include="Leave Balances\SharePointProjectItem.spdata">
+    <None Include="Lists\Leave Balances\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{4659a32a-7373-43a4-a5fb-17975da2ef66}</SharePointProjectItemId>
     </None>
-    <None Include="Managers\ManagersInstance\SharePointProjectItem.spdata">
+    <None Include="Lists\Managers\ManagersInstance\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{e6b4b237-a4ef-4f60-9d55-bf94f5fe9a56}</SharePointProjectItemId>
     </None>
-    <None Include="Managers\SharePointProjectItem.spdata">
+    <None Include="Lists\Managers\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{6525d51d-94dc-4c20-ab1f-0fea0700f125}</SharePointProjectItemId>
     </None>
-    <None Include="Requests\List1Instance\SharePointProjectItem.spdata">
+    <None Include="Lists\Requests\List1Instance\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{698011a7-a4bc-4717-8702-78f690585ecc}</SharePointProjectItemId>
     </None>
-    <None Include="Requests\SharePointProjectItem.spdata">
+    <None Include="Lists\Requests\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{67c0af30-8f66-45b5-b4db-6eda5c7430fc}</SharePointProjectItemId>
     </None>
     <None Include="packages.config" />
@@ -139,34 +140,34 @@
     <Content Include="Images\calendar-add-512.png" />
     <Content Include="Images\PBT_Group_Logo.png" />
     <Content Include="Images\tileAdd.png" />
-    <Content Include="Admins\AdminsInstance\Elements.xml" />
-    <Content Include="Admins\Elements.xml" />
-    <Content Include="Admins\Schema.xml" />
+    <Content Include="Lists\Admins\AdminsInstance\Elements.xml" />
+    <Content Include="Lists\Admins\Elements.xml" />
+    <Content Include="Lists\Admins\Schema.xml" />
     <Content Include="IsManager\Elements.xml" />
-    <Content Include="Leave Balances\Elements.xml" />
-    <Content Include="Leave Balances\Leave Balances Instance\Elements.xml" />
-    <Content Include="Leave Balances\Schema.xml" />
-    <Content Include="Requests\Elements.xml" />
-    <Content Include="Requests\List1Instance\Elements.xml" />
-    <Content Include="Requests\Schema.xml">
+    <Content Include="Lists\Leave Balances\Elements.xml" />
+    <Content Include="Lists\Leave Balances\Leave Balances Instance\Elements.xml" />
+    <Content Include="Lists\Leave Balances\Schema.xml" />
+    <Content Include="Lists\Requests\Elements.xml" />
+    <Content Include="Lists\Requests\List1Instance\Elements.xml" />
+    <Content Include="Lists\Requests\Schema.xml">
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Pages\Elements.xml" />
     <Content Include="Pages\Default.aspx" />
-    <None Include="Scripts\jquery-2.1.4.min.map" />
+    <None Include="Scripts\jquery.min.map" />
     <None Include="SharePointProjectItem.spdata">
       <SharePointProjectItemId>{67f15d52-272c-422e-a18b-23109abda59f}</SharePointProjectItemId>
     </None>
-    <None Include="Sicknotes\SharePointProjectItem.spdata">
+    <None Include="Lists\Sicknotes\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{ec41b8af-1f08-488d-b942-704c3474b911}</SharePointProjectItemId>
     </None>
-    <None Include="Sicknotes\SicknotesInstance\SharePointProjectItem.spdata">
+    <None Include="Lists\Sicknotes\SicknotesInstance\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{37017006-0cb9-47dd-81f9-6db59742cc5b}</SharePointProjectItemId>
     </None>
-    <None Include="WorkflowHistoryList\SharePointProjectItem.spdata">
+    <None Include="Workflows\WorkflowHistoryList\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{2e51ccbe-085d-45dd-bd22-08fd67e96e2b}</SharePointProjectItemId>
     </None>
-    <None Include="WorkflowTaskList\SharePointProjectItem.spdata">
+    <None Include="Workflows\WorkflowTaskList\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{0bba8447-12b9-4026-8c1e-d46872a5deef}</SharePointProjectItemId>
     </None>
   </ItemGroup>
@@ -239,7 +240,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <XamlAppDef Include="Leave Approval\Workflow.xaml">
+    <XamlAppDef Include="Workflows\Leave Approval\Workflow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </XamlAppDef>

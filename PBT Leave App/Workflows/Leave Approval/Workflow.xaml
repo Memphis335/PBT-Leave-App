@@ -49,7 +49,6 @@
       <Variable x:TypeArguments="x:String" Name="ManagerApprover" />
       <Variable x:TypeArguments="x:String" Name="currLeaveRequestor" />
       <Variable x:TypeArguments="x:String" Name="currLeaveReqStatus" />
-      <Variable x:TypeArguments="x:String" Name="reqComments" />
       <Variable x:TypeArguments="x:String" Name="myDateOff" />
       <Variable x:TypeArguments="x:String" Name="myDateBack" />
       <Variable x:TypeArguments="x:Double" Name="numdays" />
@@ -67,7 +66,6 @@
       <Variable x:TypeArguments="p:DynamicValue" Name="dv_4" />
       <Variable x:TypeArguments="x:String" Name="Manager" />
       <Variable x:TypeArguments="x:String" Name="itemUrl" />
-      <Variable x:TypeArguments="x:String" Name="workflowItem" />
       <Variable x:TypeArguments="x:Int32" Name="itemToUpdate" />
       <Variable x:TypeArguments="s:DateTime" Name="Created" />
     </Sequence.Variables>
@@ -127,29 +125,29 @@
           </InArgument>
         </p:GetODataProperties.Source>
         <scg:Dictionary x:TypeArguments="x:String, OutArgument">
-          <OutArgument x:TypeArguments="x:Double" x:Key="WorkDays">
-            <mca:CSharpReference x:TypeArguments="x:Double">numdays</mca:CSharpReference>
-          </OutArgument>
-          <OutArgument x:TypeArguments="x:String" x:Key="AuthorId">
-            <mca:CSharpReference x:TypeArguments="x:String">currLeaveRequestor</mca:CSharpReference>
-          </OutArgument>
-          <OutArgument x:TypeArguments="x:String" x:Key="TypeofLeave">
-            <mca:CSharpReference x:TypeArguments="x:String">leaveType</mca:CSharpReference>
-          </OutArgument>
-          <OutArgument x:TypeArguments="x:String" x:Key="To">
-            <mca:CSharpReference x:TypeArguments="x:String">myDateBack</mca:CSharpReference>
-          </OutArgument>
-          <OutArgument x:TypeArguments="x:String" x:Key="From1">
-            <mca:CSharpReference x:TypeArguments="x:String">myDateOff</mca:CSharpReference>
-          </OutArgument>
-          <OutArgument x:TypeArguments="x:String" x:Key="ManagerId">
-            <mca:CSharpReference x:TypeArguments="x:String">ManagerApprover</mca:CSharpReference>
+          <OutArgument x:TypeArguments="s:DateTime" x:Key="Created">
+            <mca:CSharpReference x:TypeArguments="s:DateTime">Created</mca:CSharpReference>
           </OutArgument>
           <OutArgument x:TypeArguments="x:String" x:Key="Title">
             <mca:CSharpReference x:TypeArguments="x:String">currTitle</mca:CSharpReference>
           </OutArgument>
-          <OutArgument x:TypeArguments="s:DateTime" x:Key="Created">
-            <mca:CSharpReference x:TypeArguments="s:DateTime">Created</mca:CSharpReference>
+          <OutArgument x:TypeArguments="x:String" x:Key="ManagerId">
+            <mca:CSharpReference x:TypeArguments="x:String">ManagerApprover</mca:CSharpReference>
+          </OutArgument>
+          <OutArgument x:TypeArguments="x:String" x:Key="From1">
+            <mca:CSharpReference x:TypeArguments="x:String">myDateOff</mca:CSharpReference>
+          </OutArgument>
+          <OutArgument x:TypeArguments="x:String" x:Key="To">
+            <mca:CSharpReference x:TypeArguments="x:String">myDateBack</mca:CSharpReference>
+          </OutArgument>
+          <OutArgument x:TypeArguments="x:String" x:Key="TypeofLeave">
+            <mca:CSharpReference x:TypeArguments="x:String">leaveType</mca:CSharpReference>
+          </OutArgument>
+          <OutArgument x:TypeArguments="x:String" x:Key="AuthorId">
+            <mca:CSharpReference x:TypeArguments="x:String">currLeaveRequestor</mca:CSharpReference>
+          </OutArgument>
+          <OutArgument x:TypeArguments="x:Double" x:Key="WorkDays">
+            <mca:CSharpReference x:TypeArguments="x:Double">numdays</mca:CSharpReference>
           </OutArgument>
         </scg:Dictionary>
       </p:GetODataProperties>
@@ -287,6 +285,9 @@
         </If.Condition>
         <If.Then>
           <Sequence DisplayName="GetApprovalFromManager" sap2010:WorkflowViewState.IdRef="Sequence_18">
+            <Sequence.Variables>
+              <Variable x:TypeArguments="p:DynamicValue" Name="dv_5" />
+            </Sequence.Variables>
             <p1:GetCurrentItemId sap2010:WorkflowViewState.IdRef="GetCurrentItemId_1">
               <p1:GetCurrentItemId.Result>
                 <OutArgument x:TypeArguments="x:Int32">
@@ -334,7 +335,7 @@
                 </InArgument>
               </p1:WriteToHistory.Message>
             </p1:WriteToHistory>
-            <p1:SingleTask PreserveIncompleteTasks="{x:Null}" TaskId="{x:Null}" TaskItemId="{x:Null}" WaiveAssignmentEmail="{x:Null}" WaiveCancelationEmail="{x:Null}" AssignmentEmailSubject="Leave Approval Task Assigned" CancelationEmailBody="&lt;html&gt;&lt;body style='font-size:11pt;font-family:Segoe UI Light,sans-serif;color:#444444;'&gt;&lt;div&gt;&lt;span style='font-size:13.5pt'&gt;One of your tasks was canceled and deleted. You do not need to take any further action on that task.&lt;/span&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;" CancelationEmailSubject="Leave Approval Task Canceled" CompletedStatus="Completed" ContentTypeId="0x0108003365C4474CAE8C42BCE396314E88E51F" DefaultTaskOutcome="1" DisplayName="LeaveApproval" sap2010:WorkflowViewState.IdRef="SingleTask_6" OutcomeFieldName="TaskOutcome" OverdueEmailBody="&lt;html&gt;&lt;body style='font-size:11pt;font-family:Segoe UI Light,sans-serif;color:#444444;'&gt;&lt;div&gt;&lt;span style='font-size:13.5pt'&gt;You have an &lt;/span&gt;&lt;span style='font-size:13.5pt;color:#ff3b3b;'&gt;overdue&lt;/span&gt;&lt;span style='font-size:13.5pt'&gt; task.&lt;/span&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;" OverdueEmailSubject="Leave Approval Task Overdue" OverdueReminderRepeat="1" OverdueRepeatTimes="1" SendReminderEmail="True" WaitForTaskCompletion="True">
+            <p1:SingleTask PreserveIncompleteTasks="{x:Null}" TaskId="{x:Null}" WaiveAssignmentEmail="{x:Null}" WaiveCancelationEmail="{x:Null}" AssignmentEmailSubject="Leave Approval Task Assigned" CancelationEmailBody="&lt;html&gt;&lt;body style='font-size:11pt;font-family:Segoe UI Light,sans-serif;color:#444444;'&gt;&lt;div&gt;&lt;span style='font-size:13.5pt'&gt;One of your tasks was canceled and deleted. You do not need to take any further action on that task.&lt;/span&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;" CancelationEmailSubject="Leave Approval Task Canceled" CompletedStatus="Completed" ContentTypeId="0x0108003365C4474CAE8C42BCE396314E88E51F" DefaultTaskOutcome="1" DisplayName="LeaveApprovalTask" sap2010:WorkflowViewState.IdRef="SingleTask_6" OutcomeFieldName="TaskOutcome" OverdueEmailBody="&lt;html&gt;&lt;body style='font-size:11pt;font-family:Segoe UI Light,sans-serif;color:#444444;'&gt;&lt;div&gt;&lt;span style='font-size:13.5pt'&gt;You have an &lt;/span&gt;&lt;span style='font-size:13.5pt;color:#ff3b3b;'&gt;overdue&lt;/span&gt;&lt;span style='font-size:13.5pt'&gt; task.&lt;/span&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;" OverdueEmailSubject="Leave Approval Task Overdue" OverdueReminderRepeat="1" OverdueRepeatTimes="1" SendReminderEmail="True" WaitForTaskCompletion="True">
               <p1:SingleTask.AssignedTo>
                 <InArgument x:TypeArguments="x:String">
                   <mca:CSharpValue x:TypeArguments="x:String">ManagerApprover.ToString()</mca:CSharpValue>
@@ -348,14 +349,14 @@
 "You can view " + currTitle.ToString() + " &lt;a href='" + itemUrl + "'&gt;here&lt;/a&gt;&lt;/br&gt;" +
 "&lt;/br&gt;" +
 "You can view all your tasks here &lt;a href='https://pbtgroupza-274e8fa579367e.sharepoint.com/sites/Develop/PBTLeaveApp/Pages/ToBeApprovedByMe.aspx'&gt;here&lt;/a&gt;&lt;/br&gt; " +
-"Go to task to Approve/Reject &lt;a href='https://pbtgroupza-274e8fa579367e.sharepoint.com/sites/Develop/PBTLeaveApp/Lists/WorkflowTaskList/EditForm.aspx?ID=" + currItemID + "'&gt;here&lt;/a&gt;&lt;/br&gt;" +
+"Go to task to Approve/Reject &lt;a href='%TaskSpecial: TaskUrl%'&gt;here&lt;/a&gt;&lt;/br&gt;" +
 "&lt;/br&gt;" +
 "Thank you.&lt;/span&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;"</mca:CSharpValue>
                 </InArgument>
               </p1:SingleTask.AssignmentEmailBody>
               <p1:SingleTask.Body>
                 <InArgument x:TypeArguments="x:String">
-                  <mca:CSharpValue x:TypeArguments="x:String" xml:space="preserve">"You have been tasked to Approve or Reject a Leave Request for: " + Requestor + ". You can approve/reject the request &lt;a href='https://pbtgroupza-274e8fa579367e.sharepoint.com/sites/Develop/PBTLeaveApp/Lists/WorkflowTaskList/DispForm.aspx?ID='" + currItemID + "&gt;here&lt;/a&gt;&lt;/br&gt;" + 
+                  <mca:CSharpValue x:TypeArguments="x:String" xml:space="preserve">"You have been tasked to Approve or Reject a Leave Request for: " + Requestor + "." + 
 "Thank you."</mca:CSharpValue>
                 </InArgument>
               </p1:SingleTask.Body>
@@ -390,6 +391,11 @@
                   </p:ExpressionContainerValue>
                 </InArgument>
               </p1:SingleTask.RelatedContentLinkListItemIntegerId>
+              <p1:SingleTask.TaskItemId>
+                <OutArgument x:TypeArguments="x:Int32">
+                  <mca:CSharpReference x:TypeArguments="x:Int32">itemToUpdate</mca:CSharpReference>
+                </OutArgument>
+              </p1:SingleTask.TaskItemId>
               <p1:SingleTask.Title>
                 <InArgument x:TypeArguments="x:String">
                   <mca:CSharpValue x:TypeArguments="x:String">"Please Approve/Reject Leave Request for: " + Requestor</mca:CSharpValue>
@@ -653,7 +659,7 @@ Manager + " has reached a decision on your request.&lt;/br&gt;" +
             </scg:Dictionary>
           </p:GetODataProperties>
           <p1:WriteToHistory sap2010:WorkflowViewState.IdRef="WriteToHistory_31" Message="Assigning task to HR Department" />
-          <p1:SingleTask TaskId="{x:Null}" TaskItemId="{x:Null}" AssignmentEmailSubject="Leave Request Task Assigned" CancelationEmailBody="&lt;html&gt;&lt;body style='font-size:11pt;font-family:Segoe UI Light,sans-serif;color:#444444;'&gt;&lt;div&gt;&lt;span style='font-size:13.5pt'&gt;One of your tasks was canceled and deleted. You do not need to take any further action on that task.&lt;/span&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;" CancelationEmailSubject="Leave Request Task Canceled" CompletedStatus="Completed" ContentTypeId="0x0108003365C4474CAE8C42BCE396314E88E51F" DefaultTaskOutcome="1" sap2010:WorkflowViewState.IdRef="SingleTask_8" OutcomeFieldName="TaskOutcome" OverdueEmailBody="&lt;html&gt;&lt;body style='font-size:11pt;font-family:Segoe UI Light,sans-serif;color:#444444;'&gt;&lt;div&gt;&lt;span style='font-size:13.5pt'&gt;You have an &lt;/span&gt;&lt;span style='font-size:13.5pt;color:#ff3b3b;'&gt;overdue&lt;/span&gt;&lt;span style='font-size:13.5pt'&gt; task.&lt;/span&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;" OverdueEmailSubject="Leave Request Task Overdue" OverdueReminderRepeat="1" OverdueRepeatTimes="1" PreserveIncompleteTasks="False" SendReminderEmail="True" WaitForTaskCompletion="True" WaiveAssignmentEmail="False" WaiveCancelationEmail="False">
+          <p1:SingleTask TaskId="{x:Null}" AssignmentEmailSubject="Leave Request Task Assigned" CancelationEmailBody="&lt;html&gt;&lt;body style='font-size:11pt;font-family:Segoe UI Light,sans-serif;color:#444444;'&gt;&lt;div&gt;&lt;span style='font-size:13.5pt'&gt;One of your tasks was canceled and deleted. You do not need to take any further action on that task.&lt;/span&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;" CancelationEmailSubject="Leave Request Task Canceled" CompletedStatus="Completed" ContentTypeId="0x0108003365C4474CAE8C42BCE396314E88E51F" DefaultTaskOutcome="1" DisplayName="HRApprovalTask" sap2010:WorkflowViewState.IdRef="SingleTask_8" OutcomeFieldName="TaskOutcome" OverdueEmailBody="&lt;html&gt;&lt;body style='font-size:11pt;font-family:Segoe UI Light,sans-serif;color:#444444;'&gt;&lt;div&gt;&lt;span style='font-size:13.5pt'&gt;You have an &lt;/span&gt;&lt;span style='font-size:13.5pt;color:#ff3b3b;'&gt;overdue&lt;/span&gt;&lt;span style='font-size:13.5pt'&gt; task.&lt;/span&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;" OverdueEmailSubject="Leave Request Task Overdue" OverdueReminderRepeat="1" OverdueRepeatTimes="1" PreserveIncompleteTasks="False" SendReminderEmail="True" WaitForTaskCompletion="True" WaiveAssignmentEmail="False" WaiveCancelationEmail="False">
             <p1:SingleTask.AssignedTo>
               <InArgument x:TypeArguments="x:String">
                 <mca:CSharpValue x:TypeArguments="x:String">HRApprover.ToString()</mca:CSharpValue>
@@ -667,14 +673,14 @@ Manager + " has reached a decision on your request.&lt;/br&gt;" +
 "You can view " + currTitle.ToString() + " &lt;a href='" + itemUrl + "'&gt;here&lt;/a&gt;&lt;/br&gt;" +
 "&lt;/br&gt;" +
 "You can view all your tasks here &lt;a href='https://pbtgroupza-274e8fa579367e.sharepoint.com/sites/Develop/PBTLeaveApp/Pages/ToBeApprovedByMe.aspx'&gt;here&lt;/a&gt;&lt;/br&gt; " +
-"Go to task to Approve/Reject &lt;a href='https://pbtgroupza-274e8fa579367e.sharepoint.com/sites/Develop/PBTLeaveApp/Lists/WorkflowTaskList/EditForm.aspx?ID=" + currItemID + "'&gt;here&lt;/a&gt;&lt;/br&gt;" +
+"Go to task to Approve/Reject &lt;a href='%TaskSpecial: TaskUrl%'&gt;here&lt;/a&gt;&lt;/br&gt;" +
 "&lt;/br&gt;" +
 "Thank you.&lt;/span&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;"</mca:CSharpValue>
               </InArgument>
             </p1:SingleTask.AssignmentEmailBody>
             <p1:SingleTask.Body>
               <InArgument x:TypeArguments="x:String">
-                <mca:CSharpValue x:TypeArguments="x:String" xml:space="preserve">"You have been tasked to Approve or Reject a Leave Request for: " + Requestor + ". You can approve/reject the request &lt;a href='https://pbtgroupza-274e8fa579367e.sharepoint.com/sites/Develop/PBTLeaveApp/Lists/WorkflowTaskList/DispForm.aspx?ID='" + currItemID + "&gt;here&lt;/a&gt;&lt;/br&gt;" +
+                <mca:CSharpValue x:TypeArguments="x:String" xml:space="preserve">"You have been tasked to Approve or Reject a Leave Request for: " + Requestor + "." + 
 "Thank you."</mca:CSharpValue>
               </InArgument>
             </p1:SingleTask.Body>
@@ -709,6 +715,11 @@ Manager + " has reached a decision on your request.&lt;/br&gt;" +
                 </p:ExpressionContainerValue>
               </InArgument>
             </p1:SingleTask.RelatedContentLinkListItemIntegerId>
+            <p1:SingleTask.TaskItemId>
+              <OutArgument x:TypeArguments="x:Int32">
+                <mca:CSharpReference x:TypeArguments="x:Int32">itemToUpdate</mca:CSharpReference>
+              </OutArgument>
+            </p1:SingleTask.TaskItemId>
             <p1:SingleTask.Title>
               <InArgument x:TypeArguments="x:String">
                 <mca:CSharpValue x:TypeArguments="x:String">"Leave Request added " + currTitle</mca:CSharpValue>
@@ -725,6 +736,9 @@ Manager + " has reached a decision on your request.&lt;/br&gt;" +
               <Sequence DisplayName="Item Approved" sap2010:WorkflowViewState.IdRef="Sequence_24">
                 <Sequence.Variables>
                   <Variable x:TypeArguments="x:String" Name="SiteUrl" />
+                  <Variable x:TypeArguments="sco:Collection(x:String)" Name="var1" />
+                  <Variable x:TypeArguments="p:DynamicValue" Name="dv_6" />
+                  <Variable x:TypeArguments="sco:Collection(x:String)" Name="leaveTypeToUpdate" />
                 </Sequence.Variables>
                 <p1:WriteToHistory sap2010:WorkflowViewState.IdRef="WriteToHistory_32" Message="Leave has been Approved By HR" />
                 <p1:UpdateListItem ItemGuid="{x:Null}" ListItemProperties="{x:Null}" DisplayName="SetStatusToApproved" sap2010:WorkflowViewState.IdRef="UpdateListItem_7">
@@ -762,7 +776,7 @@ HRUser + " has reached a decision on your request.&lt;/br&gt;" +
 "Your request has been &lt;strong&gt;approved&lt;/strong&gt;. Please make sure that you update your timesheets accordingly.&lt;/br&gt;" +
 "&lt;/br&gt;" +
 "&lt;a href='http://support.pbt.co.za:8080/login.do'&gt;Click here&lt;/a&gt; to go to ActiTime.&lt;/br&gt;" +
-"Regards&lt;/span&gt;&lt;/div&gt;&lt;/body&gt;&lt;/html&gt;"</mca:CSharpValue>
+"Regards&lt;/span&gt;&lt;/div&gt;&lt;img src='https://pbtgroupza.sharepoint.com/sites/Develop/SiteCollectionImages/LeaveAppSignature.jpg'&lt;/img&gt;&lt;/body&gt;&lt;/html&gt;"</mca:CSharpValue>
                     </InArgument>
                   </p1:Email.Body>
                   <p1:Email.To>
@@ -771,6 +785,86 @@ HRUser + " has reached a decision on your request.&lt;/br&gt;" +
                     </InArgument>
                   </p1:Email.To>
                 </p1:Email>
+                <p1:LookupSPListItemId sap2010:WorkflowViewState.IdRef="LookupSPListItemId_1">
+                  <p1:LookupSPListItemId.ListId>
+                    <InArgument x:TypeArguments="s:Guid">
+                      <mca:CSharpValue x:TypeArguments="s:Guid">System.Guid.Parse("{$ListId:Lists/LeaveBalances;}")</mca:CSharpValue>
+                    </InArgument>
+                  </p1:LookupSPListItemId.ListId>
+                  <p1:LookupSPListItemId.PropertyName>
+                    <InArgument x:TypeArguments="x:String">
+                      <mca:CSharpValue x:TypeArguments="x:String">"UserId"</mca:CSharpValue>
+                    </InArgument>
+                  </p1:LookupSPListItemId.PropertyName>
+                  <p1:LookupSPListItemId.PropertyValue>
+                    <InArgument x:TypeArguments="x:String">
+                      <mca:CSharpValue x:TypeArguments="x:String">currLeaveRequestor</mca:CSharpValue>
+                    </InArgument>
+                  </p1:LookupSPListItemId.PropertyValue>
+                  <p1:LookupSPListItemId.Result>
+                    <OutArgument x:TypeArguments="x:Int32">
+                      <mca:CSharpReference x:TypeArguments="x:Int32">itemToUpdate</mca:CSharpReference>
+                    </OutArgument>
+                  </p1:LookupSPListItemId.Result>
+                </p1:LookupSPListItemId>
+                <p:BuildCollection x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="BuildCollection`1_2">
+                  <p:BuildCollection.Result>
+                    <OutArgument x:TypeArguments="sco:Collection(x:String)">
+                      <mca:CSharpReference x:TypeArguments="sco:Collection(x:String)">leaveTypeToUpdate</mca:CSharpReference>
+                    </OutArgument>
+                  </p:BuildCollection.Result>
+                  <p:BuildCollection.Values>
+                    <InArgument x:TypeArguments="x:String">
+                      <mca:CSharpValue x:TypeArguments="x:String">leaveType</mca:CSharpValue>
+                    </InArgument>
+                  </p:BuildCollection.Values>
+                </p:BuildCollection>
+                <p1:LookupSPListItem ItemGuid="{x:Null}" sap2010:WorkflowViewState.IdRef="LookupSPListItem_6">
+                  <p1:LookupSPListItem.ItemId>
+                    <InArgument x:TypeArguments="x:Int32">
+                      <mca:CSharpValue x:TypeArguments="x:Int32">itemToUpdate</mca:CSharpValue>
+                    </InArgument>
+                  </p1:LookupSPListItem.ItemId>
+                  <p1:LookupSPListItem.ListId>
+                    <InArgument x:TypeArguments="s:Guid">
+                      <mca:CSharpValue x:TypeArguments="s:Guid">System.Guid.Parse("{$ListId:Lists/LeaveBalances;}")</mca:CSharpValue>
+                    </InArgument>
+                  </p1:LookupSPListItem.ListId>
+                  <p1:LookupSPListItem.Properties>
+                    <InArgument x:TypeArguments="sco:Collection(x:String)">
+                      <mca:CSharpValue x:TypeArguments="sco:Collection(x:String)">leaveTypeToUpdate</mca:CSharpValue>
+                    </InArgument>
+                  </p1:LookupSPListItem.Properties>
+                  <p1:LookupSPListItem.Result>
+                    <OutArgument x:TypeArguments="p:DynamicValue">
+                      <mca:CSharpReference x:TypeArguments="p:DynamicValue">dv_6</mca:CSharpReference>
+                    </OutArgument>
+                  </p1:LookupSPListItem.Result>
+                </p1:LookupSPListItem>
+                <p1:UpdateListItem ItemGuid="{x:Null}" ListItemProperties="{x:Null}" sap2010:WorkflowViewState.IdRef="UpdateListItem_12">
+                  <p1:UpdateListItem.ItemId>
+                    <InArgument x:TypeArguments="x:Int32">
+                      <mca:CSharpValue x:TypeArguments="x:Int32">itemToUpdate</mca:CSharpValue>
+                    </InArgument>
+                  </p1:UpdateListItem.ItemId>
+                  <p1:UpdateListItem.ListId>
+                    <InArgument x:TypeArguments="s:Guid">
+                      <mca:CSharpValue x:TypeArguments="s:Guid">System.Guid.Parse("{$ListId:Lists/LeaveBalances;}")</mca:CSharpValue>
+                    </InArgument>
+                  </p1:UpdateListItem.ListId>
+                  <p1:UpdateListItem.ListItemPropertiesDynamicValue>
+                    <InArgument x:TypeArguments="p:DynamicValue">
+                      <mca:CSharpValue x:TypeArguments="p:DynamicValue">dv_6 - numdays</mca:CSharpValue>
+                    </InArgument>
+                  </p1:UpdateListItem.ListItemPropertiesDynamicValue>
+                </p1:UpdateListItem>
+                <p1:WriteToHistory sap2010:WorkflowViewState.IdRef="WriteToHistory_34">
+                  <p1:WriteToHistory.Message>
+                    <InArgument x:TypeArguments="x:String">
+                      <mca:CSharpValue x:TypeArguments="x:String">"Leave type requested : " + dv_6</mca:CSharpValue>
+                    </InArgument>
+                  </p1:WriteToHistory.Message>
+                </p1:WriteToHistory>
               </Sequence>
             </If.Then>
             <If.Else>
@@ -858,7 +952,7 @@ HRUser + " has reached a decision on your request.&lt;/br&gt;" +
         </TerminateWorkflow>
       </If.Else>
     </If>
-    <sads:DebugSymbol.Symbol>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</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>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</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
@@ -1124,7 +1218,38 @@ HRUser + " has reached a decision on your request.&lt;/br&gt;" +
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="Email_4" sap:VirtualizedContainerService.HintSize="200,68" />
-      <sap2010:ViewStateData Id="Sequence_24" sap:VirtualizedContainerService.HintSize="222,408">
+      <sap2010:ViewStateData Id="LookupSPListItemId_1" sap:VirtualizedContainerService.HintSize="200,68">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <scg:Dictionary x:TypeArguments="x:String, msdad:ViewStateNameValue" x:Key="SPLocalizedDisplayNames">
+              <msdad:ViewStateNameValue x:Key="ListId" DisplayName="Leave Balances" Value="Lists/LeaveBalances" />
+              <msdad:ViewStateNameValue x:Key="PropertyName" DisplayName="User" Value="UserId" />
+            </scg:Dictionary>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="BuildCollection`1_2" sap:VirtualizedContainerService.HintSize="200,22" />
+      <sap2010:ViewStateData Id="LookupSPListItem_6" sap:VirtualizedContainerService.HintSize="200,89">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <scg:Dictionary x:TypeArguments="x:String, msdad:ViewStateNameValue" x:Key="SPLocalizedDisplayNames">
+              <msdad:ViewStateNameValue x:Key="ListId" DisplayName="Leave Balances" Value="Lists/LeaveBalances" />
+            </scg:Dictionary>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="UpdateListItem_12" sap:VirtualizedContainerService.HintSize="200,68">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <scg:Dictionary x:TypeArguments="x:String, msdad:ViewStateNameValue" x:Key="SPLocalizedDisplayNames">
+              <msdad:ViewStateNameValue x:Key="ListId" DisplayName="Leave Balances" Value="Lists/LeaveBalances" />
+            </scg:Dictionary>
+            <x:String x:Key="ListItemPropertiesDynamicValue.SelectedEntityType">Lists/LeaveBalances</x:String>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="WriteToHistory_34" sap:VirtualizedContainerService.HintSize="200,68" />
+      <sap2010:ViewStateData Id="Sequence_24" sap:VirtualizedContainerService.HintSize="222,923">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -1151,7 +1276,7 @@ HRUser + " has reached a decision on your request.&lt;/br&gt;" +
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="If_5" sap:VirtualizedContainerService.HintSize="469,558" />
+      <sap2010:ViewStateData Id="If_5" sap:VirtualizedContainerService.HintSize="469,1073" />
       <sap2010:ViewStateData Id="Delay_2" sap:VirtualizedContainerService.HintSize="469,22" />
       <sap2010:ViewStateData Id="UpdateListItem_9" sap:VirtualizedContainerService.HintSize="469,68">
         <sap:WorkflowViewStateService.ViewState>
@@ -1164,7 +1289,7 @@ HRUser + " has reached a decision on your request.&lt;/br&gt;" +
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_27" sap:VirtualizedContainerService.HintSize="491,1611">
+      <sap2010:ViewStateData Id="Sequence_27" sap:VirtualizedContainerService.HintSize="491,2126">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -1173,7 +1298,7 @@ HRUser + " has reached a decision on your request.&lt;/br&gt;" +
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="TerminateWorkflow_2" sap:VirtualizedContainerService.HintSize="200,22" />
-      <sap2010:ViewStateData Id="If_6" sap:VirtualizedContainerService.HintSize="716,1761">
+      <sap2010:ViewStateData Id="If_6" sap:VirtualizedContainerService.HintSize="716,2276">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -1181,14 +1306,14 @@ HRUser + " has reached a decision on your request.&lt;/br&gt;" +
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="738,3452">
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="738,3967">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="PBT_Leave_App.Leave_Approval.Workflow_1" sap:VirtualizedContainerService.HintSize="778,3748">
+      <sap2010:ViewStateData Id="PBT_Leave_App.Leave_Approval.Workflow_1" sap:VirtualizedContainerService.HintSize="778,3532">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="ShouldExpandAll">False</x:Boolean>

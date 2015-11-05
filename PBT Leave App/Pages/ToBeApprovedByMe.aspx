@@ -24,9 +24,10 @@
     <!-- Javascript -->
     <script type="text/javascript" src="../Scripts/App.js"></script>
     <script type="text/javascript" src="../Scripts/requests.js"></script>
-    <script type="text/javascript" src="../Scripts/tasks.js"></script>
+    <script type="text/javascript" src="../Scripts/tasksPending.js"></script>
     <script type="text/javascript" src="../Scripts/bootstrap.js"></script>
     <script type="text/javascript" src="../Scripts/bootstrap.min.js"></script>
+    <script type="text/javascript" src="../Scripts/jquery.cookie.js"></script>
 
 </asp:Content>
 
@@ -60,9 +61,14 @@
 <asp:Content ContentPlaceHolderID="PlaceHolderMain" runat="server">
     <div class="containerWrapper">
         <!--Main Content-->
-        <div id="container-fluid" class="container-fluid">
+        <div class="container-fluid">
             <div class="row-fluid" id="mainContainer" style="clear: both;">
-                <div class="table table-hover" id="PendingRequests"></div>
+                <p class="fa fa-2x" style="font-size: large;">Pending Approvals</p>
+                <div id="PendingRequests"></div>
+            </div>
+            <div class="row-fluid" id="secContainer" style="clear: both;">
+                <p class="fa fa-2x" style="font-size: large;">Completed Approvals</p>
+                <div id="CompletedRequests"></div>
             </div>
         </div>
     </div>

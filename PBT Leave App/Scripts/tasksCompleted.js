@@ -2,13 +2,13 @@
 
 var Module = {} || Module;
 
-Module.GetTasks = (function () {
+Module.GetTasks = (function (varStatus) {
     var pub = {},
         user,            //userID of current user
         tasks = [],        //List of our tasks
         options = {
             listName: "WorkflowTaskList",                  //Name of list we want
-            container: "#PendingRequests"    //id of html element we're rendering our list of tasks in
+            container: "#CompletedRequests"    //id of html element we're rendering our list of tasks in
         };
 
     //Module Initializer
@@ -17,7 +17,6 @@ Module.GetTasks = (function () {
         user = clientContext.get_web().get_currentUser();
         clientContext.load(user);
         clientContext.executeQueryAsync(getUserInfo, _onQueryFailed);
-       
     };
 
 
@@ -30,7 +29,7 @@ Module.GetTasks = (function () {
 
     //Makes a REST Call to grab a specified List with items assigned to the userId. Items must not have a status of 'Completed'
     function getSpecifiedList(listName, userId) {
-        var url = _spPageContextInfo.webAbsoluteUrl + "/_api/lists/getbytitle('" + listName + "')/items?$filter=(AssignedTo eq '" + userId + "') and (Status ne 'Completed')";
+        var url = _spPageContextInfo.webAbsoluteUrl + "/_api/lists/getbytitle('" + listName + "')/items?$filter=(AssignedTo eq '" + userId + "') and (Status ne 'Not Started')";
         $.ajax({
             url: url,
             type: "GET",
@@ -38,8 +37,7 @@ Module.GetTasks = (function () {
                 "accept": "application/json;odata=verbose"
             },
             success: function (results) { createTaskView(results, listName); },
-            error: function (error) { 
-                console.log("Error in getting List: " + listName); 
+            error: function (error) {  
                 $(options.container).html("Error retrieving your " + listName + ".");
             }
         });
@@ -67,7 +65,6 @@ Module.GetTasks = (function () {
                        '<td>' + task.Status + '</td>' +
                        '<td><a href='+ url + task.ID + '>Go to item</a></td>' +
                     '</tr>';
-            console.log(task);
             table.append(tr);
         });
         $(options.container).html(table);
@@ -83,6 +80,6 @@ Module.GetTasks = (function () {
 $(document).ready(function () {
     //must wait for SP scripts as we require them in our code
     SP.SOD.executeFunc('sp.js', 'SP.ClientContext', function () {
-        Module.GetTasks.init();
+        //Module.GetTasks.init();
     });
 });

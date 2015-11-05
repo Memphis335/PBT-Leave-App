@@ -10,7 +10,9 @@ var family = "";
 
 // This code runs when the DOM is ready and creates a context object which is needed to use the SharePoint object model
 $(document).ready(function () {
-    getUserName();
+    SP.SOD.executeFunc('sp.js', 'SP.ClientContext', function () {
+        getUserName();
+    });
 });
 
 // This function prepares, loads, and then executes a SharePoint query to get the current users information
@@ -29,6 +31,8 @@ function onGetUserNameSuccess() {
     getListItems(username);
     hideDiv(1);
     checkMF();
+    $.cookie("Username", username);
+    $.cookie("Visited", true, { expires: 5 });
 }
 
 // This function is executed if the above call fails
@@ -57,17 +61,25 @@ function getListItems(name) {
 function onQuerySucceededLeave(sender, args) {
     var inception = "";
     var id = "";
+    var sex = "";
+    var accrued = "";
+    var deal = "";
+    var sickLeave = "";
 
     var listItemEnumerator = items.getEnumerator();
 
     while (listItemEnumerator.moveNext()) {
         var oListItem = listItemEnumerator.get_current();
         annual = oListItem.get_item("AnnualLeave");
+        accrued = oListItem.get_item("Accrued");
         sick = oListItem.get_item("SickLeave");
         study = oListItem.get_item("StudyLeave");
         matern = oListItem.get_item("MaternityLeave");
         family = oListItem.get_item("FamilyResponsibilityLeave");
         inception = oListItem.get_item("PBTInceptionDate");
+        deal = oListItem.get_item("DaysDeal");
+        sex = oListItem.get_item("Sex");
+        sickLeave = oListItem.get_item("SickLeaveCounter");
         id = oListItem.get_id();
     }
 
@@ -82,16 +94,32 @@ function onQuerySucceededLeave(sender, args) {
     var incYear = inceptionDate.getFullYear();
     var yearDiff = year - incYear;
 
-    if (day === incDay && month === incMonth) {
-        resetLeave(id, annual, yearDiff);
+    //Get username
+    var username = user.get_title();
+
+    //Check cookie
+    var visit = $.cookie("Visited");
+    if (!visit) {
+        if (day === incDay) {
+            accrueLeave(id, accrued);
+            $.cookie("Username", username);
+            $.cookie("Visited", true, { expires: 1 });
+        }
+    }
+
+    if (!visit) {
+        if (day === incDay && month === incMonth) {
+            resetLeave(id, annual, yearDiff, sex, sick, deal, sickLeave);
+        }
     }
 
     $("#annual").text(annual);
+    $("#accrued").text(accrued);
     $("#sick").text(sick);
     $("#study").text(study);
     $("#matern").text(matern);
     $("#family").text(family);
-    var username = user.get_title();
+
     getLeaveRequests(username);
 }
 
@@ -106,30 +134,49 @@ function getQueryStringParameter(paramToRetrieve) {
     }
 }
 
-function resetLeave(id, num, year) {
+function resetLeave(id, num, year, sex, sick, deal, counter) {
     var resetList = context.get_web().get_lists().getByTitle("Leave Balances");
 
     var carryOver = num;
     var term = year;
+    var maternityVal;
+    var sickCarry;
 
-    if (term >= 10) {
-        if (carryOver > 8) {
-            carryOver = 23;
-        } else carryOver = +15 + +num;
-    } else if (term >= 5 && term < 10) {
+    //Sick Leave Rule
+    if (counter === +2) {
+        sickCarry = sick;
+        counter++;
+    } else {
+        sickCarry = 30;
+        counter = +0;
+    }
+
+    //Annual Leave Rule
+    if (deal == "Yes") {
+        if (carryOver > 4) {
+            carryOver = 24;
+        } else carryOver = +20 + +num;
+    } else {
         if (carryOver > 4) {
             carryOver = 19;
         } else carryOver = +15 + +num;
+    }
+
+    //Maternity Leave Rule
+    if (sex == "Male") {
+        maternityVal = 0;
     } else {
-        carryOver = 15;
+        maternityVal = 86.68;
     }
 
     this.oListItem = resetList.getItemById(id);
     oListItem.set_item("AnnualLeave", carryOver);
-    oListItem.set_item("SickLeave", 30);
-    oListItem.set_item("StudyLEave", 5);
-    oListItem.set_item("MaternityLeave", 5);
+    oListItem.set_item("Accrued", 0);
+    oListItem.set_item("SickLeave", sickCarry);
+    oListItem.set_item("StudyLeave", 5);
+    oListItem.set_item("MaternityLeave", maternityVal);
     oListItem.set_item("FamilyResponsibilityLeave", 3);
+    oListItem.set_item("SickLeaveCounter", counter);
 
     oListItem.update();
 
@@ -141,6 +188,27 @@ function resetLeave(id, num, year) {
 
 function onResetQuerySucceeded() {
     alert("Your Leave balances has been reset!");
+}
+
+function accrueLeave(id, accrued) {
+    var resetList = context.get_web().get_lists().getByTitle("Leave Balances");
+
+    var numToInc = +accrued + +1.25;
+    console.log(numToInc);
+
+    this.oListItem = resetList.getItemById(id);
+    oListItem.set_item("Accrued", numToInc);
+
+    oListItem.update();
+
+    context.executeQueryAsync(
+        Function.createDelegate(this, this.onAccruedQuerySucceeded),
+        Function.createDelegate(this, this.onQueryFailed)
+    );
+}
+
+function onAccruedQuerySucceeded() {
+    alert("Annual Leave accrued!");
 }
 
 function processEmails() {
@@ -213,7 +281,7 @@ function onQuerySucceeded(sender, args) {
         listItemInfo = oListItem.get_item("Name1");
     }
 
-    var userTitle = listItemInfo.$4I_1;
+    var userTitle = listItemInfo.$4J_1;
     if (userTitle == user.get_title()) {
         $("#admin").css("display", "inherit");
     }
@@ -300,4 +368,9 @@ function onQuerySucceededCount(sender, args) {
 function onQueryFailedcount(sender, args) {
     alert('Count failed. ' + args.get_message() +
         '\n' + args.get_stackTrace());
+}
+
+function refreshTable() {
+    var username = user.get_title();
+    $("#tblCustomListData").load(getLeaveRequests(username));
 }

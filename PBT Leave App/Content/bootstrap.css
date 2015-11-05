@@ -1083,7 +1083,7 @@ html {
 }
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-  font-size: 14px;
+  font-size: 12px;
   line-height: 1.42857143;
   color: #333;
   background-color: #fff;
@@ -4751,7 +4751,7 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
 }
 @media (min-width: 768px) {
   .navbar-side {
-    width: 225px;
+    width: 180px;
     margin-left: -225px;
     left: 225px;
     position: fixed;
