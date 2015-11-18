@@ -2,7 +2,7 @@
 function check() {
     var cbOnbehalf = $("#cbOnbehalf:checked").val();
 
-    if (cbOnbehalf == "on") {
+    if (cbOnbehalf === "on") {
         $("#txtName").val("");
         $("#txtSurname").val("");
         $("#tbManager").val("");
@@ -16,7 +16,6 @@ function check() {
 //Request Leave function
 function requestLeave() {
     var context = new SP.ClientContext.get_current();
-    var user = context.get_web().get_currentUser();
 
     //Get values from form
     var count = $("#hiddenDiv").text();
@@ -31,10 +30,9 @@ function requestLeave() {
     var dateTo = new Date(toDate);
     dateTo.setHours(dateTo.getHours() + 22);
     var selLeave = $("#selLeave").val();
-    var frLeave = $("#FRLeave").val();
+    var frLeave = $("#leaveSelect").val();
     var cbOnbehalf = $("#cbOnbehalf:checked").val();
     var workDaysVar = $("#workDays").text();
-
 
     //Send values to Sharepoint list
     var oList = context.get_web().get_lists().getByTitle("Leave Requests");
@@ -50,7 +48,7 @@ function requestLeave() {
     oListItem.set_item("To", dateTo);
     oListItem.set_item("TypeofLeave", selLeave);
     oListItem.set_item("Reason", frLeave);
-    if (cbOnbehalf == "on") {
+    if (cbOnbehalf === "on") {
         cbOnbehalf = "Yes";
     } else {
         cbOnbehalf = "No";
@@ -175,7 +173,7 @@ function uploadFile() {
         $("#barProgress").html("20%");
         // Add the file to the SharePoint folder.
         var addFile = addFileToFolder(arrayBuffer);
-        addFile.done(function (file, status, xhr) {
+        addFile.done(function (file) {
             $("#barProgress").css("width", "30%");
             $("#barProgress").html("30%");
 
@@ -183,7 +181,7 @@ function uploadFile() {
             var getItem = getListItem(file.d.ListItemAllFields.__deferred.uri);
             $("#barProgress").css("width", "40%");
             $("#barProgress").html("40%");
-            getItem.done(function (listItem, status, xhr) {
+            getItem.done(function (listItem) {
                 $("#barProgress").css("width", "50%");
                 $("#barProgress").html("50%");
 
@@ -192,7 +190,7 @@ function uploadFile() {
                 $("#barProgress").css("width", "60%");
                 $("#barProgress").html("60%");
 
-                changeItem.done(function (data, status, url) {
+                changeItem.done(function () {
                     $("#barProgress").css("width", "80%");
                     $("#barProgress").html("80%");
                     $("#btnUploadFile").html("File Uploaded!");
@@ -230,7 +228,7 @@ function hideShowNote() {
     var currentDate = new Date(dateFrom);
     var lastDay = new Date(dateTo);
 
-    if (selLeave == sickLeaveVal) {
+    if (selLeave === sickLeaveVal) {
         if (+days >= +daysVal) {
             $("#sckNote").html("***Sick leave of 3 days or more require a sick note from a registered doctor. Please upload your sicknote below.***");
             $("#SickNote").css("display", "inherit");
@@ -240,7 +238,7 @@ function hideShowNote() {
             while (currentDate <= lastDay) {
                 var weekDay = currentDate.getDay();
                 console.log(weekDay);
-                if (weekDay == 1 || weekDay == 5) {
+                if (weekDay === 1 || weekDay === 5) {
                     $("#sckNote").html("***Sick leave on a Friday or Monday require a sick note from a registered doctor. Please upload your sicknote below.***");
                     $("#SickNote").css("display", "inherit");
                     $("#getFile").attr({ "required": "required" });
@@ -256,7 +254,7 @@ function hideShowNote() {
         $("#btnSubmit").removeAttr("disabled");
     }
 
-    if (selLeave == frLeave) {
+    if (selLeave === frLeave) {
         $("#FRLeave").css("display", "inherit");
     } else {
         $("#FRLeave").css("display", "none");
@@ -422,10 +420,9 @@ function chkManager() {
     );
 }
 
-function checkManagerQuerySucceeded(sender, args) {
+function checkManagerQuerySucceeded() {
     var listItemInfo = "";
     var manager = "";
-
     var listItemEnumerator = manListItem.getEnumerator();
     while (listItemEnumerator.moveNext()) {
         var oListItem = listItemEnumerator.get_current();
@@ -435,7 +432,7 @@ function checkManagerQuerySucceeded(sender, args) {
     $("#tbManager").val(manager);
 }
 
-function checkManagerQueryFailed(sender, args) {
+function checkManagerQueryFailed() {
     $("#tbManager").val("Error!");
 }
 
@@ -444,18 +441,18 @@ function validate() {
     var selLeave = $("#selLeave").val();
     var workDaysVar = $("#workDays").text();
 
-    if (selLeave == "Annual Leave") {
+    if (selLeave === "Annual Leave") {
         console.log("True");
         workerNum = annual;
         console.log(workDaysVar);
         console.log(annual);
-    } else if (selLeave == "Sick Leave") {
+    } else if (selLeave === "Sick Leave") {
         workerNum = sick;
-    } else if (selLeave == "Study Leave") {
+    } else if (selLeave === "Study Leave") {
         workerNum = study;
-    } else if (selLeave == "Maternity Leave") {
+    } else if (selLeave === "Maternity Leave") {
         workerNum = matern;
-    } else if (selLeave == "Family Responsibility Leave") {
+    } else if (selLeave === "Family Responsibility Leave") {
         workerNum = family;
     }
 
@@ -504,7 +501,7 @@ function getLeaveRequests(name) {
     );
 }
 
-function onQuerySuccess(sender, args) {
+function onQuerySuccess() {
     var title = "";
     var name = "";
     var surname = "";

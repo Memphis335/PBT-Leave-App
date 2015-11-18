@@ -146,7 +146,7 @@
     <Content Include="IsManager\Elements.xml" />
     <Content Include="Lists\Leave Balances\Elements.xml" />
     <Content Include="Lists\Leave Balances\Leave Balances Instance\Elements.xml" />
-    <Content Include="Lists\Leave Balances\Schema.xml" />
+    <Content Include="Lists\Leave Balances\Leave Balances Instance\Schema.xml" />
     <Content Include="Lists\Requests\Elements.xml" />
     <Content Include="Lists\Requests\List1Instance\Elements.xml" />
     <Content Include="Lists\Requests\Schema.xml">

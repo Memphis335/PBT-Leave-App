@@ -2,7 +2,6 @@
 <ProjectItem Type="Microsoft.VisualStudio.SharePoint.ListDefinition" DefaultFile="Elements.xml" SupportedTrustLevels="All" SupportedDeploymentScopes="Web, Site" xmlns="http://schemas.microsoft.com/VisualStudio/2010/SharePointTools/SharePointProjectItemModel">
   <Files>
     <ProjectItemFile Source="Elements.xml" Target="Leave Balances\" Type="ElementManifest" />
-    <ProjectItemFile Source="Schema.xml" Target="Leave Balances\" Type="ElementFile" />
   </Files>
   <ExtensionData>
     <ExtensionDataItem Key="Microsoft.VisualStudio.SharePoint.ListSettings.ListFieldsContentTypeID" Value="0x010031e77ed5eac64f5bab7851276336297c" />
