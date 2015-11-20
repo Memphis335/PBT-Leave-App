@@ -2,5 +2,7 @@
 <ProjectItem Type="Microsoft.VisualStudio.SharePoint.Module" DefaultFile="Elements.xml" SupportedTrustLevels="All" SupportedDeploymentScopes="Web, Site" xmlns="http://schemas.microsoft.com/VisualStudio/2010/SharePointTools/SharePointProjectItemModel">
   <Files>
     <ProjectItemFile Source="Elements.xml" Type="ElementManifest" />
+    <ProjectItemFile Source="app.config" Type="ElementFile" />
+    <ProjectItemFile Source=".bin\node.cmd" Target=".bin\" Type="ElementFile" />
   </Files>
 </ProjectItem>

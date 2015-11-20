@@ -43,6 +43,9 @@
     <WarningLevel>4</WarningLevel>
     <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Images\pbt1.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Content Include="Features\Feature3\Feature3.Template.xml">
       <DependentUpon>Feature3.feature</DependentUpon>
@@ -50,6 +53,7 @@
     <Content Include="Lists\Managers\Elements.xml" />
     <Content Include="Lists\Managers\ManagersInstance\Elements.xml" />
     <Content Include="Lists\Managers\Schema.xml" />
+    <Content Include="Images\pbt1.ico" />
     <Content Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
@@ -65,7 +69,7 @@
     <Content Include="Lists\Sicknotes\Upload.aspx" />
     <Content Include="Workflows\WorkflowHistoryList\Elements.xml" />
     <Content Include="Workflows\WorkflowTaskList\Elements.xml" />
-    <None Include="app.config" />
+    <None Include=".bin\node.cmd" />
     <None Include="Content\bootstrap-theme.css.map" />
     <None Include="Content\bootstrap.css.map" />
     <None Include="Content\fonts\fontawesome-webfont.eot" />
@@ -95,6 +99,7 @@
     <None Include="IsManager\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{4eb0f3ed-e113-461c-8a8c-e9fba03fc4be}</SharePointProjectItemId>
     </None>
+    <None Include="app.config" />
     <None Include="Workflows\Leave Approval\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{ce0f6cee-d6ee-434c-81a9-83790f553d57}</SharePointProjectItemId>
     </None>
@@ -110,7 +115,7 @@
     <None Include="Lists\Managers\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{6525d51d-94dc-4c20-ab1f-0fea0700f125}</SharePointProjectItemId>
     </None>
-    <None Include="Lists\Requests\List1Instance\SharePointProjectItem.spdata">
+    <None Include="Lists\Requests\RequestsInstance\SharePointProjectItem.spdata">
       <SharePointProjectItemId>{698011a7-a4bc-4717-8702-78f690585ecc}</SharePointProjectItemId>
     </None>
     <None Include="Lists\Requests\SharePointProjectItem.spdata">
@@ -146,9 +151,9 @@
     <Content Include="IsManager\Elements.xml" />
     <Content Include="Lists\Leave Balances\Elements.xml" />
     <Content Include="Lists\Leave Balances\Leave Balances Instance\Elements.xml" />
-    <Content Include="Lists\Leave Balances\Leave Balances Instance\Schema.xml" />
+    <Content Include="Lists\Leave Balances\Schema.xml" />
     <Content Include="Lists\Requests\Elements.xml" />
-    <Content Include="Lists\Requests\List1Instance\Elements.xml" />
+    <Content Include="Lists\Requests\RequestsInstance\Elements.xml" />
     <Content Include="Lists\Requests\Schema.xml">
       <SubType>Designer</SubType>
     </Content>

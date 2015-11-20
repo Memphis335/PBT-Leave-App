@@ -2,6 +2,5 @@
 <ProjectItem Type="Microsoft.VisualStudio.SharePoint.ListInstance" DefaultFile="Elements.xml" SupportedTrustLevels="All" SupportedDeploymentScopes="Web, Site" xmlns="http://schemas.microsoft.com/VisualStudio/2010/SharePointTools/SharePointProjectItemModel">
   <Files>
     <ProjectItemFile Source="Elements.xml" Target="Leave Balances Instance\" Type="ElementManifest" />
-    <ProjectItemFile Source="Schema.xml" Target="Leave Balances Instance\" Type="ElementFile" />
   </Files>
 </ProjectItem>

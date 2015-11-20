@@ -169,6 +169,7 @@
                 <label class="col-md-4 control-label" for="FRLeave">Reason for Leave :</label>
                 <div class="col-md-4">
                     <select id="leaveSelect" class="form-control">
+                        <option value=""></option>
                         <option value="childbirth">Birth of my child.</option>
                         <option value="childsick">My child is sick.</option>
                         <option value="death">Passing of spouse,life partner, parent, adoptive parent, grandparent, child, adopted child, grandchild or sibling</option>

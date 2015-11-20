@@ -68,6 +68,8 @@
       <Variable x:TypeArguments="x:String" Name="itemUrl" />
       <Variable x:TypeArguments="x:Int32" Name="itemToUpdate" />
       <Variable x:TypeArguments="s:DateTime" Name="Created" />
+      <Variable x:TypeArguments="sco:Collection(x:String)" Name="itemResult" />
+      <Variable x:TypeArguments="p:DynamicValue" Name="dv_5" />
     </Sequence.Variables>
     <p1:WriteToHistory sap2010:WorkflowViewState.IdRef="WriteToHistory_1" Message="PBT Leave request workflow started." />
     <Sequence DisplayName="Init" sap2010:WorkflowViewState.IdRef="Sequence_2">
@@ -179,6 +181,35 @@
       <p1:WriteToHistory.Message>
         <InArgument x:TypeArguments="x:String">
           <mca:CSharpValue x:TypeArguments="x:String">"Item to update ::" + itemToUpdate</mca:CSharpValue>
+        </InArgument>
+      </p1:WriteToHistory.Message>
+    </p1:WriteToHistory>
+    <p1:LookupSPListItem ItemGuid="{x:Null}" sap2010:WorkflowViewState.IdRef="LookupSPListItem_6">
+      <p1:LookupSPListItem.ItemId>
+        <InArgument x:TypeArguments="x:Int32">
+          <mca:CSharpValue x:TypeArguments="x:Int32">itemToUpdate</mca:CSharpValue>
+        </InArgument>
+      </p1:LookupSPListItem.ItemId>
+      <p1:LookupSPListItem.ListId>
+        <InArgument x:TypeArguments="s:Guid">
+          <mca:CSharpValue x:TypeArguments="s:Guid">System.Guid.Parse("{$ListId:Lists/LeaveBalances;}")</mca:CSharpValue>
+        </InArgument>
+      </p1:LookupSPListItem.ListId>
+      <p1:LookupSPListItem.Properties>
+        <InArgument x:TypeArguments="sco:Collection(x:String)">
+          <mca:CSharpValue x:TypeArguments="sco:Collection(x:String)">itemResult</mca:CSharpValue>
+        </InArgument>
+      </p1:LookupSPListItem.Properties>
+      <p1:LookupSPListItem.Result>
+        <OutArgument x:TypeArguments="p:DynamicValue">
+          <mca:CSharpReference x:TypeArguments="p:DynamicValue">dv_5</mca:CSharpReference>
+        </OutArgument>
+      </p1:LookupSPListItem.Result>
+    </p1:LookupSPListItem>
+    <p1:WriteToHistory DisplayName="check variable2" sap2010:WorkflowViewState.IdRef="WriteToHistory_35">
+      <p1:WriteToHistory.Message>
+        <InArgument x:TypeArguments="x:String">
+          <mca:CSharpValue x:TypeArguments="x:String">"Item to update in list::" + itemResult.ToString()</mca:CSharpValue>
         </InArgument>
       </p1:WriteToHistory.Message>
     </p1:WriteToHistory>
@@ -902,7 +933,7 @@ HRUser + " has reached a decision on your request.&lt;/br&gt;" +
         </TerminateWorkflow>
       </If.Else>
     </If>
-    <sads:DebugSymbol.Symbol>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</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>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</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
@@ -955,6 +986,16 @@ HRUser + " has reached a decision on your request.&lt;/br&gt;" +
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="WriteToHistory_34" sap:VirtualizedContainerService.HintSize="738,68" />
+      <sap2010:ViewStateData Id="LookupSPListItem_6" sap:VirtualizedContainerService.HintSize="738,89">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <scg:Dictionary x:TypeArguments="x:String, msdad:ViewStateNameValue" x:Key="SPLocalizedDisplayNames">
+              <msdad:ViewStateNameValue x:Key="ListId" DisplayName="Leave Balances" Value="Lists/LeaveBalances" />
+            </scg:Dictionary>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="WriteToHistory_35" sap:VirtualizedContainerService.HintSize="738,68" />
       <sap2010:ViewStateData Id="LookupWorkflowContextProperty_1" sap:VirtualizedContainerService.HintSize="738,68">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -1243,14 +1284,14 @@ HRUser + " has reached a decision on your request.&lt;/br&gt;" +
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="760,3792">
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="760,4029">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="PBT_Leave_App.Leave_Approval.Workflow_1" sap:VirtualizedContainerService.HintSize="800,3872">
+      <sap2010:ViewStateData Id="PBT_Leave_App.Leave_Approval.Workflow_1" sap:VirtualizedContainerService.HintSize="800,4109">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="ShouldExpandAll">False</x:Boolean>

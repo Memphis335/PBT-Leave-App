@@ -6,5 +6,6 @@
     <ProjectItemFile Source="PBT_Group_Logo.png" Target="Images\" Type="ElementFile" />
     <ProjectItemFile Source="calendar-add-512.png" Target="Images\" Type="ElementFile" />
     <ProjectItemFile Source="tileAdd.png" Target="Images\" Type="ElementFile" />
+    <ProjectItemFile Source="pbt1.ico" Type="ElementFile" />
   </Files>
 </ProjectItem>
