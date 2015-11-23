@@ -155,64 +155,267 @@
       </p:GetODataProperties>
       <p1:WriteToHistory sap2010:WorkflowViewState.IdRef="WriteToHistory_5" Message="All variables relevant to this WorkFlow has been set..." />
     </Sequence>
-    <p1:LookupSPListItemId DisplayName="LookupSPListItemIdtoUpdate" sap2010:WorkflowViewState.IdRef="LookupSPListItemId_3">
-      <p1:LookupSPListItemId.ListId>
-        <InArgument x:TypeArguments="s:Guid">
-          <mca:CSharpValue x:TypeArguments="s:Guid">System.Guid.Parse("{$ListId:Lists/LeaveBalances;}")</mca:CSharpValue>
-        </InArgument>
-      </p1:LookupSPListItemId.ListId>
-      <p1:LookupSPListItemId.PropertyName>
-        <InArgument x:TypeArguments="x:String">
-          <mca:CSharpValue x:TypeArguments="x:String">"UserId"</mca:CSharpValue>
-        </InArgument>
-      </p1:LookupSPListItemId.PropertyName>
-      <p1:LookupSPListItemId.PropertyValue>
-        <InArgument x:TypeArguments="x:String">
-          <mca:CSharpValue x:TypeArguments="x:String">currLeaveRequestor</mca:CSharpValue>
-        </InArgument>
-      </p1:LookupSPListItemId.PropertyValue>
-      <p1:LookupSPListItemId.Result>
-        <OutArgument x:TypeArguments="x:Int32">
-          <mca:CSharpReference x:TypeArguments="x:Int32">itemToUpdate</mca:CSharpReference>
-        </OutArgument>
-      </p1:LookupSPListItemId.Result>
-    </p1:LookupSPListItemId>
-    <p1:WriteToHistory DisplayName="check variable" sap2010:WorkflowViewState.IdRef="WriteToHistory_34">
-      <p1:WriteToHistory.Message>
-        <InArgument x:TypeArguments="x:String">
-          <mca:CSharpValue x:TypeArguments="x:String">"Item to update ::" + itemToUpdate</mca:CSharpValue>
-        </InArgument>
-      </p1:WriteToHistory.Message>
-    </p1:WriteToHistory>
-    <p1:LookupSPListItem ItemGuid="{x:Null}" sap2010:WorkflowViewState.IdRef="LookupSPListItem_6">
-      <p1:LookupSPListItem.ItemId>
-        <InArgument x:TypeArguments="x:Int32">
-          <mca:CSharpValue x:TypeArguments="x:Int32">itemToUpdate</mca:CSharpValue>
-        </InArgument>
-      </p1:LookupSPListItem.ItemId>
-      <p1:LookupSPListItem.ListId>
-        <InArgument x:TypeArguments="s:Guid">
-          <mca:CSharpValue x:TypeArguments="s:Guid">System.Guid.Parse("{$ListId:Lists/LeaveBalances;}")</mca:CSharpValue>
-        </InArgument>
-      </p1:LookupSPListItem.ListId>
-      <p1:LookupSPListItem.Properties>
-        <InArgument x:TypeArguments="sco:Collection(x:String)">
-          <mca:CSharpValue x:TypeArguments="sco:Collection(x:String)">itemResult</mca:CSharpValue>
-        </InArgument>
-      </p1:LookupSPListItem.Properties>
-      <p1:LookupSPListItem.Result>
-        <OutArgument x:TypeArguments="p:DynamicValue">
-          <mca:CSharpReference x:TypeArguments="p:DynamicValue">dv_5</mca:CSharpReference>
-        </OutArgument>
-      </p1:LookupSPListItem.Result>
-    </p1:LookupSPListItem>
-    <p1:WriteToHistory DisplayName="check variable2" sap2010:WorkflowViewState.IdRef="WriteToHistory_35">
-      <p1:WriteToHistory.Message>
-        <InArgument x:TypeArguments="x:String">
-          <mca:CSharpValue x:TypeArguments="x:String">"Item to update in list::" + itemResult.ToString()</mca:CSharpValue>
-        </InArgument>
-      </p1:WriteToHistory.Message>
-    </p1:WriteToHistory>
+    <Sequence DisplayName="TestToUpdateList" sap2010:WorkflowViewState.IdRef="Sequence_29">
+      <Sequence.Variables>
+        <Variable x:TypeArguments="x:String" Name="AnnualLeave" />
+        <Variable x:TypeArguments="x:String" Name="FamilyResponsibilityLeave" />
+        <Variable x:TypeArguments="x:String" Name="MaternityLeave" />
+        <Variable x:TypeArguments="x:String" Name="SickLeave" />
+        <Variable x:TypeArguments="x:String" Name="StudyLeave" />
+        <Variable x:TypeArguments="x:String" Name="columnToUpdate" />
+      </Sequence.Variables>
+      <p1:LookupSPListItemId DisplayName="LookupSPListItemIdtoUpdate" sap2010:WorkflowViewState.IdRef="LookupSPListItemId_3">
+        <p1:LookupSPListItemId.ListId>
+          <InArgument x:TypeArguments="s:Guid">
+            <mca:CSharpValue x:TypeArguments="s:Guid">System.Guid.Parse("{$ListId:Lists/LeaveBalances;}")</mca:CSharpValue>
+          </InArgument>
+        </p1:LookupSPListItemId.ListId>
+        <p1:LookupSPListItemId.PropertyName>
+          <InArgument x:TypeArguments="x:String">
+            <mca:CSharpValue x:TypeArguments="x:String">"UserId"</mca:CSharpValue>
+          </InArgument>
+        </p1:LookupSPListItemId.PropertyName>
+        <p1:LookupSPListItemId.PropertyValue>
+          <InArgument x:TypeArguments="x:String">
+            <mca:CSharpValue x:TypeArguments="x:String">currLeaveRequestor</mca:CSharpValue>
+          </InArgument>
+        </p1:LookupSPListItemId.PropertyValue>
+        <p1:LookupSPListItemId.Result>
+          <OutArgument x:TypeArguments="x:Int32">
+            <mca:CSharpReference x:TypeArguments="x:Int32">itemToUpdate</mca:CSharpReference>
+          </OutArgument>
+        </p1:LookupSPListItemId.Result>
+      </p1:LookupSPListItemId>
+      <p1:WriteToHistory DisplayName="check variable" sap2010:WorkflowViewState.IdRef="WriteToHistory_34">
+        <p1:WriteToHistory.Message>
+          <InArgument x:TypeArguments="x:String">
+            <mca:CSharpValue x:TypeArguments="x:String">"Item to update ::" + itemToUpdate</mca:CSharpValue>
+          </InArgument>
+        </p1:WriteToHistory.Message>
+      </p1:WriteToHistory>
+      <p1:LookupSPListItem ItemGuid="{x:Null}" Properties="{x:Null}" sap2010:WorkflowViewState.IdRef="LookupSPListItem_6">
+        <p1:LookupSPListItem.ItemId>
+          <InArgument x:TypeArguments="x:Int32">
+            <mca:CSharpValue x:TypeArguments="x:Int32">itemToUpdate</mca:CSharpValue>
+          </InArgument>
+        </p1:LookupSPListItem.ItemId>
+        <p1:LookupSPListItem.ListId>
+          <InArgument x:TypeArguments="s:Guid">
+            <mca:CSharpValue x:TypeArguments="s:Guid">System.Guid.Parse("{$ListId:Lists/LeaveBalances;}")</mca:CSharpValue>
+          </InArgument>
+        </p1:LookupSPListItem.ListId>
+        <p1:LookupSPListItem.Result>
+          <OutArgument x:TypeArguments="p:DynamicValue">
+            <mca:CSharpReference x:TypeArguments="p:DynamicValue">dv_5</mca:CSharpReference>
+          </OutArgument>
+        </p1:LookupSPListItem.Result>
+      </p1:LookupSPListItem>
+      <p:GetODataProperties DisplayName="GetDynamicValueProperties" sap2010:WorkflowViewState.IdRef="GetODataProperties_10">
+        <p:GetODataProperties.Source>
+          <InArgument x:TypeArguments="p:DynamicValue">
+            <mca:CSharpValue x:TypeArguments="p:DynamicValue">dv_5</mca:CSharpValue>
+          </InArgument>
+        </p:GetODataProperties.Source>
+        <scg:Dictionary x:TypeArguments="x:String, OutArgument">
+          <OutArgument x:TypeArguments="x:String" x:Key="AnnualLeave">
+            <mca:CSharpReference x:TypeArguments="x:String">AnnualLeave</mca:CSharpReference>
+          </OutArgument>
+          <OutArgument x:TypeArguments="x:String" x:Key="FamilyResponsibilityLeave">
+            <mca:CSharpReference x:TypeArguments="x:String">FamilyResponsibilityLeave</mca:CSharpReference>
+          </OutArgument>
+          <OutArgument x:TypeArguments="x:String" x:Key="MaternityLeave">
+            <mca:CSharpReference x:TypeArguments="x:String">MaternityLeave</mca:CSharpReference>
+          </OutArgument>
+          <OutArgument x:TypeArguments="x:String" x:Key="SickLeave">
+            <mca:CSharpReference x:TypeArguments="x:String">SickLeave</mca:CSharpReference>
+          </OutArgument>
+          <OutArgument x:TypeArguments="x:String" x:Key="StudyLeave">
+            <mca:CSharpReference x:TypeArguments="x:String">StudyLeave</mca:CSharpReference>
+          </OutArgument>
+        </scg:Dictionary>
+      </p:GetODataProperties>
+      <p1:WriteToHistory DisplayName="check variable2" sap2010:WorkflowViewState.IdRef="WriteToHistory_35">
+        <p1:WriteToHistory.Message>
+          <InArgument x:TypeArguments="x:String">
+            <mca:CSharpValue x:TypeArguments="x:String" xml:space="preserve">"Item to update in list::" + leaveType + "&lt;br&gt;" +
+"Annual Leave = " + AnnualLeave + "&lt;br&gt;" +
+    "Study Leave = " + StudyLeave + "&lt;br&gt;" +
+        "Sick Leave = " + SickLeave + "&lt;br&gt;" + 
+            "Maternity Leave = " + MaternityLeave + "&lt;br&gt;" +
+                "Family R Leave = " + FamilyResponsibilityLeave + "&lt;br&gt;"</mca:CSharpValue>
+          </InArgument>
+        </p1:WriteToHistory.Message>
+      </p1:WriteToHistory>
+      <If sap2010:WorkflowViewState.IdRef="If_11">
+        <If.Condition>
+          <InArgument x:TypeArguments="x:Boolean">
+            <mca:CSharpValue x:TypeArguments="x:Boolean">leaveType == "Annual Leave"</mca:CSharpValue>
+          </InArgument>
+        </If.Condition>
+        <If.Then>
+          <p1:UpdateListItem ItemGuid="{x:Null}" ListItemProperties="{x:Null}" sap2010:WorkflowViewState.IdRef="UpdateListItem_12">
+            <p1:UpdateListItem.ItemId>
+              <InArgument x:TypeArguments="x:Int32">
+                <mca:CSharpValue x:TypeArguments="x:Int32">itemToUpdate</mca:CSharpValue>
+              </InArgument>
+            </p1:UpdateListItem.ItemId>
+            <p1:UpdateListItem.ListId>
+              <InArgument x:TypeArguments="s:Guid">
+                <mca:CSharpValue x:TypeArguments="s:Guid">System.Guid.Parse("{$ListId:Lists/LeaveBalances;}")</mca:CSharpValue>
+              </InArgument>
+            </p1:UpdateListItem.ListId>
+            <p1:UpdateListItem.ListItemPropertiesDynamicValue>
+              <InArgument x:TypeArguments="p:DynamicValue">
+                <p:SetDynamicValueProperties>
+                  <scg:Dictionary x:TypeArguments="x:String, InArgument">
+                    <InArgument x:TypeArguments="x:Double" x:Key="AnnualLeave">
+                      <mca:CSharpValue x:TypeArguments="x:Double">Convert.ToDouble(AnnualLeave) - numdays</mca:CSharpValue>
+                    </InArgument>
+                  </scg:Dictionary>
+                </p:SetDynamicValueProperties>
+              </InArgument>
+            </p1:UpdateListItem.ListItemPropertiesDynamicValue>
+          </p1:UpdateListItem>
+        </If.Then>
+        <If.Else>
+          <If sap2010:WorkflowViewState.IdRef="If_10">
+            <If.Condition>
+              <InArgument x:TypeArguments="x:Boolean">
+                <mca:CSharpValue x:TypeArguments="x:Boolean">leaveType == "Sick Leave"</mca:CSharpValue>
+              </InArgument>
+            </If.Condition>
+            <If.Then>
+              <p1:UpdateListItem ItemGuid="{x:Null}" ListItemProperties="{x:Null}" sap2010:WorkflowViewState.IdRef="UpdateListItem_13">
+                <p1:UpdateListItem.ItemId>
+                  <InArgument x:TypeArguments="x:Int32">
+                    <mca:CSharpValue x:TypeArguments="x:Int32">itemToUpdate</mca:CSharpValue>
+                  </InArgument>
+                </p1:UpdateListItem.ItemId>
+                <p1:UpdateListItem.ListId>
+                  <InArgument x:TypeArguments="s:Guid">
+                    <mca:CSharpValue x:TypeArguments="s:Guid">System.Guid.Parse("{$ListId:Lists/LeaveBalances;}")</mca:CSharpValue>
+                  </InArgument>
+                </p1:UpdateListItem.ListId>
+                <p1:UpdateListItem.ListItemPropertiesDynamicValue>
+                  <InArgument x:TypeArguments="p:DynamicValue">
+                    <p:SetDynamicValueProperties>
+                      <scg:Dictionary x:TypeArguments="x:String, InArgument">
+                        <InArgument x:TypeArguments="x:Double" x:Key="SickLeave">
+                          <mca:CSharpValue x:TypeArguments="x:Double">Convert.ToDouble(SickLeave) - numdays</mca:CSharpValue>
+                        </InArgument>
+                      </scg:Dictionary>
+                    </p:SetDynamicValueProperties>
+                  </InArgument>
+                </p1:UpdateListItem.ListItemPropertiesDynamicValue>
+              </p1:UpdateListItem>
+            </If.Then>
+            <If.Else>
+              <If sap2010:WorkflowViewState.IdRef="If_9">
+                <If.Condition>
+                  <InArgument x:TypeArguments="x:Boolean">
+                    <mca:CSharpValue x:TypeArguments="x:Boolean">leaveType == "Study Leave"</mca:CSharpValue>
+                  </InArgument>
+                </If.Condition>
+                <If.Then>
+                  <p1:UpdateListItem ItemGuid="{x:Null}" ListItemProperties="{x:Null}" sap2010:WorkflowViewState.IdRef="UpdateListItem_14">
+                    <p1:UpdateListItem.ItemId>
+                      <InArgument x:TypeArguments="x:Int32">
+                        <mca:CSharpValue x:TypeArguments="x:Int32">itemToUpdate</mca:CSharpValue>
+                      </InArgument>
+                    </p1:UpdateListItem.ItemId>
+                    <p1:UpdateListItem.ListId>
+                      <InArgument x:TypeArguments="s:Guid">
+                        <mca:CSharpValue x:TypeArguments="s:Guid">System.Guid.Parse("{$ListId:Lists/LeaveBalances;}")</mca:CSharpValue>
+                      </InArgument>
+                    </p1:UpdateListItem.ListId>
+                    <p1:UpdateListItem.ListItemPropertiesDynamicValue>
+                      <InArgument x:TypeArguments="p:DynamicValue">
+                        <p:SetDynamicValueProperties>
+                          <scg:Dictionary x:TypeArguments="x:String, InArgument">
+                            <InArgument x:TypeArguments="x:Double" x:Key="StudyLeave">
+                              <mca:CSharpValue x:TypeArguments="x:Double">Convert.ToDouble(StudyLeave) - numdays</mca:CSharpValue>
+                            </InArgument>
+                          </scg:Dictionary>
+                        </p:SetDynamicValueProperties>
+                      </InArgument>
+                    </p1:UpdateListItem.ListItemPropertiesDynamicValue>
+                  </p1:UpdateListItem>
+                </If.Then>
+                <If.Else>
+                  <If sap2010:WorkflowViewState.IdRef="If_8">
+                    <If.Condition>
+                      <InArgument x:TypeArguments="x:Boolean">
+                        <mca:CSharpValue x:TypeArguments="x:Boolean">leaveType == "Maternity Leave"</mca:CSharpValue>
+                      </InArgument>
+                    </If.Condition>
+                    <If.Then>
+                      <p1:UpdateListItem ItemGuid="{x:Null}" ListItemProperties="{x:Null}" sap2010:WorkflowViewState.IdRef="UpdateListItem_15">
+                        <p1:UpdateListItem.ItemId>
+                          <InArgument x:TypeArguments="x:Int32">
+                            <mca:CSharpValue x:TypeArguments="x:Int32">itemToUpdate</mca:CSharpValue>
+                          </InArgument>
+                        </p1:UpdateListItem.ItemId>
+                        <p1:UpdateListItem.ListId>
+                          <InArgument x:TypeArguments="s:Guid">
+                            <mca:CSharpValue x:TypeArguments="s:Guid">System.Guid.Parse("{$ListId:Lists/LeaveBalances;}")</mca:CSharpValue>
+                          </InArgument>
+                        </p1:UpdateListItem.ListId>
+                        <p1:UpdateListItem.ListItemPropertiesDynamicValue>
+                          <InArgument x:TypeArguments="p:DynamicValue">
+                            <p:SetDynamicValueProperties>
+                              <scg:Dictionary x:TypeArguments="x:String, InArgument">
+                                <InArgument x:TypeArguments="x:Double" x:Key="MaternityLeave">
+                                  <mca:CSharpValue x:TypeArguments="x:Double">Convert.ToDouble(MaternityLeave) - numdays</mca:CSharpValue>
+                                </InArgument>
+                              </scg:Dictionary>
+                            </p:SetDynamicValueProperties>
+                          </InArgument>
+                        </p1:UpdateListItem.ListItemPropertiesDynamicValue>
+                      </p1:UpdateListItem>
+                    </If.Then>
+                    <If.Else>
+                      <If sap2010:WorkflowViewState.IdRef="If_7">
+                        <If.Condition>
+                          <InArgument x:TypeArguments="x:Boolean">
+                            <mca:CSharpValue x:TypeArguments="x:Boolean">leaveType == "Family Responsibility Leave"</mca:CSharpValue>
+                          </InArgument>
+                        </If.Condition>
+                        <If.Then>
+                          <p1:UpdateListItem ItemGuid="{x:Null}" ListItemProperties="{x:Null}" sap2010:WorkflowViewState.IdRef="UpdateListItem_16">
+                            <p1:UpdateListItem.ItemId>
+                              <InArgument x:TypeArguments="x:Int32">
+                                <mca:CSharpValue x:TypeArguments="x:Int32">itemToUpdate</mca:CSharpValue>
+                              </InArgument>
+                            </p1:UpdateListItem.ItemId>
+                            <p1:UpdateListItem.ListId>
+                              <InArgument x:TypeArguments="s:Guid">
+                                <mca:CSharpValue x:TypeArguments="s:Guid">System.Guid.Parse("{$ListId:Lists/LeaveBalances;}")</mca:CSharpValue>
+                              </InArgument>
+                            </p1:UpdateListItem.ListId>
+                            <p1:UpdateListItem.ListItemPropertiesDynamicValue>
+                              <InArgument x:TypeArguments="p:DynamicValue">
+                                <p:SetDynamicValueProperties>
+                                  <scg:Dictionary x:TypeArguments="x:String, InArgument">
+                                    <InArgument x:TypeArguments="x:Double" x:Key="FamilyResponsibilityLeave">
+                                      <mca:CSharpValue x:TypeArguments="x:Double">Convert.ToDouble(FamilyResponsibilityLeave) - numdays</mca:CSharpValue>
+                                    </InArgument>
+                                  </scg:Dictionary>
+                                </p:SetDynamicValueProperties>
+                              </InArgument>
+                            </p1:UpdateListItem.ListItemPropertiesDynamicValue>
+                          </p1:UpdateListItem>
+                        </If.Then>
+                      </If>
+                    </If.Else>
+                  </If>
+                </If.Else>
+              </If>
+            </If.Else>
+          </If>
+        </If.Else>
+      </If>
+      <p1:WriteToHistory sap2010:WorkflowViewState.IdRef="WriteToHistory_36" Message="Item updated!!" />
+    </Sequence>
     <p1:LookupWorkflowContextProperty DisplayName="GetUserToMail" sap2010:WorkflowViewState.IdRef="LookupWorkflowContextProperty_1" PropertyName="InitiatorUserId">
       <p1:LookupWorkflowContextProperty.Result>
         <OutArgument x:TypeArguments="x:String">
@@ -933,11 +1136,11 @@ HRUser + " has reached a decision on your request.&lt;/br&gt;" +
         </TerminateWorkflow>
       </If.Else>
     </If>
-    <sads:DebugSymbol.Symbol>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</sads:DebugSymbol.Symbol>
+    <sads:DebugSymbol.Symbol>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</sads:DebugSymbol.Symbol>
   </Sequence>
   <sap2010:WorkflowViewState.ViewStateManager>
     <sap2010:ViewStateManager>
-      <sap2010:ViewStateData Id="WriteToHistory_1" sap:VirtualizedContainerService.HintSize="738,68" />
+      <sap2010:ViewStateData Id="WriteToHistory_1" sap:VirtualizedContainerService.HintSize="1386,68" />
       <sap2010:ViewStateData Id="UpdateListItem_10" sap:VirtualizedContainerService.HintSize="247,68">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -967,7 +1170,7 @@ HRUser + " has reached a decision on your request.&lt;/br&gt;" +
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="WriteToHistory_5" sap:VirtualizedContainerService.HintSize="247,68" />
-      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="738,51">
+      <sap2010:ViewStateData Id="Sequence_2" sap:VirtualizedContainerService.HintSize="1386,52">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -975,7 +1178,7 @@ HRUser + " has reached a decision on your request.&lt;/br&gt;" +
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="LookupSPListItemId_3" sap:VirtualizedContainerService.HintSize="738,68">
+      <sap2010:ViewStateData Id="LookupSPListItemId_3" sap:VirtualizedContainerService.HintSize="1364,68">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <scg:Dictionary x:TypeArguments="x:String, msdad:ViewStateNameValue" x:Key="SPLocalizedDisplayNames">
@@ -985,8 +1188,8 @@ HRUser + " has reached a decision on your request.&lt;/br&gt;" +
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="WriteToHistory_34" sap:VirtualizedContainerService.HintSize="738,68" />
-      <sap2010:ViewStateData Id="LookupSPListItem_6" sap:VirtualizedContainerService.HintSize="738,89">
+      <sap2010:ViewStateData Id="WriteToHistory_34" sap:VirtualizedContainerService.HintSize="1364,68" />
+      <sap2010:ViewStateData Id="LookupSPListItem_6" sap:VirtualizedContainerService.HintSize="1364,90">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <scg:Dictionary x:TypeArguments="x:String, msdad:ViewStateNameValue" x:Key="SPLocalizedDisplayNames">
@@ -995,8 +1198,78 @@ HRUser + " has reached a decision on your request.&lt;/br&gt;" +
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="WriteToHistory_35" sap:VirtualizedContainerService.HintSize="738,68" />
-      <sap2010:ViewStateData Id="LookupWorkflowContextProperty_1" sap:VirtualizedContainerService.HintSize="738,68">
+      <sap2010:ViewStateData Id="GetODataProperties_10" sap:VirtualizedContainerService.HintSize="1364,92">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:String x:Key="Properties.SelectedEntityType">Lists/LeaveBalances</x:String>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="WriteToHistory_35" sap:VirtualizedContainerService.HintSize="1364,68" />
+      <sap2010:ViewStateData Id="UpdateListItem_12" sap:VirtualizedContainerService.HintSize="200,68">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <scg:Dictionary x:TypeArguments="x:String, msdad:ViewStateNameValue" x:Key="SPLocalizedDisplayNames">
+              <msdad:ViewStateNameValue x:Key="ListId" DisplayName="Leave Balances" Value="Lists/LeaveBalances" />
+            </scg:Dictionary>
+            <x:String x:Key="ListItemPropertiesDynamicValue.SelectedEntityType">Lists/LeaveBalances</x:String>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="UpdateListItem_13" sap:VirtualizedContainerService.HintSize="200,68">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <scg:Dictionary x:TypeArguments="x:String, msdad:ViewStateNameValue" x:Key="SPLocalizedDisplayNames">
+              <msdad:ViewStateNameValue x:Key="ListId" DisplayName="Leave Balances" Value="Lists/LeaveBalances" />
+            </scg:Dictionary>
+            <x:String x:Key="ListItemPropertiesDynamicValue.SelectedEntityType">Lists/LeaveBalances</x:String>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="UpdateListItem_14" sap:VirtualizedContainerService.HintSize="200,68">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <scg:Dictionary x:TypeArguments="x:String, msdad:ViewStateNameValue" x:Key="SPLocalizedDisplayNames">
+              <msdad:ViewStateNameValue x:Key="ListId" DisplayName="Leave Balances" Value="Lists/LeaveBalances" />
+            </scg:Dictionary>
+            <x:String x:Key="ListItemPropertiesDynamicValue.SelectedEntityType">Lists/LeaveBalances</x:String>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="UpdateListItem_15" sap:VirtualizedContainerService.HintSize="200,68">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <scg:Dictionary x:TypeArguments="x:String, msdad:ViewStateNameValue" x:Key="SPLocalizedDisplayNames">
+              <msdad:ViewStateNameValue x:Key="ListId" DisplayName="Leave Balances" Value="Lists/LeaveBalances" />
+            </scg:Dictionary>
+            <x:String x:Key="ListItemPropertiesDynamicValue.SelectedEntityType">Lists/LeaveBalances</x:String>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="UpdateListItem_16" sap:VirtualizedContainerService.HintSize="200,68">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <scg:Dictionary x:TypeArguments="x:String, msdad:ViewStateNameValue" x:Key="SPLocalizedDisplayNames">
+              <msdad:ViewStateNameValue x:Key="ListId" DisplayName="Leave Balances" Value="Lists/LeaveBalances" />
+            </scg:Dictionary>
+            <x:String x:Key="ListItemPropertiesDynamicValue.SelectedEntityType">Lists/LeaveBalances</x:String>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="If_7" sap:VirtualizedContainerService.HintSize="464,220" />
+      <sap2010:ViewStateData Id="If_8" sap:VirtualizedContainerService.HintSize="689,372" />
+      <sap2010:ViewStateData Id="If_9" sap:VirtualizedContainerService.HintSize="914,524" />
+      <sap2010:ViewStateData Id="If_10" sap:VirtualizedContainerService.HintSize="1139,676" />
+      <sap2010:ViewStateData Id="If_11" sap:VirtualizedContainerService.HintSize="1364,828" />
+      <sap2010:ViewStateData Id="WriteToHistory_36" sap:VirtualizedContainerService.HintSize="1364,68" />
+      <sap2010:ViewStateData Id="Sequence_29" sap:VirtualizedContainerService.HintSize="1386,1646">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </sap2010:ViewStateData>
+      <sap2010:ViewStateData Id="LookupWorkflowContextProperty_1" sap:VirtualizedContainerService.HintSize="1386,68">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <scg:Dictionary x:TypeArguments="x:String, msdad:ViewStateNameValue" x:Key="SPLocalizedDisplayNames">
@@ -1005,24 +1278,24 @@ HRUser + " has reached a decision on your request.&lt;/br&gt;" +
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="LookupSPUser_1" sap:VirtualizedContainerService.HintSize="738,89" />
-      <sap2010:ViewStateData Id="GetODataProperties_7" sap:VirtualizedContainerService.HintSize="738,92">
+      <sap2010:ViewStateData Id="LookupSPUser_1" sap:VirtualizedContainerService.HintSize="1386,90" />
+      <sap2010:ViewStateData Id="GetODataProperties_7" sap:VirtualizedContainerService.HintSize="1386,92">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:String x:Key="Properties.SelectedEntityType">SharePoint_User</x:String>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="LookupSPUser_2" sap:VirtualizedContainerService.HintSize="738,89" />
-      <sap2010:ViewStateData Id="GetODataProperties_8" sap:VirtualizedContainerService.HintSize="738,92">
+      <sap2010:ViewStateData Id="LookupSPUser_2" sap:VirtualizedContainerService.HintSize="1386,90" />
+      <sap2010:ViewStateData Id="GetODataProperties_8" sap:VirtualizedContainerService.HintSize="1386,92">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:String x:Key="Properties.SelectedEntityType">SharePoint_User</x:String>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="BuildCollection`1_1" sap:VirtualizedContainerService.HintSize="738,22" />
-      <sap2010:ViewStateData Id="Email_1" sap:VirtualizedContainerService.HintSize="738,68" />
+      <sap2010:ViewStateData Id="BuildCollection`1_1" sap:VirtualizedContainerService.HintSize="1386,22" />
+      <sap2010:ViewStateData Id="Email_1" sap:VirtualizedContainerService.HintSize="1386,68" />
       <sap2010:ViewStateData Id="WriteToHistory_22" sap:VirtualizedContainerService.HintSize="464,68" />
       <sap2010:ViewStateData Id="LookupSPListItem_4" sap:VirtualizedContainerService.HintSize="464,89">
         <sap:WorkflowViewStateService.ViewState>
@@ -1126,7 +1399,7 @@ HRUser + " has reached a decision on your request.&lt;/br&gt;" +
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_18" sap:VirtualizedContainerService.HintSize="491,1521">
+      <sap2010:ViewStateData Id="Sequence_18" sap:VirtualizedContainerService.HintSize="200,51">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -1135,7 +1408,7 @@ HRUser + " has reached a decision on your request.&lt;/br&gt;" +
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="If_2" sap:VirtualizedContainerService.HintSize="464,210" />
-      <sap2010:ViewStateData Id="Sequence_19" sap:VirtualizedContainerService.HintSize="738,51">
+      <sap2010:ViewStateData Id="Sequence_19" sap:VirtualizedContainerService.HintSize="1386,52">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">False</x:Boolean>
@@ -1143,7 +1416,7 @@ HRUser + " has reached a decision on your request.&lt;/br&gt;" +
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="WaitForFieldChange_1" sap:VirtualizedContainerService.HintSize="738,68">
+      <sap2010:ViewStateData Id="WaitForFieldChange_1" sap:VirtualizedContainerService.HintSize="1386,68">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <scg:Dictionary x:TypeArguments="x:String, msdad:ViewStateNameValue" x:Key="SPLocalizedDisplayNames">
@@ -1154,8 +1427,8 @@ HRUser + " has reached a decision on your request.&lt;/br&gt;" +
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="WriteToHistory_27" sap:VirtualizedContainerService.HintSize="738,68" />
-      <sap2010:ViewStateData Id="LookupSPListItem_5" sap:VirtualizedContainerService.HintSize="738,89">
+      <sap2010:ViewStateData Id="WriteToHistory_27" sap:VirtualizedContainerService.HintSize="1386,68" />
+      <sap2010:ViewStateData Id="LookupSPListItem_5" sap:VirtualizedContainerService.HintSize="1386,90">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <scg:Dictionary x:TypeArguments="x:String, msdad:ViewStateNameValue" x:Key="SPLocalizedDisplayNames">
@@ -1165,14 +1438,14 @@ HRUser + " has reached a decision on your request.&lt;/br&gt;" +
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="GetODataProperties_6" sap:VirtualizedContainerService.HintSize="738,92">
+      <sap2010:ViewStateData Id="GetODataProperties_6" sap:VirtualizedContainerService.HintSize="1386,92">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:String x:Key="Properties.SelectedEntityType">Lists/Requests</x:String>
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="LookupSPListItem_3" sap:VirtualizedContainerService.HintSize="491,89">
+      <sap2010:ViewStateData Id="LookupSPListItem_3" sap:VirtualizedContainerService.HintSize="491,90">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <scg:Dictionary x:TypeArguments="x:String, msdad:ViewStateNameValue" x:Key="SPLocalizedDisplayNames">
@@ -1189,7 +1462,7 @@ HRUser + " has reached a decision on your request.&lt;/br&gt;" +
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="LookupSPUser_3" sap:VirtualizedContainerService.HintSize="491,89" />
+      <sap2010:ViewStateData Id="LookupSPUser_3" sap:VirtualizedContainerService.HintSize="491,90" />
       <sap2010:ViewStateData Id="GetODataProperties_9" sap:VirtualizedContainerService.HintSize="491,92">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -1198,7 +1471,7 @@ HRUser + " has reached a decision on your request.&lt;/br&gt;" +
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="WriteToHistory_31" sap:VirtualizedContainerService.HintSize="491,68" />
-      <sap2010:ViewStateData Id="SingleTask_8" sap:VirtualizedContainerService.HintSize="491,89">
+      <sap2010:ViewStateData Id="SingleTask_8" sap:VirtualizedContainerService.HintSize="491,90">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <scg:Dictionary x:TypeArguments="x:String, msdad:ViewStateNameValue" x:Key="SPLocalizedDisplayNames">
@@ -1254,7 +1527,7 @@ HRUser + " has reached a decision on your request.&lt;/br&gt;" +
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="If_5" sap:VirtualizedContainerService.HintSize="491,682" />
+      <sap2010:ViewStateData Id="If_5" sap:VirtualizedContainerService.HintSize="491,684" />
       <sap2010:ViewStateData Id="Delay_2" sap:VirtualizedContainerService.HintSize="491,22" />
       <sap2010:ViewStateData Id="UpdateListItem_9" sap:VirtualizedContainerService.HintSize="491,68">
         <sap:WorkflowViewStateService.ViewState>
@@ -1267,7 +1540,7 @@ HRUser + " has reached a decision on your request.&lt;/br&gt;" +
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_27" sap:VirtualizedContainerService.HintSize="513,1735">
+      <sap2010:ViewStateData Id="Sequence_27" sap:VirtualizedContainerService.HintSize="513,1740">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -1276,7 +1549,7 @@ HRUser + " has reached a decision on your request.&lt;/br&gt;" +
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
       <sap2010:ViewStateData Id="TerminateWorkflow_2" sap:VirtualizedContainerService.HintSize="200,22" />
-      <sap2010:ViewStateData Id="If_6" sap:VirtualizedContainerService.HintSize="738,1885">
+      <sap2010:ViewStateData Id="If_6" sap:VirtualizedContainerService.HintSize="1386,1892">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -1284,7 +1557,7 @@ HRUser + " has reached a decision on your request.&lt;/br&gt;" +
           </scg:Dictionary>
         </sap:WorkflowViewStateService.ViewState>
       </sap2010:ViewStateData>
-      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="760,4029">
+      <sap2010:ViewStateData Id="Sequence_1" sap:VirtualizedContainerService.HintSize="1408,5274">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
