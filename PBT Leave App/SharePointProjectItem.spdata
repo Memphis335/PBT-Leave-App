@@ -3,6 +3,6 @@
   <Files>
     <ProjectItemFile Source="Elements.xml" Type="ElementManifest" />
     <ProjectItemFile Source="app.config" Type="ElementFile" />
-    <ProjectItemFile Source=".bin\node.cmd" Target=".bin\" Type="ElementFile" />
+    <ProjectItemFile Source="TextFile1.txt" Type="ElementFile" />
   </Files>
 </ProjectItem>

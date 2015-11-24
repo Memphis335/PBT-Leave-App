@@ -13,7 +13,6 @@
     <ProjectItemFile Source="jquery-2.1.4.js" Target="Scripts\" Type="ElementFile" />
     <ProjectItemFile Source="jquery-2.1.4.intellisense.js" Target="Scripts\" Type="ElementFile" />
     <ProjectItemFile Source="tasksPending.js" Target="Scripts\" Type="ElementFile" />
-    <ProjectItemFile Source="tasksCompleted.js" Target="Scripts\" Type="ElementFile" />
     <ProjectItemFile Source="jquery.cookie.js" Target="Scripts\" Type="ElementFile" />
   </Files>
 </ProjectItem>

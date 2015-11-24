@@ -2,6 +2,6 @@
 <Elements xmlns="http://schemas.microsoft.com/sharepoint/">
   <Module Name="RootModule">
     <File Path="app.config" Url="app.config" ReplaceContent="TRUE" />
-    <File Path=".bin\node.cmd" Url=".bin/node.cmd" ReplaceContent="TRUE" />
+    <File Path="TextFile1.txt" Url="TextFile1.txt" ReplaceContent="TRUE" />
   </Module>
 </Elements>

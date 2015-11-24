@@ -58,7 +58,6 @@
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
     <Content Include="Scripts\jquery.cookie.js" />
-    <Content Include="Scripts\tasksCompleted.js" />
     <Content Include="Scripts\tasksPending.js" />
     <Content Include="Lists\Sicknotes\EditDlg.htm" />
     <Content Include="Lists\Sicknotes\Elements.xml" />
@@ -67,9 +66,9 @@
     <Content Include="Lists\Sicknotes\Schema.xml" />
     <Content Include="Lists\Sicknotes\SicknotesInstance\Elements.xml" />
     <Content Include="Lists\Sicknotes\Upload.aspx" />
+    <Content Include="TextFile1.txt" />
     <Content Include="Workflows\WorkflowHistoryList\Elements.xml" />
     <Content Include="Workflows\WorkflowTaskList\Elements.xml" />
-    <None Include=".bin\node.cmd" />
     <None Include="Content\bootstrap-theme.css.map" />
     <None Include="Content\bootstrap.css.map" />
     <None Include="Content\fonts\fontawesome-webfont.eot" />
@@ -232,6 +231,7 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Activities, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="Microsoft.JScript" />
     <Reference Include="Microsoft.SharePoint.DesignTime.Activities.16.0, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.SharePoint.DesignTime.Activities.16.0.Design, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="PresentationFramework" />
@@ -249,6 +249,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </XamlAppDef>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
