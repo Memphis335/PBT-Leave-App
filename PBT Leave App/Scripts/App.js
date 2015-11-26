@@ -63,6 +63,7 @@ function onQuerySucceededLeave(sender, args) {
     var id = "";
     var sex = "";
     var accrued = "";
+    var accrue = "";
     var deal = "";
     var sickLeave = "";
 
@@ -81,29 +82,48 @@ function onQuerySucceededLeave(sender, args) {
         sex = oListItem.get_item("Sex");
         sickLeave = oListItem.get_item("SickLeaveCounter");
         id = oListItem.get_id();
+        accrue = oListItem.get_item("LastAccrue");
     }
 
-    var date = new Date();
+    //todays date
+    this.date = new Date();
     var day = date.getDate();
     var month = date.getMonth() + 1;
     var year = date.getFullYear();
 
+    //Employee start date
     var inceptionDate = new Date(inception);
     var incDay = inceptionDate.getDate();
     var incMonth = inceptionDate.getMonth() + 1;
     var incYear = inceptionDate.getFullYear();
     var yearDiff = year - incYear;
 
+    //Last accrued date
+    var accrueDate = new Date(accrue);
+    var accDay = accrueDate.getDate();
+    var accMonth = accrueDate.getMonth() + 1;
+    var accYear = accrueDate.getFullYear();
+
+    var oneYear = 365;
+    var oneMonth = 30;
+
+    //Get amount of days since last accrue
+    var amountOfDays = getAmountOfDays(date, accrue);
+    console.log(amountOfDays);
     //Get username
     var username = user.get_title();
 
     //Check cookie
     var visit = $.cookie("Visited");
     if (!visit) {
-        if (day === incDay) {
-            accrueLeave(id, accrued);
-            $.cookie("Username", username);
-            $.cookie("Visited", true, { expires: 1 });
+        var counter = 0;
+        while (counter <= amountOfDays) {
+            if (counter == oneMonth) {
+                accrueLeave(id, accrued);
+                $.cookie("Username", username);
+                $.cookie("Visited", true, { expires: 30 });
+            } 
+            counter++;
         }
     }
 
@@ -194,10 +214,10 @@ function accrueLeave(id, accrued) {
     var resetList = context.get_web().get_lists().getByTitle("Leave Balances");
 
     var numToInc = +accrued + +1.25;
-    console.log(numToInc);
 
     this.oListItem = resetList.getItemById(id);
     oListItem.set_item("Accrued", numToInc);
+    oListItem.set_item("LastAccrue", date);
 
     oListItem.update();
 
@@ -373,4 +393,17 @@ function onQueryFailedcount(sender, args) {
 function refreshTable() {
     var username = user.get_title();
     $("#tblCustomListData").load(getLeaveRequests(username));
+}
+
+function getAmountOfDays(startDate, endDate) {
+    var result = 0;
+
+    var currentDate = new Date(startDate);
+    var lastDay = new Date(endDate);
+    while (lastDay >= currentDate) {
+        result++;
+        lastDay.setDate(lastDay.getDate() + 1);
+    }
+
+    return result;
 }

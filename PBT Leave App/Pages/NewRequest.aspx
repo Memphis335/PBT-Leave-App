@@ -197,7 +197,7 @@
             <div class="form-group">
                 <label class="col-md-4 control-label" for="btnSubmit"></label>
                 <div class="col-md-4">
-                    <button id="btnSubmit" onclick="validate();" name="btnSubmit" class="btn btn-primary" style="width: 25%; margin-left: 0;">Submit</button>
+                    <button id="btnSubmit" onclick="validate();" name="btnSubmit" class="btn btn-primary" style="width: 25%; margin-left: 0;"><i class="fa fa-paper-plane"></i> Submit</button>
                 </div>
             </div>
 

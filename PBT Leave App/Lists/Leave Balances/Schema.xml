@@ -18,6 +18,7 @@
           <FieldRef ID="{16bf8b69-ac8f-400a-8fd2-1c11e0a1e2e3}" Name="Accrued" />
           <FieldRef ID="{32b381a0-a0e8-41a8-9c90-e2c9d1727bb0}" Name="DaysDeal" />
           <FieldRef ID="{ecd9e65b-d9e7-4091-85bc-e80f3b17ce7a}" Name="SickLeaveCounter" />
+          <FieldRef ID="{da6cee55-936d-4a89-bc09-7f5138b1b6ff}" Name="LastAccrue" />
         </FieldRefs>
       </ContentType>
       <ContentTypeRef ID="0x01">
@@ -55,6 +56,7 @@
         </CHOICES>
       </Field>
       <Field Name="SickLeaveCounter" ShowInNewForm="False" ID="{ecd9e65b-d9e7-4091-85bc-e80f3b17ce7a}" DisplayName="Sick Leave Counter" Type="Text" Description="DO NOT EDIT! (Used for Internal Process)" />
+      <Field Name="LastAccrue" ID="{da6cee55-936d-4a89-bc09-7f5138b1b6ff}" DisplayName="LastAccrue" Type="DateTime" Format="DateOnly"/>
     </Fields>
     <Views>
       <View BaseViewID="0" Type="HTML" MobileView="TRUE" TabularView="FALSE">
@@ -121,6 +123,19 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
           <FieldRef Name="LinkTitle"></FieldRef>
           <FieldRef Name="User" />
           <FieldRef Name="IsManager" />
@@ -134,9 +149,11 @@
           <FieldRef Name="Author" />
           <FieldRef Name="Sex" />
           <FieldRef Name="Accrued" />
+          <FieldRef Name="LastAccrue" />
         </ViewFields>
         <Query>
           <OrderBy>
+
 
 
 
