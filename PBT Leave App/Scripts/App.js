@@ -108,7 +108,7 @@ function onQuerySucceededLeave(sender, args) {
     var oneMonth = 30;
 
     //Get amount of days since last accrue
-    var amountOfDays = getAmountOfDays(date, accrue);
+    var amountOfDays = getAmountOfDays(accrue, date);
     console.log(amountOfDays);
     //Get username
     var username = user.get_title();
@@ -118,18 +118,26 @@ function onQuerySucceededLeave(sender, args) {
     if (!visit) {
         var counter = 0;
         while (counter <= amountOfDays) {
-            if (counter == oneMonth) {
-                accrueLeave(id, accrued);
-                $.cookie("Username", username);
-                $.cookie("Visited", true, { expires: 30 });
-            } 
+            for (var i = 0; i <= oneMonth; i++) {
+                if (i == oneMonth) {
+                    accrueLeave(id, accrued);
+                    $.cookie("Username", username);
+                    $.cookie("Visited", true, { expires: 30 });
+                }
+            }
             counter++;
         }
     }
 
     if (!visit) {
-        if (day === incDay && month === incMonth) {
-            resetLeave(id, annual, yearDiff, sex, sick, deal, sickLeave);
+        var counterYear = 0;
+        while (counterYear <= amountOfDays) {
+            for (var i = 0; i <= oneYear; i++) {
+                if (i == oneYear) {
+                    resetLeave(id, annual, yearDiff, sex, sick, deal, sickLeave);
+                }
+            }
+            counterYear++;
         }
     }
 
@@ -397,13 +405,11 @@ function refreshTable() {
 
 function getAmountOfDays(startDate, endDate) {
     var result = 0;
-
     var currentDate = new Date(startDate);
     var lastDay = new Date(endDate);
-    while (lastDay >= currentDate) {
+    while (currentDate <= lastDay) {
         result++;
-        lastDay.setDate(lastDay.getDate() + 1);
+        currentDate.setDate(currentDate.getDate() + 1);
     }
-
     return result;
 }
