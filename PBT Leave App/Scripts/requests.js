@@ -13,6 +13,16 @@ function check() {
         printName();
     }
 }
+
+function show() {
+    var secApprover = $("#2ndApprover:checked").val();
+
+    if (secApprover === "on") {
+        $("#div2ndApprover").css("display", "inherit");
+    } else {
+        $("#div2ndApprover").css("display", "none");
+    }
+}
 //Request Leave function
 function requestLeave() {
     var context = new SP.ClientContext.get_current();
@@ -33,7 +43,11 @@ function requestLeave() {
     var frLeave = $("#leaveSelect").val();
     var cbOnbehalf = $("#cbOnbehalf:checked").val();
     var workDaysVar = $("#workDays").text();
+    var secApprover = $("#2ndApprover").val();
+    var secApproverName = $("#tb2ndApprover_TopSpan_ResolvedList").find("span.ms-entity-resolved").attr("title");
 
+
+    alert(secApproverName);
     //Send values to Sharepoint list
     var oList = context.get_web().get_lists().getByTitle("Leave Requests");
     var itemCreateInfo = new SP.ListItemCreationInformation();
@@ -48,13 +62,20 @@ function requestLeave() {
     oListItem.set_item("To", dateTo);
     oListItem.set_item("TypeofLeave", selLeave);
     oListItem.set_item("Reason", frLeave);
-    if (cbOnbehalf === "on") {
-        cbOnbehalf = "Yes";
+    if (cbOnbehalf == "on") {
+        cbOnbehalf = "True";
     } else {
-        cbOnbehalf = "No";
+        cbOnbehalf = "False";
     }
     oListItem.set_item("OnBehalf", cbOnbehalf);
     oListItem.set_item("WorkDays", workDaysVar);
+    if (secApprover == "on") {
+        secApprover = "True";
+    } else {
+        secApprover = "False";
+    }
+    oListItem.set_item("RequiresecondaryApproval", secApprover);
+    oListItem.set_item("SecondaryApprover", SP.FieldUserValue.fromUser(secApproverName));
 
     oListItem.update();
     context.load(oListItem);
@@ -428,7 +449,7 @@ function checkManagerQuerySucceeded() {
         var oListItem = listItemEnumerator.get_current();
         listItemInfo = oListItem.get_item("BDM");
     }
-    manager = listItemInfo.$4J_1;
+    manager = listItemInfo.$4K_1;
     $("#tbManager").val(manager);
 }
 
@@ -538,8 +559,8 @@ function onQuerySuccess() {
         var toDate = to.toISOString().slice(0, 10).replace(/-/g, "-");
         var reqWhen = when.toISOString().slice(0, 10).replace(/-/g, "-");
 
-        tableData += "<tbody><tr><td>" + title + "</td><td>" + name + "</td><td>" + surname + "</td><td>" + number + "</td><td>" + manager.$4J_1 + "</td><td>" + fromDate + "</td><td>" + toDate + "</td><td>" + days + "</td><td>"
-            + type + "</td><td>" + requestedBy.$4J_1 + "</td><td>" + reqWhen + "</td><td>" + status + "</td></tr></tbody>";
+        tableData += "<tbody><tr><td>" + title + "</td><td>" + name + "</td><td>" + surname + "</td><td>" + number + "</td><td>" + manager.$4K_1 + "</td><td>" + fromDate + "</td><td>" + toDate + "</td><td>" + days + "</td><td>"
+            + type + "</td><td>" + requestedBy.$4K_1 + "</td><td>" + reqWhen + "</td><td>" + status + "</td></tr></tbody>";
     }
     table.html(tableData);
 }

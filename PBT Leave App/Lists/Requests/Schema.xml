@@ -16,6 +16,8 @@
           <FieldRef ID="{acf1e9e3-b3d7-4acf-b7ec-34352c05715f}" Name="WorkDays" />
           <FieldRef ID="{2fefe348-667c-427e-9d38-728c3f8b0f46}" Name="Approved_x002f_Rejected" />
           <FieldRef ID="{1299808e-c18e-4cc9-ad00-a8b61a7832bc}" Name="Reason" />
+          <FieldRef ID="{2a9fd841-57fd-4b3e-9816-99eecb6fa496}" Name="RequiresecondaryApproval" />
+          <FieldRef ID="{bd43058c-c4af-46e4-bb89-6f88cdaa9c73}" Name="SecondaryApprover" />
         </FieldRefs>
       </ContentType>
       <ContentTypeRef ID="0x01">
@@ -45,6 +47,8 @@
       <Field Name="WorkDays" ID="{acf1e9e3-b3d7-4acf-b7ec-34352c05715f}" DisplayName="Work Days" Type="Number" Required="TRUE" />
       <Field Name="Approved_x002f_Rejected" ID="{2fefe348-667c-427e-9d38-728c3f8b0f46}" DisplayName="Approved/Rejected" Type="Text" />
       <Field Name="Reason" ID="{1299808e-c18e-4cc9-ad00-a8b61a7832bc}" DisplayName="Reason" Type="Note" />
+      <Field Name="RequiresecondaryApproval" ID="{2a9fd841-57fd-4b3e-9816-99eecb6fa496}" DisplayName="Require secondary Approval" Type="Boolean" />
+      <Field Name="SecondaryApprover" ID="{bd43058c-c4af-46e4-bb89-6f88cdaa9c73}" DisplayName="Secondary Approver" Type="User" List="UserInfo" />
     </Fields>
     <Views>
       <View BaseViewID="0" Type="HTML" MobileView="TRUE" TabularView="FALSE">
@@ -52,12 +56,10 @@
         <XslLink Default="TRUE">main.xsl</XslLink>
         <RowLimit Paged="TRUE">30</RowLimit>
         <ViewFields>
-
           <FieldRef Name="LinkTitleNoMenu"></FieldRef>
         </ViewFields>
         <Query>
           <OrderBy>
-
             <FieldRef Name="Modified" Ascending="FALSE"></FieldRef>
           </OrderBy>
         </Query>
@@ -137,6 +139,21 @@
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
           <FieldRef Name="LinkTitle"></FieldRef>
           <FieldRef Name="Name1" />
           <FieldRef Name="Surname" />
@@ -152,9 +169,12 @@
           <FieldRef Name="Approved_x002f_Rejected" />
           <FieldRef Name="Reason" />
           <FieldRef Name="WorkDays" />
+          <FieldRef Name="RequiresecondaryApproval" />
+          <FieldRef Name="SecondaryApprover" />
         </ViewFields>
         <Query>
           <OrderBy>
+
 
 
 

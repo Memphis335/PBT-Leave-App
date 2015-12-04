@@ -37,6 +37,7 @@
             $("#ctl00_PlaceHolderMain_todate_todateDate").value = "";
             window.setInterval(chkManager(), 2000);
             countRequests();
+            $("#tb2ndApprover").spPeoplePicker();
         });
 
     </script>
@@ -146,6 +147,25 @@
                 <label class="col-md-4 control-label" for="tbManager">Approval Manager</label>
                 <div class="col-md-4">
                     <input type="text" id="tbManager" class="form-control input-md" disabled="disabled" placeholder="Generated Value..." />
+                </div>
+            </div>
+            
+            <!-- Multiple Checkboxes 2nd Approver -->
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="2ndApprover">Do you require approval form a Project Manager?</label>
+                <div class="col-md-4">
+                    <label class="checkbox-inline" for="2ndApprover">
+                        <input type="checkbox" name="2ndApprover" id="2ndApprover"  onclick="show();" />
+                        Yes/No
+                    </label>
+                </div>
+            </div>
+            
+            <!-- Text Input Second Approver -->
+            <div class="form-group" id="div2ndApprover" style="display: none;">
+                <label class="col-md-4 control-label" for="tb2ndApprover">Enter Name of 2nd Approver</label>
+                <div class="col-md-4" id="tb2ndApprover">
+                    
                 </div>
             </div>
 

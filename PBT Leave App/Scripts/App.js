@@ -109,7 +109,6 @@ function onQuerySucceededLeave(sender, args) {
 
     //Get amount of days since last accrue
     var amountOfDays = getAmountOfDays(accrue, date);
-    console.log(amountOfDays);
     //Get username
     var username = user.get_title();
 
@@ -309,7 +308,7 @@ function onQuerySucceeded(sender, args) {
         listItemInfo = oListItem.get_item("Name1");
     }
 
-    var userTitle = listItemInfo.$4J_1;
+    var userTitle = listItemInfo.$4K_1;
     if (userTitle == user.get_title()) {
         $("#admin").css("display", "inherit");
     }

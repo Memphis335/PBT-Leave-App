@@ -24,3 +24,10 @@
 .form-group {
     width: 100%
 }
+
+#tb2ndApprover_TopSpan{
+    width: 486px !important;
+    height: 29px;
+    border-radius: 4px;
+    font-size: 1.3em;
+}
